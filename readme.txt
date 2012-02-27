@@ -41,6 +41,20 @@ Enjoy!
 
 2. ExtraWatch stats on frontend
 
+3. Graphs and trends for goals, referers, internal, keywords, uri, users, countries, IP, browser, os, size_db
+
+4. Creating new goal
+
+5. Anti-spam and blocking section with bad-words list
+
+6. Nightly email reports
+
+7. Settings with list of available translations
+
+8. Visitor location when clicked on "globe" icon
+
+9. Goals list
+
 == Frequently Asked Questions ==
 
 Please read http://www.codegravity.com/faq/
