@@ -10,14 +10,15 @@ Popular visitor live tracking component ported from Joomla. Features: live stats
 
 == Description ==
 Popular visitor live tracking component ported from Joomla. ExtraWatch allows you to watch your joomla visitors live stats and bots in real-time from the administration back-end. Specially their IP addresses, countries they come from, geographical location on a map, which pages they are viewing, their browser and operating system, it creates daily and all-time stats from these information plus unique, pageload and total hits statistics. Furthermore, you can block harmful IP addresses, see blocked attempts stats, evaluate the trend charts, and create goals based on many parameters. In the front-end, it displays the top countries, user and visit information for certain periods of time.
-- translations: brazilian portuguese, dutch, french, german, greek, russian, slovak, slovenian, spanish, swedish, czech, danish, lithuanian, polish italian, turkish, latvian, ukrainian, bulgarian
+
+- translations: brazilian portuguese, dutch, french, german, greek, russian, slovak, slovenian, spanish, swedish, czech, danish, lithuanian, polish italian, turkish, latvian, ukrainian, bulgarian, albanian, bengali, chinese-simplified, chinese-traditional, estonian, indonesian, arabic, japanese, hebrew, croatian, hungarian, macedonian, ukrainian, vietnamese
 
 Watch the demo here:
 http://youtu.be/w8-LITejoV0?hd=1
 
 Live working demo deployed at: 
 http://codegravitydemo.com/wordpress/
-http://codegravitydemo.com/wordpress/wp-admin/ user: admin, pass: demo
+http://codegravitydemo.com/wordpress/wp-admin/ user: demo, pass: demo
 
 == Installation ==
 Manual installation choosing the extrawatch.zip archive
