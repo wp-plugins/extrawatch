@@ -16,19 +16,19 @@ Popular visitor live tracking component ported from Joomla. Features:
 
 == Description ==
 Popular visitor live tracking component ported from Joomla. 
-ExtraWatch allows you to watch your joomla visitors live stats and bots in real-time from the administration back-end. Especially:
+ExtraWatch allows you to watch your visitors live stats and bots in real-time from the administration back-end. Especially:
 
-- visitor IP addresses, countries they came from, geographical location on a map, which pages they are viewing, their browser and operating system, 
+- Visitor IP addresses, countries they came from, geographical location on a map, which pages they are viewing, their browser and operating system, 
 
 - ExtraWatch creates daily and all-time stats from these information plus unique, pageload and total hits statistics. 
 
-- you can block harmful IP addresses, see blocked attempts stats
+- You can block harmful IP addresses, see blocked attempts stats
 
-- evaluate the trend charts, and create goals based on many parameters. 
+- Evaluate the trend charts, and create goals based on many parameters. 
 
-- in the front-end, it displays the top countries, user and visit information for certain periods of time.
+- In the front-end, it displays the top countries, user and visit information for certain periods of time.
 
-- it creates a nightly email report so you can check the performance of your website in the morning
+- It creates a nightly email report so you can check the performance of your website in the morning
 
 
 See screenshots and demo!
