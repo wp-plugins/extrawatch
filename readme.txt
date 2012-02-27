@@ -35,6 +35,12 @@ Live working demo deployed at:
 http://codegravitydemo.com/wordpress/
 http://codegravitydemo.com/wordpress/wp-admin/ user: demo, pass: demo
 
+Project documentation:
+http://www.codegravity.com/doc/
+
+Project homepage:
+http://www.codegravity.com/projects/joomlawatch
+
 == Installation ==
 Manual installation choosing the extrawatch.zip archive
 
