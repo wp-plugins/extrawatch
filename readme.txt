@@ -37,6 +37,9 @@ Enjoy!
 
 == Screenshots ==
 
+1. ExtraWatch tab in admin section
+
+2. ExtraWatch stats on frontend
 
 == Frequently Asked Questions ==
 
