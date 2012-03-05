@@ -30,6 +30,13 @@ ExtraWatch allows you to watch your visitors live stats and bots in real-time fr
 
 - It creates a nightly email report so you can check the performance of your website in the morning
 
+
+Purchase information:
+This is a PRO version with single domain 9/15 EUR lifetime license and 30 day money-back guarantee
+
+https://www.e-junkie.com/ecom/gb.php?i=1013699&c=single&cl=189955 (9 EUR)
+https://www.e-junkie.com/ecom/gb.php?i=1012575&c=single&cl=189955 (15 EUR - nofollow link from sponsors page)
+
 List of all features:
 
 - *Live Stats* displays the behaviour of your visitors in real-time together with the valuable
@@ -62,9 +69,6 @@ tables in time
 
 - *Front-end modules* - information visible for your visitors such as number of visits for
 
-Purchase information:
-
-This is a PRO version with single domain 9/15 EUR lifetime license.
 
 See screenshots and demo!
 
