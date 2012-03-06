@@ -33,6 +33,7 @@ ExtraWatch allows you to watch your visitors live stats and bots in real-time fr
 
 <strong>Purchase information (30 day money-back guarantee):</strong>
 
+									 
 - [9 EUR single domain lifetime license](https://www.e-junkie.com/ecom/gb.php?i=1013699&c=single&cl=189955)
 
 - [15 EUR single domain lifetime license](https://www.e-junkie.com/ecom/gb.php?i=1012575&c=single&cl=189955) - includes nofollow link from [sponsors page](http://www.codegravity.com/donate/)
