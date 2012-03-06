@@ -62,5 +62,5 @@ if (@function_exists("extrawatch_admin_menu")) {
         echo renderExtraWatchUsers();
     }
 }
-
+unset( $_GET['error'] );
 ?>
