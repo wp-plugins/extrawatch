@@ -1,7 +1,7 @@
 === ExtraWatch ===
 Contributors: matto3c
 Donate link: http://www.codegravity.com/
-Tags: admin, AJAX, page, pages, plugin, sidebar, spam, stats, widget, wordpress, countries, visitors, tracking, maps, location, geolocation, statistics, spam, google, links
+Tags: admin, heatmap, graphs, counter, trends, flags, goals, database, sizes, SEO, search engine optimization, google, traffic, flow, AJAX, page, pages, plugin, sidebar, spam, stats, widget, wordpress, countries, visitors, tracking, maps, location, geolocation, statistics, spam, google, links
 Requires at least: 3.0.
 Tested up to: 3.3.1.
 Stable tag: 1.2.18
