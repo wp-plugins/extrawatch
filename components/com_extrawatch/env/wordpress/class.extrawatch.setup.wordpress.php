@@ -46,7 +46,7 @@ class ExtraWatchSetupWordpress implements ExtraWatchSetup
         foreach ($sqlSplitted as $sql) {
             $sql .= ";";
             $database->executeQuery($sql);
-            echo($sql . "<br/><br/>");
+            // echo($sql . "<br/><br/>");
         }
     }
 
@@ -82,7 +82,7 @@ class ExtraWatchSetupWordpress implements ExtraWatchSetup
                 //	@ unlink($fileName); //try to delete
             }
         }
-        echo ("100%");
+        // echo ("100%");
     }
 
     function drop_tables($database)
