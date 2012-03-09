@@ -6,17 +6,20 @@ Requires at least: 3.0.
 Tested up to: 3.3.1.
 Stable tag: 1.2.18
 
-Popular visitor live tracking component ported from Joomla. Features: 
-- live stats
-- graphs
-- goals
-- history,
-- anti-spam and blocking,
-- nightly reports and more..
+Popular visitor live tracking component ported from Joomla. Features: - live stats, graphs, goals, history, anti-spam and blocking...
 
 == Description ==
 
-Popular visitor live tracking component ported from Joomla. <a href="http://youtu.be/w8-LITejoV0?hd=1">View demo video</a>. Demo server: <a href="http://codegravitydemo.com/wordpress/">Frontpage</a> / <a href="http://codegravitydemo.com/wordpress/wp-admin/">Admin</a>. Purchase the single-domain pro license: <a href="https://www.e-junkie.com/ecom/gb.php?i=1013699&c=single&cl=189955">9 EUR</a> or <a href="https://www.e-junkie.com/ecom/gb.php?i=1012575&c=single&cl=189955">15 EUR</a>. Features: <strong>Visitor Live Stats</strong>, <strong>History</strong>, <strong>Traffic Flow</strong>, <strong>SEO report</strong>, <strong>Click Heatmap</strong>, <strong>Graphs</strong>, <strong>Anti-spam</strong>, <strong>Nightly Email Reports</strong>, <strong>Database Status</strong>, <strong>Directory Sizes</strong>, <strong>Front-end Counters</strong>, translated in <strong>42 world languages</strong>
+Popular visitor live tracking component ported from Joomla. <a href="http://youtu.be/w8-LITejoV0?hd=1">View demo video</a>. Demo server: <a href="http://codegravitydemo.com/wordpress/">Frontpage</a> / <a href="http://codegravitydemo.com/wordpress/wp-admin/">Admin</a>. 
+
+Purchase the single-domain pro license: 
+
+- [9 EUR single domain lifetime license](https://www.e-junkie.com/ecom/gb.php?i=1013699&c=single&cl=189955)
+
+- [15 EUR single domain lifetime license](https://www.e-junkie.com/ecom/gb.php?i=1012575&c=single&cl=189955) - includes nofollow link from [sponsors page](http://www.codegravity.com/donate/)
+
+Features: <strong>Visitor Live Stats</strong>, <strong>History</strong>, <strong>Traffic Flow</strong>, <strong>SEO report</strong>, <strong>Click Heatmap</strong>, <strong>Graphs</strong>, <strong>Anti-spam</strong>, <strong>Nightly Email Reports</strong>, <strong>Database Status</strong>, <strong>Directory Sizes</strong>, <strong>Front-end Counters</strong>, translated in <strong>42 world languages</strong>
+
 
 ExtraWatch allows you to watch your visitors live stats and bots in real-time from the administration back-end. Especially:
 
@@ -36,9 +39,6 @@ ExtraWatch allows you to watch your visitors live stats and bots in real-time fr
 <strong>Purchase information (30 day money-back guarantee):</strong>
 
 									 
-- [9 EUR single domain lifetime license](https://www.e-junkie.com/ecom/gb.php?i=1013699&c=single&cl=189955)
-
-- [15 EUR single domain lifetime license](https://www.e-junkie.com/ecom/gb.php?i=1012575&c=single&cl=189955) - includes nofollow link from [sponsors page](http://www.codegravity.com/donate/)
 
 
 List of all features:
