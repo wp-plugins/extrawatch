@@ -87,8 +87,10 @@ class ExtraWatchSetupWordpress implements ExtraWatchSetup
 
     function drop_tables($database)
     {
+	
         $query = "DROP TABLE #__extrawatch";
         $database->setQuery(trim($database->replaceDbPrefix($query)));
+        $database->query();
 
         $query = "DROP TABLE #__extrawatch_info";
         $database->executeQuery(trim($database->replaceDbPrefix($query)));
@@ -152,8 +154,17 @@ class ExtraWatchSetupWordpress implements ExtraWatchSetup
         $query = "DROP TABLE #__extrawatch_uri2keyphrase";
         $database->executeQuery(trim($database->replaceDbPrefix($query)));
         $database->query();
+		
 
-        echo("ExtraWatch tables deleted successfully");
+        $query = "DROP TABLE #__extrawatch_heatmap";
+        $database->executeQuery(trim($database->replaceDbPrefix($query)));
+        $database->query();
+		
+        $query = "DROP TABLE #__extrawatch_uri2keyphrase_pos";
+        $database->executeQuery(trim($database->replaceDbPrefix($query)));
+        $database->query();
+		
+		//echo("ExtraWatch tables deleted successfully");
 
         //delete file from upload
         @unlink(JPATH_BASE2 . DS . ".." . DS . ".." . DS . "uploads" . DS . "extrawatch.zip");
