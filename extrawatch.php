@@ -2,7 +2,7 @@
 /*
 Plugin Name: ExtraWatch
 Plugin URI: http://www.codegravity.com
-Description: Popular visitor live tracking component ported from Joomla. <a href="http://youtu.be/w8-LITejoV0?hd=1">View demo video</a>. Demo server: <a href="http://codegravitydemo.com/wordpress/">Frontpage</a> / <a href="http://codegravitydemo.com/wordpress/wp-admin/">Admin</a>. Features in FREE: <strong>Visitor Live Stats</strong>, <strong>Goals</strong>, <strong>History</strong>, <strong>Graphs</strong>, <strong>Anti-spam</strong>, <strong>Nightly Email Reports</strong>, <strong>Front-end Counters</strong>, translated in <strong>42 world languages</strong>, In PRO version (9/15 EUR single domain lifetime license): <strong>Traffic Flow</strong>, <strong>SEO report</strong>, <strong>Click Heatmap</strong>, <strong>Database Status</strong>, <strong>Directory Sizes</strong>
+Description: Popular visitor live tracking component ported from Joomla. <a href="http://youtu.be/w8-LITejoV0?hd=1">View demo video</a>. Demo server: <a href="http://codegravitydemo.com/wordpress/">Frontpage</a> / <a href="http://codegravitydemo.com/wordpress/wp-admin/">Admin</a>. Features in FREE: <strong>Visitor Live Stats</strong>, <strong>Goals</strong>, <strong>History</strong>, <strong>Graphs</strong>, <strong>Anti-spam</strong>, <strong>Nightly Email Reports</strong>, <strong>Front-end Counters</strong>, translated in <strong>42 world languages</strong>, In PRO: (9/15 EUR single domain lifetime license): <strong>Traffic Flow</strong>, <strong>SEO report</strong>, <strong>Click Heatmap</strong>, <strong>Database Status</strong>, <strong>Directory Sizes</strong>
 Version: 1.2.18 FREE
 Author: Matej Koval
 Author URI: http://www.codegravity.com
