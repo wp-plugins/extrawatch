@@ -39,9 +39,7 @@ defined('_JEXEC') or die('Restricted access');
                         </td>
                         <td>
                             <a href='http://www.codegravity.com' target='_blank'
-                               style='font-family: verdana; font-size: 14px; align:top; font-weight: bold; color: black;'> <?php echo _EW_ADMINHEADER_JW;?><?php echo($this->extraWatch->config->getConfigValue('EXTRAWATCH_VERSION'));?>
-                                .<?php echo($this->extraWatch->config->getConfigValue('EXTRAWATCH_REVISION'));?>
-                                PRO</a><br/><?php echo _EW_TITLE;?>
+                               style='font-family: verdana; font-size: 14px; align:top; font-weight: bold; color: black;'> <?php echo _EW_ADMINHEADER_JW;?><?php echo($this->extraWatch->config->getConfigValue('EXTRAWATCH_VERSION'));?>.<?php echo($this->extraWatch->config->getConfigValue('EXTRAWATCH_REVISION'));?> FREE</a><br/><?php echo _EW_TITLE;?>
                         </td>
                         <td>
                             <?php require_once(JPATH_BASE2 . DS . "components" . DS . "com_extrawatch" . DS . "view" . DS . "menu.php"); ?>
