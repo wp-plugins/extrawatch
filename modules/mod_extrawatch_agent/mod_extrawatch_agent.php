@@ -97,7 +97,7 @@ function renderExtraWatchAgent()
     }
 
     if (!($extraWatch->config->isAdFree() && $extraWatch->config->getCheckboxValue("EXTRAWATCH_FRONTEND_NO_BACKLINK"))) {
-        $output .= ("<a href='http://www.codegravity.com' target='_blank' $nofollow title='" . $title . "'>");
+        $output .= ("<a href='http://www.extrawatch.com' target='_blank' $nofollow title='" . $title . "'>");
     }
 
     $output .= ("<img src='" . $extraWatch->config->getLiveSiteWithSuffix() . "components/com_extrawatch/img.php?rand=" . (rand() % 100000) . "&env=" . get_class($extraWatch->env) . "' border='0' alt='$title' title='$title'/>");
