@@ -12,14 +12,7 @@ Popular visitor live tracking component ported from Joomla. Features: - live sta
 
 Popular visitor live tracking component ported from Joomla. <a href="http://youtu.be/w8-LITejoV0?hd=1">View demo video</a>. Demo server: <a href="http://codegravitydemo.com/wordpress/">Frontpage</a> / <a href="http://codegravitydemo.com/wordpress/wp-admin/">Admin</a>. 
 
-Purchase the single-domain pro license: 
-
-- [9 EUR single domain lifetime license](https://www.e-junkie.com/ecom/gb.php?i=1013699&c=single&cl=189955)
-
-- [15 EUR single domain lifetime license](https://www.e-junkie.com/ecom/gb.php?i=1012575&c=single&cl=189955) - includes nofollow link from [sponsors page](http://www.codegravity.com/donate/)
-
 Features: <strong>Visitor Live Stats</strong>, <strong>History</strong>, <strong>Traffic Flow</strong>, <strong>SEO report</strong>, <strong>Click Heatmap</strong>, <strong>Graphs</strong>, <strong>Anti-spam</strong>, <strong>Nightly Email Reports</strong>, <strong>Database Status</strong>, <strong>Directory Sizes</strong>, <strong>Front-end Counters</strong>, translated in <strong>42 world languages</strong>
-
 
 ExtraWatch allows you to watch your visitors live stats and bots in real-time from the administration back-end. Especially:
 
@@ -36,12 +29,8 @@ ExtraWatch allows you to watch your visitors live stats and bots in real-time fr
 - It creates a nightly email report so you can check the performance of your website in the morning
 
 
-<strong>Purchase information (30 day money-back guarantee):</strong>
-
-									 
-
-
-List of all features:
+							 
+List of all features (FREE version):
 
 - *Live Stats* displays the behaviour of your visitors in real-time together with the valuable
 statistic information and maps. You can perform several useful actions from this
@@ -50,12 +39,7 @@ dashboard.
 - *History* displays the configurable amount of previous visits. ExtraWatch focuses more
 on visitor behaviour and doesn't keep much visitor data.
 
-- *Traffic Flow* presents interactive HTML5 chart of your visitor's paths
-
-- *SEO report* displays report of keyphrases by which users found your website and their
-performance in time
-
-- *Heatmap* section displays HTML5 map of clicks for each individual page
+- *Goals* allows you to track various types of user actions
 
 - *Graphs* section contains daily and weekly bar charts for pages, goals, users .. etc.
 
@@ -63,15 +47,32 @@ performance in time
 
 - *Emails* section - allows you to configure nightly email reports
 
+- *Settings* - different configuration options plus possibility to choose one from more than
+42 world languages
+
+- *Front-end modules* - information visible for your visitors such as number of visits for
+
+
+In PRO Version (9 / 15 EUR, single domain lifetime license):
+
 - *Database Status* - displays the increase/decrease in size of your individual database
 tables in time
 
 - *Directory Sizes* - monitors 3rd party plugin directories
 
-- *Settings* - different configuration options plus possibility to choose one from more than
-42 world languages
+- *Traffic Flow* presents interactive HTML5 chart of your visitor's paths
 
-- *Front-end modules* - information visible for your visitors such as number of visits for
+- *SEO report* displays report of keyphrases by which users found your website and their
+performance in time
+
+- *Heatmap* section displays HTML5 map of clicks for each individual page
+
+
+<strong>Purchase information (30 day money-back guarantee):</strong>
+
+- [9 EUR single domain lifetime license](https://www.e-junkie.com/ecom/gb.php?i=1013699&c=single&cl=189955)
+
+- [15 EUR single domain lifetime license](https://www.e-junkie.com/ecom/gb.php?i=1012575&c=single&cl=189955) - includes nofollow link from [sponsors page](http://www.codegravity.com/donate/)
 
 
 See screenshots and demo!
