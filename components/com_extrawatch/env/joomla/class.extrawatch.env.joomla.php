@@ -4,7 +4,7 @@
  * ExtraWatch - A real-time ajax monitor and live stats
  * @package ExtraWatch
  * @version 1.2.18
- * @revision 41
+ * @revision 52
  * @license http://www.gnu.org/licenses/gpl-3.0.txt     GNU General Public License v3
  * @copyright (C) 2012 by Matej Koval - All rights reserved!
  * @website http://www.codegravity.com
@@ -76,12 +76,16 @@ class ExtraWatchJoomlaEnv implements ExtraWatchEnv
     function getUser()
     {
         global $mainframe;
+		$current_error_reporting = error_reporting();
+		error_reporting(0);
         if (version_compare(JVERSION, '1.5.0', 'ge')) {
             /* joomla 1.5 or above */
-            return JFactory::getUser();
+            $user = JFactory::getUser();
         } else {
-            return @ $mainframe->getUser();
+            $user = @ $mainframe->getUser();
         }
+		error_reporting($current_error_reporting);
+		return $user;
 
     }
 

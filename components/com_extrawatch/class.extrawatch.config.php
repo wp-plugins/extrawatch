@@ -4,7 +4,7 @@
  * ExtraWatch - A real-time ajax monitor and live stats
  * @package ExtraWatch
  * @version 1.2.18
- * @revision 41
+ * @revision 52
  * @license http://www.gnu.org/licenses/gpl-3.0.txt     GNU General Public License v3
  * @copyright (C) 2012 by Matej Koval - All rights reserved!
  * @website http://www.codegravity.com
@@ -351,9 +351,7 @@ class ExtraWatchConfig
      */
     function isAdFree()
     {
-        if ($this->getConfigValue("EXTRAWATCH_ADFREE")) {
-            return true;
-        }
+        return true;
     }
 
     /**
@@ -437,26 +435,6 @@ class ExtraWatchConfig
     {
         return get_class($this->env);
     }
-
-    function getRandHash()
-    {
-        return md5(md5($this->getRand()));
-    }
-
-    /**
-     * For things like heatmap etc..
-     * @return bool
-     */
-    function isPermittedWithHash($hash)
-    {
-        $randHash = ExtraWatchConfig::getRandHash();
-        if (!$randHash || $randHash != addslashes(strip_tags($hash))) {
-            return false;
-        }
-        return true;
-    }
-
-
 }
 
 ?>
