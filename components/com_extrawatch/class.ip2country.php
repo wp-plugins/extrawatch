@@ -50,13 +50,17 @@ function unquote(& $str)
 // convert Internet dot address to network address
 function inet_aton($ip)
 {
-    $ip_array = explode(".", $ip);
-    /*
-        if (!isset($ip_array)) {
-            return;
-        }
-    */
-    return ($ip_array[0] * pow(256, 3)) + ($ip_array[1] * pow(256, 2)) + ($ip_array[2] * 256) + $ip_array[3];
+    if (strstr($ip, '.')) { //is IPv4
+        $ip_array = explode(".", $ip);
+        /*
+            if (!isset($ip_array)) {
+                return;
+            }
+        */
+        return ($ip_array[0] * pow(256, 3)) + ($ip_array[1] * pow(256, 2)) + ($ip_array[2] * 256) + $ip_array[3];
+    } else {            //is IPv6 - we don't have IPv6 database now
+        return 0;
+    }
 }
 
 class ip2country

@@ -4,7 +4,7 @@
  * ExtraWatch - A real-time ajax monitor and live stats
  * @package ExtraWatch
  * @version 1.2.18
- * @revision 52
+ * @revision 56
  * @license http://www.gnu.org/licenses/gpl-3.0.txt     GNU General Public License v3
  * @copyright (C) 2012 by Matej Koval - All rights reserved!
  * @website http://www.codegravity.com
@@ -73,8 +73,8 @@ class ExtraWatchHelper
      */
     function getURI()
     {
-        $redirURI = addslashes(strip_tags(@ $_SERVER[$this->config->getConfigValue('EXTRAWATCH_SERVER_URI_KEY')]));
-        $uri = htmlspecialchars(addslashes(strip_tags(@ $_SERVER['REQUEST_URI'])));
+        $redirURI = addslashes(@strip_tags(@ $_SERVER[$this->config->getConfigValue('EXTRAWATCH_SERVER_URI_KEY')]));
+        $uri = htmlspecialchars(addslashes(@strip_tags(@ $_SERVER['REQUEST_URI'])));
 
         if (@ $redirURI && @ substr($redirURI, -9, 9) != "index.php")
             $uri = $redirURI;
@@ -274,11 +274,11 @@ class ExtraWatchHelper
     {
         if (isset($key)) {
             //print_r(ExtraWatchEnvFactory::getEnvironment());
-            return strip_tags(ExtraWatchEnvFactory::getEnvironment()->getRequest()->getVar($key));
+            return @strip_tags(ExtraWatchEnvFactory::getEnvironment()->getRequest()->getVar($key));
         } else {
             $getArray = ExtraWatchEnvFactory::getEnvironment()->getRequest()->get('get');
             foreach ($getArray as &$get) { /* traversing the array and stripping tags */
-                $get = strip_tags($get);
+                $get = @strip_tags($get);
             }
             return $getArray;
         }
@@ -298,10 +298,10 @@ class ExtraWatchHelper
             foreach ($postArray as &$post) { /* traversing the array and stripping tags */
                 if (is_array($post)) {
                     foreach ($post as &$postNested) {
-                        $postNested = strip_tags($postNested);
+                        $postNested = @strip_tags($postNested);
                     }
                 } else {
-                    $post = strip_tags($post);
+                    $post = @strip_tags($post);
                 }
             }
             return $postArray;

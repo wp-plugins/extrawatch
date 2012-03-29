@@ -50,6 +50,7 @@ if (@function_exists("extrawatch_admin_menu")) {
         add_submenu_page('extrawatch','Your License','Your License',$EC_userLevel,'extrawatch&task=license',array(&$this, 'extrawatch&task=license'));
         add_submenu_page('extrawatch','Settings','Settings',$EC_userLevel,'extrawatch&task=settings',array(&$this, 'extrawatch&task=settings'));
         add_submenu_page('extrawatch','Credits','Credits',$EC_userLevel,'extrawatch&task=credits',array(&$this, 'extrawatch&task=credits'));
+
     }
 
     function jw_plugin_options()
@@ -66,15 +67,19 @@ if (@function_exists("extrawatch_admin_menu")) {
 
     function extrawatch_frontend()
     {
-        echo("<br/>");
-        include_once ("modules" . DS . "mod_extrawatch_agent" . DS . "mod_extrawatch_agent.php");
-        include_once ("modules" . DS . "mod_extrawatch_users" . DS . "mod_extrawatch_users.php");
-        include_once ("modules" . DS . "mod_extrawatch_visitors" . DS . "mod_extrawatch_visitors.php");
-
-        echo renderExtraWatchAgent();
-        echo renderExtraWatchVisitors();
-        echo renderExtraWatchUsers();
+        //
     }
+
+    require_once("components" . DS . "com_extrawatch" . DS . "env". DS . "wordpress". DS . "widget". DS. "class.extrawatch.agent.widget.php");
+    add_action( 'widgets_init', create_function('', 'return register_widget("ExtraWatchAgentWidget");') );
+
+    require_once("components" . DS . "com_extrawatch" . DS . "env". DS . "wordpress". DS . "widget". DS. "class.extrawatch.users.widget.php");
+    add_action( 'widgets_init', create_function('', 'return register_widget("ExtraWatchUsersWidget");') );
+
+    require_once("components" . DS . "com_extrawatch" . DS . "env". DS . "wordpress". DS . "widget". DS. "class.extrawatch.visitors.widget.php");
+    add_action( 'widgets_init', create_function('', 'return register_widget("ExtraWatchVisitorsWidget");') );
+
+
 }
 unset( $_GET['error'] );
 ?>
