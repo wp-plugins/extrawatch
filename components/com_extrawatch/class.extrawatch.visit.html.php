@@ -4,7 +4,7 @@
  * ExtraWatch - A real-time ajax monitor and live stats
  * @package ExtraWatch
  * @version 1.2.18
- * @revision 57
+ * @revision 58
  * @license http://www.gnu.org/licenses/gpl-3.0.txt     GNU General Public License v3
  * @copyright (C) 2012 by Matej Koval - All rights reserved!
  * @website http://www.codegravity.com
@@ -333,6 +333,14 @@ class ExtraWatchVisitHTML
     /* visits */
     function renderVisitors()
     {
+        /** message if no modules are published */
+        if ($this->extraWatch->config->getEnvironment() == "ExtraWatchWordpressEnv") {
+            if (!is_active_widget( false, false, "extrawatchagentwidget", true )) {
+                $message = "Warning: No visits are being recorded. You must go to Appearance->Widgets section, <br/>find ExtraWatchAgent widget and drag&drop it to some of the containers on the right side. <br/>You can publish also other ExtraWatch modules this way.";
+                return ("<br/><br/><span style='color: red; font-weight: bold;'>".$message."</span>");
+            }
+        }
+
         //$rows = $this->extraWatch->visit->getVisitors();
         $this->lastDate = "";
         $output = $this->renderTable(false);
