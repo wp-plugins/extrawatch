@@ -4,7 +4,7 @@
  * ExtraWatch - A real-time ajax monitor and live stats
  * @package ExtraWatch
  * @version 1.2.18
- * @revision 56
+ * @revision 57
  * @license http://www.gnu.org/licenses/gpl-3.0.txt     GNU General Public License v3
  * @copyright (C) 2012 by Matej Koval - All rights reserved!
  * @website http://www.codegravity.com
@@ -141,7 +141,7 @@ class ExtraWatchVisit
         $maxVisitors = $this->config->getConfigValue('EXTRAWATCH_LIMIT_VISITORS');
         $query = sprintf("SELECT id as maxId FROM #__extrawatch where browser is not NULL ORDER BY id DESC LIMIT %d, 1", (int)($maxVisitors * 2));
         $maxId = @ $this->database->resultQuery($query);
-        $query = sprintf("DELETE FROM #__extrawatch_uri WHERE fk < %d", (int)$maxId);
+        $query = sprintf("DELETE FROM #__extrawatch_uri WHERE browser is not NULL and fk < %d", (int)$maxId);
         @$this->database->executeQuery($query);
         $query = sprintf("DELETE FROM #__extrawatch WHERE browser is not NULL and id < %d", (int)$maxId);
         @$this->database->executeQuery($query);
@@ -151,7 +151,7 @@ class ExtraWatchVisit
         $maxBots = $this->config->getConfigValue('EXTRAWATCH_LIMIT_BOTS');
         $query = sprintf("SELECT id as maxId FROM #__extrawatch where browser is NULL ORDER BY id DESC LIMIT %d, 1", (int)($maxBots * 2));
         $maxId = @ $this->database->resultQuery($query);
-        $query = sprintf("DELETE FROM #__extrawatch_uri WHERE fk < %d", (int)$maxId);
+        $query = sprintf("DELETE FROM #__extrawatch_uri WHERE browser is NULL and fk < %d", (int)$maxId);
         @$this->database->executeQuery($query); //1189132
         $query = sprintf("DELETE FROM #__extrawatch WHERE browser is NULL and id < %d", (int)$maxId);
         @$this->database->executeQuery($query);

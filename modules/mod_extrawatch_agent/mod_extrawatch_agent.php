@@ -4,7 +4,7 @@
  * ExtraWatch - A real-time ajax monitor and live stats
  * @package ExtraWatch
  * @version 1.2.18
- * @revision 56
+ * @revision 57
  * @license http://www.gnu.org/licenses/gpl-3.0.txt     GNU General Public License v3
  * @copyright (C) 2012 by Matej Koval - All rights reserved!
  * @website http://www.codegravity.com
@@ -69,7 +69,7 @@ function renderExtraWatchAgent()
     $extraWatch->block->checkPostRequestForSpam(ExtraWatchHelper::requestPost());
     $extraWatch->visit->insertVisit();
 
-    $extraWatchHTML->renderHeatMapJS();
+    //$extraWatchHTML->renderHeatMapJS();
 
     /*
      * The following piece of code identifies the userAgent and inserts the backlink to codegravity.com
