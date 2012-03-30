@@ -23,7 +23,7 @@ if (!defined('_JEXEC') && !defined('_VALID_MOS')) die('Restricted access');
 # define('EXTRAWATCH_LIVE_SITE','/');
 
 define('EXTRAWATCH_VERSION', "1.2.18");
-define('EXTRAWATCH_REVISION', "BETA");
+define('EXTRAWATCH_REVISION', "58");
 
 define('EXTRAWATCH_DEBUG', 0);
 
