@@ -1,14 +1,15 @@
 <?php
 
 /**
+ * @file
  * ExtraWatch - A real-time ajax monitor and live stats
  * @package ExtraWatch
  * @version 1.2.18
- * @revision 58
+ * @revision 155
  * @license http://www.gnu.org/licenses/gpl-3.0.txt     GNU General Public License v3
  * @copyright (C) 2012 by Matej Koval - All rights reserved!
  * @website http://www.codegravity.com
- **/
+ */
 
 /** ensure this file is being included by a parent file */
 if (!defined('_JEXEC') && !defined('_VALID_MOS'))
@@ -17,13 +18,13 @@ if (!defined('_JEXEC') && !defined('_VALID_MOS'))
 class ExtraWatchStat
 {
 
-    var $database;
-    var $config;
-    var $helper;
-    var $env;
-    var $date;
+    public $database;
+    public $config;
+    public $helper;
+    public $env;
+    public $date;
 
-    function ExtraWatchStat($database)
+    function __construct($database)
     {
         $this->database = $database;
         $this->env = ExtraWatchEnvFactory::getEnvironment();
@@ -145,7 +146,7 @@ class ExtraWatchStat
     {
 
         $maxLimit = $this->config->getConfigValue('EXTRAWATCH_STATS_MAX_ROWS');
-        if (@ $expanded == true) {
+        if (@ $expanded == TRUE) {
             $query = sprintf("select name, sum(value) as value from #__extrawatch_info where (`group` = '%s') group by name order by value desc limit %d", $this->database->getEscaped($name), (int)$maxLimit);
         }
         else {
@@ -176,7 +177,7 @@ class ExtraWatchStat
             $date = $this->date->getUTCTimestamp();
         }
 
-        if (@ $expanded == true) {
+        if (@ $expanded == TRUE) {
             $query = sprintf("select name, value from #__extrawatch_info where (`group` = '%s' and `date` = '%d') order by value desc limit %d", $this->database->getEscaped($name), (int)$date, (int)20);
         }
         else {
@@ -213,9 +214,9 @@ class ExtraWatchStat
         $diff = 0;
         if ($value1 && $value2) {
             $diff = floor((($value2 - $value1) / $value1) * 1000) / 10;
-        } else if ($value1 && !$value2) {
+        } elseif ($value1 && !$value2) {
             $diff = -100;
-        } else if (!$value1 && $value2) {
+        } elseif (!$value1 && $value2) {
             $diff = "-";
         }
 
@@ -243,9 +244,9 @@ class ExtraWatchStat
         $diff = 0;
         if ($value1 && $value2) {
             $diff = floor((($value2 - $value1) / $value1) * 1000) / 10;
-        } else if ($value1 && !$value2) {
+        } elseif ($value1 && !$value2) {
             $diff = -100;
-        } else if (!$value1 && $value2) {
+        } elseif (!$value1 && $value2) {
             $diff = "-";
         }
 
@@ -294,9 +295,9 @@ class ExtraWatchStat
         $rows = @ $this->database->objectListQuery($query);
         $count = $this->database->resultQuery($query);
         if (isset ($count)) {
-            return false;
+            return FALSE;
         } else {
-            return true;
+            return TRUE;
         }
 
     }
@@ -307,7 +308,7 @@ class ExtraWatchStat
     function countUsersForToday()
     {
         $date = $this->date->jwDateToday();
-        $query = sprintf("select count(id) as count from #__extrawatch_info where `group` = '%d' and `date` = '%d' order by value desc", (int)DB_KEY_USERS, (int)$date);
+        $query = sprintf("select count(id) as count from #__extrawatch_info where `group` = '%d' and `date` = '%d' order by value desc", (int)EW_DB_KEY_USERS, (int)$date);
         $count = @ $this->database->resultQuery($query);
         return $count;
     }
@@ -321,7 +322,7 @@ class ExtraWatchStat
         $date = $this->date->jwDateToday();
         $limit = $this->config->getConfigValue('EXTRAWATCH_FRONTEND_USERS_COUNT');
         $limit = 20;
-        $query = sprintf("select `name`, value from #__extrawatch_info where `group` = '%d' and `date` = '%d' order by value desc limit %d", (int)DB_KEY_USERS, (int)$date, (int)$limit);
+        $query = sprintf("select `name`, value from #__extrawatch_info where `group` = '%d' and `date` = '%d' order by value desc limit %d", (int)EW_DB_KEY_USERS, (int)$date, (int)$limit);
         $this->database->setQuery($query);
         $rows = @ $this->database->objectListQuery($query);
         return $rows;
@@ -333,10 +334,10 @@ class ExtraWatchStat
         $systemTables = array('extrawatch_cache', 'extrawatch_cc2c', 'extrawatch_ip2c');
         foreach ($systemTables as $key => $value) {
             if (strstr($table, $value)) {
-                return true;
+                return TRUE;
             }
         }
-        return false;
+        return FALSE;
     }
 
     function getDatabaseStatus()
@@ -357,7 +358,7 @@ class ExtraWatchStat
             JOIN #__extrawatch_keyphrase keyphrase ON info.name = keyphrase.id
             WHERE info.`group`=%d  and info.date = '%d'
             GROUP BY keyphrase.name, info.value
-            ORDER BY `position` ASC, `count` DESC ", (int)DB_KEY_SEARCH_RESULT_NUM, (int)$day);
+            ORDER BY `position` ASC, `count` DESC ", (int)EW_DB_KEY_SEARCH_RESULT_NUM, (int)$day);
         $this->database->setQuery($query);
         $rows = $this->database->objectListQuery($query);
         return $rows;
@@ -379,4 +380,4 @@ class ExtraWatchStat
 
 }
 
-?>
+

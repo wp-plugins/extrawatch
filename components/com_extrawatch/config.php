@@ -1,17 +1,20 @@
 <?php
 
 /**
+ * @file
  * ExtraWatch - A real-time ajax monitor and live stats
  * @package ExtraWatch
  * @version 1.2.18
- * @revision 58
+ * @revision 155
  * @license http://www.gnu.org/licenses/gpl-3.0.txt     GNU General Public License v3
  * @copyright (C) 2012 by Matej Koval - All rights reserved!
  * @website http://www.codegravity.com
- **/
+ */
 
 /** ensure this file is being included by a parent file */
-if (!defined('_JEXEC') && !defined('_VALID_MOS')) die('Restricted access');
+if (!defined('_JEXEC') && !defined('_VALID_MOS')) {
+	die('Restricted access');
+}
 
 /* This is the main file with basic settings */
 
@@ -23,7 +26,7 @@ if (!defined('_JEXEC') && !defined('_VALID_MOS')) die('Restricted access');
 # define('EXTRAWATCH_LIVE_SITE','/');
 
 define('EXTRAWATCH_VERSION', "1.2.18");
-define('EXTRAWATCH_REVISION', "58");
+define('EXTRAWATCH_REVISION', "155");
 
 define('EXTRAWATCH_DEBUG', 0);
 
@@ -157,7 +160,7 @@ define('TYPE_EXTRAWATCH_FRONTEND_VISITORS_TOTAL', "checkbox");
 define('EXTRAWATCH_FRONTEND_COUNTRIES_FIRST', 1);
 define('TYPE_EXTRAWATCH_FRONTEND_COUNTRIES_FIRST', "checkbox");
 
-define('EXTRAWATCH_SEO_RENDER_ONLY_CHANGED', false);
+define('EXTRAWATCH_SEO_RENDER_ONLY_CHANGED', FALSE);
 define('TYPE_EXTRAWATCH_SEO_RENDER_ONLY_CHANGED', "checkbox");
 
 define('EXTRAWATCH_FRONTEND_VISITORS_TOTAL_INITIAL', 0);
@@ -544,25 +547,25 @@ define('EXTRAWATCH_LANGUAGE', 'english');
 define('TYPE_EXTRAWATCH_LANGUAGE', "select");
 
 define('EXTRAWATCH_HISTORY_MAX_VALUES', 20);
-define('TYPE_HISTORY_MAX_VALUES', "text");
+define('TYPE_EXTRAWATCH_HISTORY_MAX_VALUES', "text");
 
 define('EXTRAWATCH_HISTORY_MAX_DB_RECORDS', 200);
-define('TYPE_HISTORY_MAX_DB_RECORDS', "text");
+define('TYPE_EXTRAWATCH_HISTORY_MAX_DB_RECORDS', "text");
 
 
-define('EXTRAWATCH_ONLY_LAST_URI', false);
+define('EXTRAWATCH_ONLY_LAST_URI', FALSE);
 define('TYPE_EXTRAWATCH_ONLY_LAST_URI', "checkbox");
 
-define('EXTRAWATCH_HIDE_REPETITIVE_TITLE', false);
+define('EXTRAWATCH_HIDE_REPETITIVE_TITLE', FALSE);
 define('TYPE_EXTRAWATCH_HIDE_REPETITIVE_TITLE', "checkbox");
 
-define('EXTRAWATCH_UNINSTALL_KEEP_DATA', false);
+define('EXTRAWATCH_UNINSTALL_KEEP_DATA', FALSE);
 define('TYPE_EXTRAWATCH_UNINSTALL_KEEP_DATA', "checkbox");
 
-define('EXTRAWATCH_EMAIL_REPORTS_ENABLED', false);
+define('EXTRAWATCH_EMAIL_REPORTS_ENABLED', FALSE);
 define('TYPE_EXTRAWATCH_EMAIL_REPORTS_ENABLED', "checkbox");
 
-define('EXTRAWATCH_EMAIL_SEO_REPORTS_ENABLED', false);
+define('EXTRAWATCH_EMAIL_SEO_REPORTS_ENABLED', FALSE);
 define('TYPE_EXTRAWATCH_EMAIL_SEO_REPORTS_ENABLED', "checkbox");
 
 define('EXTRAWATCH_EMAIL_REPORTS_ADDRESS', "@");
@@ -592,29 +595,29 @@ define('EXTRAWATCH_FLOW_DEFAULT_OUTGOING_LINKS_COUNT', 5);
 define('EXTRAWATCH_FLOW_DEFAULT_NESTING_LEVEL', 2);
 
 
-define('DB_KEY_BROWSER', 1);
-define('DB_KEY_COUNTRY', 2);
-define('DB_KEY_GOALS', 3);
-define('DB_KEY_HITS', 4);
-define('DB_KEY_INTERNAL', 5);
-define('DB_KEY_IP', 6);
-define('DB_KEY_KEYWORDS', 7);
-define('DB_KEY_LOADS', 8);
-define('DB_KEY_OS', 9);
-define('DB_KEY_REFERERS', 10);
-define('DB_KEY_UNIQUE', 11);
-define('DB_KEY_URI', 12);
-define('DB_KEY_USERS', 13);
-define('DB_KEY_KEYPHRASE', 14);
-define('DB_KEY_URI2KEYPHRASE', 15);
+define('EW_DB_KEY_BROWSER', 1);
+define('EW_DB_KEY_COUNTRY', 2);
+define('EW_DB_KEY_GOALS', 3);
+define('EW_DB_KEY_HITS', 4);
+define('EW_DB_KEY_INTERNAL', 5);
+define('EW_DB_KEY_IP', 6);
+define('EW_DB_KEY_KEYWORDS', 7);
+define('EW_DB_KEY_LOADS', 8);
+define('EW_DB_KEY_OS', 9);
+define('EW_DB_KEY_REFERERS', 10);
+define('EW_DB_KEY_UNIQUE', 11);
+define('EW_DB_KEY_URI', 12);
+define('EW_DB_KEY_USERS', 13);
+define('EW_DB_KEY_KEYPHRASE', 14);
+define('EW_DB_KEY_URI2KEYPHRASE', 15);
 
-define('DB_KEY_SIZE_DB', 101);
-define('DB_KEY_SIZE_COM', 102);
-define('DB_KEY_SIZE_MOD', 103);
+define('EW_DB_KEY_SIZE_DB', 101);
+define('EW_DB_KEY_SIZE_COM', 102);
+define('EW_DB_KEY_SIZE_MOD', 103);
 
-define('DB_KEY_TRAFFIC_FLOW', 16);
-define('DB_KEY_SEARCH_RESULT_NUM', 17);
-define('DB_KEY_HEATMAP', 18);
+define('EW_DB_KEY_TRAFFIC_FLOW', 16);
+define('EW_DB_KEY_SEARCH_RESULT_NUM', 17);
+define('EW_DB_KEY_HEATMAP', 18);
 
 define('EXTRAWATCH_WARNING_THRESHOLD', 20);
 
@@ -711,4 +714,4 @@ serialize(array(
 define('EXTRAWATCH_HEATMAP_KEEP_DAYS', 7);
 
 
-?>
+

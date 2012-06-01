@@ -28,9 +28,9 @@
         <folder>env</folder>
         <folder>view</folder>
         <folder>css</folder>
+        <folder>ajax</folder>
 
         <filename>admin.extrawatch.html.php</filename>
-        <filename>block.php</filename>
         <filename>class.ip2country.php</filename>
         <filename>class.ipinfodb.php</filename>
         <filename>class.extrawatch.block.html.php</filename>
@@ -60,26 +60,16 @@
         <filename>class.extrawatch.visit.html.php</filename>
         <filename>class.extrawatch.visit.php</filename>
         <filename>config.php</filename>
-        <filename>heatmap.php</filename>
         <filename>img.php</filename>
         <filename>inc.extrawatch.env.php</filename>
         <filename>includes.php</filename>
         <filename>index.html</filename>
         <filename>INSTALL.txt</filename>
-        <filename>last.php</filename>
-        <filename>lastvisit.php</filename>
         <filename>LICENSE.txt</filename>
         <filename>README.txt</filename>
-        <filename>sizequery.php</filename>
-        <filename>sizequerytotal.php</filename>
-        <filename>stats.php</filename>
         <filename>TERMS_AND_CONDITIONS.txt</filename>
         <filename>timezone.php</filename>
-        <filename>tooltip.php</filename>
-        <filename>trendtooltip.php</filename>
         <filename>UPGRADE.txt</filename>
-        <filename>vars.php</filename>
-        <filename>visits.php</filename>
 
     </files>
 

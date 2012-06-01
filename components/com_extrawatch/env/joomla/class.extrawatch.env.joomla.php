@@ -1,14 +1,15 @@
 <?php
 
 /**
+ * @file
  * ExtraWatch - A real-time ajax monitor and live stats
  * @package ExtraWatch
  * @version 1.2.18
- * @revision 58
+ * @revision 155
  * @license http://www.gnu.org/licenses/gpl-3.0.txt     GNU General Public License v3
  * @copyright (C) 2012 by Matej Koval - All rights reserved!
  * @website http://www.codegravity.com
- **/
+ */
 
 /** ensure this file is being included by a parent file */
 if (!defined('_JEXEC') && !defined('_VALID_MOS'))
@@ -70,7 +71,7 @@ class ExtraWatchJoomlaEnv implements ExtraWatchEnv
 
     function renderLink($task, $otherParams)
     {
-        return $this->getRootSite() . $this->getAdminDir() . "/index.php?option=com_extrawatch&task=" . $task . "&action=" . $otherParams;
+        return $this->getRootSite() . $this->getAdminDir() . "/index.php?option=com_extrawatch&task=" . $task . "&". $otherParams;
     }
 
     function getUser()
@@ -96,7 +97,7 @@ class ExtraWatchJoomlaEnv implements ExtraWatchEnv
             /* joomla 1.5 or above */
             $mydoc =& JFactory::getDocument();
             return $mydoc->getTitle();
-        } else if (version_compare(JVERSION, '1.0.0', 'ge')) {
+        } elseif (version_compare(JVERSION, '1.0.0', 'ge')) {
             /* joomla 1.0 */
             return $mainframe->getPageTitle();
         }
@@ -147,4 +148,4 @@ class ExtraWatchJoomlaEnv implements ExtraWatchEnv
 
 }
 
-?>
+

@@ -29,72 +29,51 @@
 // Look the latest file date (format YYYYMMDD)
 // http://ip-to-country.directi.com/downloads/latest
 //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-// $Id: class.ip2country.php,v 1.4 2004/02/01 07:24:54 pascalz Exp $
+// Id: class.ip2country.php,v 1.4 2004/02/01 07:24:54 pascalz Exp $
 //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 /** ensure this file is being included by a parent file */
-if (!defined('_JEXEC') && !defined('_VALID_MOS')) die('Restricted access');
-
-
-// Unquote a string...if quoted
-function unquote(& $str)
-{
-    $str = trim($str);
-
-    if (($str[0] == '"') && ($str[strlen($str) - 1] == '"')) {
-        $str = substr($str, 1, strlen($str) - 2);
-    }
+if (!defined('_JEXEC') && !defined('_VALID_MOS')) {
+    die('Restricted access');
 }
 
-// Recreate inet_aton function like in mySQL
-// convert Internet dot address to network address
-function inet_aton($ip)
-{
-    $ip_array = explode(".", $ip);
-    /*
-        if (!isset($ip_array)) {
-            return;
-        }
-    */
-    return ($ip_array[0] * pow(256, 3)) + ($ip_array[1] * pow(256, 2)) + ($ip_array[2] * 256) + $ip_array[3];
-}
 
-class ip2country
-{
-    var $CVSFile; // the ip-to-country.csv file
-    var $IP; // IP to looking for
+/** Class renamed only to avoid name clashes (originally named ip2country) */
+class ExtraWatchIP2Country {
+    public $CVSFile; // the ip-to-country.csv file
+    public $IP; // IP to looking for
 
-    var $Prefix1; // Country prefix (2char) ex.: US
-    var $Prefix2; // Country prefix (3char) ex.: USA
-    var $Country; // Country name  ex.: UNITED STATE
+    public $Prefix1; // Country prefix (2char) ex.: US
+    public $Prefix2; // Country prefix (3char) ex.: USA
+    public $Country; // Country name  ex.: UNITED STATE
 
-    var $UseDB; // Use database instead csv file (more fast)
+    public $UseDB = TRUE; // Use database instead csv file (more fast)
 
     // db values
-    var $db_host; // host information for database connection
-    var $db_login; // login information for database connection
-    var $db_password; // password information for database connection
-    var $db_basename; // base information for database connection
-    var $db_tablename; // Your own table name
-    var $db_ip_from_colname; // Your own ip_from column name
-    var $db_ip_to_colname; // Your own ip_to column name
-    var $db_prefix1_colname; // Your own prefix1 column name
-    var $db_prefix2_colname; // Your own prefix2 column name
-    var $db_country_colname; // Your own country column name
+    public $db_host; // host information for database connection
+    public $db_login; // login information for database connection
+    public $db_password; // password information for database connection
+    public $db_basename; // base information for database connection
+    public $db_tablename; // Your own table name
+    public $db_ip_from_colname; // Your own ip_from column name
+    public $db_ip_to_colname; // Your own ip_to column name
+    public $db_prefix1_colname; // Your own prefix1 column name
+    public $db_prefix2_colname; // Your own prefix2 column name
+    public $db_country_colname; // Your own country column name
 
-    var $_IPn; // Private - network address
+    public $_IPn; // Private - network address
 
-    var $env;
-    var $database;
+    public $env;
+    public $database;
 
     // Constructor
-    function ip2country($ip, $usedb = false)
+    function __construct($ip, $usedb = FALSE)
     {
         $this->env = ExtraWatchEnvFactory::getEnvironment();
         $this->database = & $this->env->getDatabase();
         // TODO: Add regex to verify ip is valid
         if ($ip) {
-            $this->_IPn = inet_aton($ip);
+            $this->_IPn = $this->inet_aton($ip);
             $this->IP = $ip;
         }
 
@@ -114,10 +93,15 @@ class ip2country
     // Look in file or database
     function LookUp()
     {
+        if (!@$this->database) {
+            $this->env = ExtraWatchEnvFactory::getEnvironment();
+            $this->database = & $this->env->getDatabase();
+        }
+
         if ($this->UseDB) {
             /*
                * The Fastest Way is to import the CSV file in your database and to
-               * set UseDB to true !
+               * set UseDB to TRUE !
                * I use MySQL but feel free to use your database functions ;)
                */
 
@@ -135,15 +119,43 @@ class ip2country
                 $country_colname = $this->db_country_colname;
                 $this->Country = $row->$country_colname;
 
-                return true;
+                return TRUE;
             } else
-                return false;
+                return FALSE;
 
             //			mysql_close($conn);
 
         }
     }
+
+    // Unquote a string...if quoted
+    function unquote(& $str)
+    {
+        $str = trim($str);
+
+        if (($str[0] == '"') && ($str[strlen($str) - 1] == '"')) {
+            $str = substr($str, 1, strlen($str) - 2);
+        }
+    }
+
+// Recreate inet_aton function like in mySQL
+// convert Internet dot address to network address
+    function inet_aton($ip)
+    {
+        if (strstr($ip, '.')) { //is IPv4
+            $ip_array = explode(".", $ip);
+            /*
+                if (!isset($ip_array)) {
+                    return;
+                }
+            */
+            return ($ip_array[0] * pow(256, 3)) + ($ip_array[1] * pow(256, 2)) + ($ip_array[2] * 256) + $ip_array[3];
+        } else {            //is IPv6 - we don't have IPv6 database now
+            return 0;
+        }
+    }
+
 }
 
 //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-?>
+

@@ -1,14 +1,15 @@
 <?php
 
 /**
+ * @file
  * ExtraWatch - A real-time ajax monitor and live stats
  * @package ExtraWatch
  * @version 1.2.18
- * @revision 58
+ * @revision 155
  * @license http://www.gnu.org/licenses/gpl-3.0.txt     GNU General Public License v3
  * @copyright (C) 2012 by Matej Koval - All rights reserved!
  * @website http://www.codegravity.com
- **/
+ */
 
 /** ensure this file is being included by a parent file */
 if (!defined('_JEXEC') && !defined('_VALID_MOS'))
@@ -17,7 +18,7 @@ if (!defined('_JEXEC') && !defined('_VALID_MOS'))
 class ExtraWatchTrendHTML
 {
 
-    var $extraWatch;
+    public $extraWatch;
 
     const COLOR_GRAY = "gray";
 
@@ -25,7 +26,7 @@ class ExtraWatchTrendHTML
 
     const COLOR_GREEN = "green";
 
-    function ExtraWatchTrendHTML($extraWatch)
+    function __construct($extraWatch)
     {
         $this->extraWatch = $extraWatch;
     }
@@ -38,7 +39,7 @@ class ExtraWatchTrendHTML
         $color = $this->getDiffColor($relDiff);
 
         if (!$onlyImage) {
-            $diffOutput .= "<table cellpadding='0' cellspacing='0'><tr><td><a href='" . @ $this->extraWatch->config->getAdministratorIndex() . "?option=com_extrawatch&task=trends&group=$group&name=$name&date=$date' style='color:$color;'>";
+            $diffOutput .= "<table cellpadding='0' cellspacing='0'><tr><td><a href='" . @ $this->extraWatch->env->renderLink("trends","group=$group&name=$name&date=$date")."' style='color:$color;'>";
             $diffOutput .= "$relDiff%</a></td><td>";
         }
         $diffOutput .= "<img src='" . $this->extraWatch->config->getLiveSiteWithSuffix() . "components/com_extrawatch/icons/trend_$color.gif' border='0' title='$title'/>";
@@ -49,7 +50,7 @@ class ExtraWatchTrendHTML
         return $diffOutput;
     }
 
-    function getDiffColor($relDiff, $inversed = false)
+    static function getDiffColor($relDiff, $inversed = FALSE)
     {
         if (!$relDiff) {
             $color = ExtraWatchTrendHTML::COLOR_GRAY;
@@ -96,7 +97,7 @@ class ExtraWatchTrendHTML
         $nameTranslated = $name;
 
         switch ($group) {
-            case DB_KEY_INTERNAL:
+            case EW_DB_KEY_INTERNAL:
                 {
                 /* special handling for inbound */
                 $inboundRow = $this->extraWatch->visit->getInternalNameById(@$name);
@@ -107,23 +108,23 @@ class ExtraWatchTrendHTML
                 break;
                 }
 
-            case DB_KEY_GOALS:
+            case EW_DB_KEY_GOALS:
                 {
                 $nameTranslated = "<br/>" . $this->extraWatch->goal->getGoalNameById($name);
                 break;
                 }
 
-            case DB_KEY_URI2KEYPHRASE:
+            case EW_DB_KEY_URI2KEYPHRASE:
                 {
                 $nameTranslated = "<br/>" . $this->extraWatch->visit->getKeyphraseFromUri2KeyphraseId($name);
                 break;
                 }
-            case DB_KEY_HEATMAP:
+            case EW_DB_KEY_HEATMAP:
                 {
                 $nameTranslated = "<br/>" . $this->extraWatch->visit->getTitleByUriId($name);
                 break;
                 }
-            case DB_KEY_SEARCH_RESULT_NUM:
+            case EW_DB_KEY_SEARCH_RESULT_NUM:
                 {
                 $result = $this->extraWatch->seo->getUri2KeyphrasePosNameById($name);
                 $nameTranslated = "<br/>" . $result;
@@ -138,7 +139,8 @@ class ExtraWatchTrendHTML
 
         $groupTranslated = @constant("_EW_STATS_" . strtoupper($dbKeysArray[$group]));
 
-        $helpId = ExtraWatchHTML::renderOnlineHelp("trends");
+        $extraWatchHTML = new ExtraWatchHTML();
+        $helpId = $extraWatchHTML->renderOnlineHelp("trends");
         $output = "<center><h2>" . _EW_TRENDS_DAILY_WEEKLY . " $groupTranslated : $nameTranslated $helpId</h2><br/>";
         $output .= "<table cellpadding='0' cellspacing='0'>";
         $output .= "<tr>";
@@ -243,7 +245,7 @@ class ExtraWatchTrendHTML
         <form action='".$this->extraWatch->env->renderLink("graphs","")."' method='POST'>
         <select name='group' onchange='this.form.submit()'>";
         foreach ($keysArray as $key => $value) {
-            $key2 = @constant("DB_KEY_" . strtoupper($keysArray[$key]));
+            $key2 = @constant("EW_DB_KEY_" . strtoupper($keysArray[$key]));
             if ($key2 == $group) {
                 $selected = "selected";
             } else {
@@ -269,7 +271,7 @@ class ExtraWatchTrendHTML
 
         $date = $this->extraWatch->date->jwDateToday();
 
-        $rows = $this->extraWatch->stat->getIntValuesByName($group, $date, false, 10);
+        $rows = $this->extraWatch->stat->getIntValuesByName($group, $date, FALSE, 10);
 
         $output = $this->renderGraphSelectionForm($group);
         if (!$rows) {
@@ -293,7 +295,7 @@ class ExtraWatchTrendHTML
         if (!$value) { // if no value, we are not going to format it at all
             return $value;
         }
-        if ($group == DB_KEY_SIZE_DB || $group == DB_KEY_SIZE_COM || $group == DB_KEY_SIZE_MOD) {
+        if ($group == EW_DB_KEY_SIZE_DB || $group == EW_DB_KEY_SIZE_COM || $group == EW_DB_KEY_SIZE_MOD) {
             $output = $this->extraWatch->sizes->sizeFormat($value) . "&nbsp;";
         } else {
             $output = $value;
@@ -302,4 +304,4 @@ class ExtraWatchTrendHTML
     }
 }
 
-?>
+

@@ -1,25 +1,28 @@
 <?php
 
 /**
+ * @file
  * ExtraWatch - A real-time ajax monitor and live stats
  * @package ExtraWatch
  * @version 1.2.18
- * @revision 58
+ * @revision 155
  * @license http://www.gnu.org/licenses/gpl-3.0.txt     GNU General Public License v3
  * @copyright (C) 2012 by Matej Koval - All rights reserved!
  * @website http://www.codegravity.com
- **/
+ */
 
 /** ensure this file is being included by a parent file */
-if (!defined('_JEXEC') && !defined('_VALID_MOS')) die('Restricted access');
+if (!defined('_JEXEC') && !defined('_VALID_MOS')) {
+	die('Restricted access');
+}
 
 class ExtraWatchSEO
 {
 
-    var $database;
-    var $date;
+    public $database;
+    public $date;
 
-    function ExtraWatchSEO($database)
+    function __construct($database)
     {
         $this->database = $database;
         $this->date = new ExtraWatchDate($database);
@@ -35,7 +38,7 @@ class ExtraWatchSEO
                                 JOIN `#__extrawatch_keyphrase` keyword ON u2k.keyphraseId = keyword.id
                                 WHERE info.`group` = %d
                                 AND info.`date` =%d
-                                ORDER BY info.value DESC", DB_KEY_URI2KEYPHRASE, $this->date->jwDateToday());
+                                ORDER BY info.value DESC", EW_DB_KEY_URI2KEYPHRASE, $this->date->jwDateToday());
         return $this->database->loadObjectList($query);
     }
 
@@ -50,7 +53,7 @@ class ExtraWatchSEO
                         WHERE `group` = %d
                         AND `date` = %d
                         GROUP BY uriId
-                        ORDER BY total DESC", (int)DB_KEY_URI2KEYPHRASE, (int)$day);
+                        ORDER BY total DESC", (int)EW_DB_KEY_URI2KEYPHRASE, (int)$day);
         return $this->database->objectListQuery($query);
     }
 
@@ -67,7 +70,7 @@ class ExtraWatchSEO
                                 AND #__extrawatch_uri2keyphrase.uri2titleId = %d
                                 ORDER BY value desc
     ",
-            (int)DB_KEY_URI2KEYPHRASE, (int)$day, (int)$uriId);
+            (int)EW_DB_KEY_URI2KEYPHRASE, (int)$day, (int)$uriId);
         return $this->database->objectListQuery($query);
     }
 
@@ -76,7 +79,7 @@ class ExtraWatchSEO
     {
         $day = $this->date->jwDateToday();
         $daysToKeep = EXTRAWATCH_DAYS_TO_KEEP_UNIMPORTANT_KEYPHRASES;
-        $query = sprintf("SELECT sum( `value` ) AS total, `name` as uri2keyphraseId FROM `#__extrawatch_info` WHERE `group` = %d AND `date` < %d GROUP BY `name` HAVING total < %d", DB_KEY_URI2KEYPHRASE, $day - $daysToKeep, EXTRAWATCH_UNIMPORTANT_KEYPHRASE_THRESHOLD * $daysToKeep);
+        $query = sprintf("SELECT sum( `value` ) AS total, `name` as uri2keyphraseId FROM `#__extrawatch_info` WHERE `group` = %d AND `date` < %d GROUP BY `name` HAVING total < %d", EW_DB_KEY_URI2KEYPHRASE, $day - $daysToKeep, EXTRAWATCH_UNIMPORTANT_KEYPHRASE_THRESHOLD * $daysToKeep);
         $rows = $this->database->objectListQuery($query);
         $i = 0;
         $idList = "";
@@ -88,7 +91,7 @@ class ExtraWatchSEO
             }
         }
         if (@$idList) {
-            $query = sprintf("delete from #__extrawatch_info where `group` = %d and `name` in (%s) ", DB_KEY_URI2KEYPHRASE, $idList);
+            $query = sprintf("delete from #__extrawatch_info where `group` = %d and `name` in (%s) ", EW_DB_KEY_URI2KEYPHRASE, $idList);
             $this->database->executeQuery($query);
         }
     }
@@ -115,7 +118,7 @@ class ExtraWatchSEO
             JOIN `#__extrawatch_uri2title` ON #__extrawatch_uri2keyphrase.uri2titleId = #__extrawatch_uri2title.id
             WHERE #__extrawatch_info.`group` = %d and #__extrawatch_info.`date` = %d
             GROUP BY uri
-            ORDER BY valueTotal DESC, position ASC", DB_KEY_SEARCH_RESULT_NUM, $day);
+            ORDER BY valueTotal DESC, position ASC", EW_DB_KEY_SEARCH_RESULT_NUM, $day);
         return $this->database->objectListQuery($query);
     }
 
@@ -133,7 +136,7 @@ class ExtraWatchSEO
                 JOIN `#__extrawatch_keyphrase` ON #__extrawatch_uri2keyphrase.keyphraseId = #__extrawatch_keyphrase.id
                 WHERE #__extrawatch_info.`group` = %d and #__extrawatch_info.`date` = %d
                 and #__extrawatch_uri2title.`id` = %d
-                ORDER BY value DESC, position ASC", DB_KEY_SEARCH_RESULT_NUM, $day, $uri2titleId);
+                ORDER BY value DESC, position ASC", EW_DB_KEY_SEARCH_RESULT_NUM, $day, $uri2titleId);
         return $this->database->objectListQuery($query);
     }
 
@@ -158,7 +161,7 @@ class ExtraWatchSEO
                 JOIN `#__extrawatch_uri2keyphrase_pos` ON #__extrawatch_uri2keyphrase_pos.id = #__extrawatch_info.name
                 WHERE #__extrawatch_info.`group` =%d
                 AND #__extrawatch_info.`date` =%d
-                LIMIT 1", DB_KEY_SEARCH_RESULT_NUM, $day);
+                LIMIT 1", EW_DB_KEY_SEARCH_RESULT_NUM, $day);
         return $this->database->resultQuery($query);
     }
 
@@ -189,7 +192,7 @@ class ExtraWatchSEO
             GROUP BY uri2titleId
             HAVING `count` >1
             ORDER by `count` DESC
-            ", DB_KEY_SEARCH_RESULT_NUM);
+            ", EW_DB_KEY_SEARCH_RESULT_NUM);
         return $this->database->objectListQuery($query);
     }*/
 
@@ -201,16 +204,17 @@ class ExtraWatchSEO
             WHERE info.`group` = %d
             AND uri2keyphraseId = %d
             GROUP BY `date`
-            ORDER BY `date` DESC , `#__extrawatch_uri2keyphrase_pos`.`uri2keyphraseId` ASC",
-            DB_KEY_SEARCH_RESULT_NUM, $uri2keyphraseId);
+            ORDER BY `date` DESC , `#__extrawatch_uri2keyphrase_pos`.`uri2keyphraseId` ASC
+            LIMIT 2",
+            EW_DB_KEY_SEARCH_RESULT_NUM, $uri2keyphraseId);
         return $this->database->objectListQuery($query);
     }
 
     function getAveragePositionChangesByUri2KeyphraseIdLimited($uri2keyphraseId)
     {
         $rows = $this->getAveragePositionChangesByUri2KeyphraseId($uri2keyphraseId);
-        if (@$rows && sizeof($rows) >= 2) {
-            return array($rows[0], $rows[1]);
+        if (@$rows && sizeof($rows) > 1) {
+            return array($rows[0],$rows[1]);
         }
         return $rows;
     }

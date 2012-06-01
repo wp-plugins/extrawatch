@@ -1,33 +1,36 @@
 <?php
 
 /**
+ * @file
  * ExtraWatch - A real-time ajax monitor and live stats
  * @package ExtraWatch
  * @version 1.2.18
- * @revision 58
+ * @revision 155
  * @license http://www.gnu.org/licenses/gpl-3.0.txt     GNU General Public License v3
  * @copyright (C) 2012 by Matej Koval - All rights reserved!
  * @website http://www.codegravity.com
- **/
+ */
 
 /** ensure this file is being included by a parent file */
-if (!defined('_JEXEC') && !defined('_VALID_MOS')) die('Restricted access');
+if (!defined('_JEXEC') && !defined('_VALID_MOS')) {
+    die('Restricted access');
+}
 
 class ExtraWatchSEOHTML
 {
 
-    var $extraWatch;
-    var $extraWatchStatHTML;
+    public $extraWatch;
+    public $extraWatchStatHTML;
 
-    function ExtraWatchSEOHTML($extraWatch)
+    function __construct($extraWatch)
     {
         $this->extraWatch = $extraWatch;
         $this->extraWatchStatHTML = new ExtraWatchStatHTML($this->extraWatch);
     }
 
-    function renderSEOReport($day, $fromEmail = false, $renderAlsoNotChanged = false)
+    function renderSEOReport($day, $fromEmail = FALSE, $renderAlsoNotChanged = FALSE)
     {
-        $loadsPerDay = $this->extraWatch->stat->getKeyValueInGroupByDate(DB_KEY_LOADS, DB_KEY_LOADS, $day);
+        $loadsPerDay = $this->extraWatch->stat->getKeyValueInGroupByDate(EW_DB_KEY_LOADS, EW_DB_KEY_LOADS, $day);
         if (!$loadsPerDay) {
             return ExtraWatchHelper::renderNoData();
         }
@@ -36,13 +39,14 @@ class ExtraWatchSEOHTML
         if ($loadsPerDay) {
             $percent = sprintf("%.2f", ($searchEngineHits / $loadsPerDay) * 100);
         }
-        $output = "<table border='0'>";
+        $output = $this->renderMostDynamicKeyphrases($renderAlsoNotChanged, $day - 1);
+        $output .= "<table border='0'>";
         $output .= "<tr><td></td><td align='right'><b>" . _EW_SEO_TOTAL_VISITS_FROM_SEARCH_ENGINES . ": " . $searchEngineHits . " ($percent%)</b></td></tr>";
 
         $rows = $this->extraWatch->seo->getUri2KeyphrasePosUris($day);
         if ($rows)
             foreach ($rows as $row) {
-                $isChange = false;
+                $isChange = FALSE;
                 $total = $row->valueTotal;
                 $percent = 0;
                 if ($loadsPerDay) {
@@ -57,15 +61,15 @@ class ExtraWatchSEOHTML
                         if ($loadsPerDay) {
                             $percent = sprintf("%.2f", ($row2->value / $loadsPerDay) * 100);
                         }
-                        $isChangeForRow = $this->extraWatchStatHTML->isChange(DB_KEY_SEARCH_RESULT_NUM, $row2->uri2keyphrasePosId, $day);
+                        $isChangeForRow = $this->extraWatchStatHTML->isChange(EW_DB_KEY_SEARCH_RESULT_NUM, $row2->uri2keyphrasePosId, $day);
                         if ($renderAlsoNotChanged || $isChangeForRow) {
                             $outputBlock .= "<tr class='tableRow" . ($i++ % 2) . "'><td width='100%'>" . $this->renderKeyphraseLink($row2->keyphrase) . "</td>" .
                                 "<td width='5%' align='right'>" . $row2->position .
                                 "<td width='5%' align='right'>" . $row2->value . "</td>" .
                                 "<td width='5%' align='right' style='color: #555'>(" . $percent . "%)</td>";
-                            $outputBlock .= $this->extraWatchStatHTML->renderDiffTableCellsAndIcon(DB_KEY_SEARCH_RESULT_NUM, $row2->uri2keyphrasePosId, $day, $fromEmail);
+                            $outputBlock .= $this->extraWatchStatHTML->renderDiffTableCellsAndIcon(EW_DB_KEY_SEARCH_RESULT_NUM, $row2->uri2keyphrasePosId, $day, $fromEmail);
                             $outputBlock .= "</tr>";
-                            $isChange = true;
+                            $isChange = TRUE;
                         }
                     }
                     $outputBlock .= "</table><br/>";
@@ -76,12 +80,11 @@ class ExtraWatchSEOHTML
                 $output .= "</td></tr>";
             }
         $output .= "</table>";
-        $output .= $this->renderMostDynamicKeyphrases();
         return $output;
     }
 
 /*
-function renderPositionChanges() {
+function extraWatchRenderPositionChanges() {
     $output = "";
     $rows = $this->extraWatch->visit->getMostChangingKeywords();
     foreach ($rows as $row) {
@@ -113,7 +116,7 @@ function renderPositionChanges() {
     return $output;
 }*/
 
-    function renderMostDynamicKeyphrases()
+    function renderMostDynamicKeyphrases($renderAlsoNotChanged = false, $day)
     {
         $output = "";
         $rows = $this->extraWatch->seo->getMostChangedKeyphrases();
@@ -122,12 +125,25 @@ function renderPositionChanges() {
             $i = 0;
             foreach ($rows as $row) {
                 $rows2 = $this->extraWatch->seo->getAveragePositionChangesByUri2KeyphraseIdLimited($row->uri2keyphraseId);
-                $output .= sprintf("<tr class='tableRow%d'><td>%s</td><td align='center'>%d</td><td align='center'>%.2f</td><td align='center'>%d</td><td align='center'>" . $row->count . "</td>", ($i++ % 2), $this->renderKeyphraseLink($row->name), $row->minPosition, $row->averagePosition, $row->maxPosition);
-                $output .= $this->renderPositionChangeDiff($rows2) . "</tr>";
+                if ($this->isChange($day, $rows2))  {
+                    $changeOutput = $this->renderPositionChangeDiff($rows2, $day);
+                    if (@$changeOutput) {
+                        $output .= sprintf("<tr class='tableRow%d'><td>%s</td><td align='center'>%d</td><td align='center'>%.2f</td><td align='center'>%d</td><td align='center'>" . $row->count . "</td>", ($i++ % 2), $this->renderKeyphraseLink($row->name), $row->minPosition, $row->averagePosition, $row->maxPosition);
+                        $output .= $changeOutput;
+                        $output .= "</tr>";
+                    }
+                }
             }
             $output .= "</table><br/>";
         }
         return $output;
+    }
+
+    function isChange($day, $rows2) {
+        if (sizeof($rows2) > 1 && $rows2[1]->date == $day) {
+            return true;
+        }
+        return false;
     }
 
     function renderKeyphraseLink($keyphrase)
@@ -135,7 +151,7 @@ function renderPositionChanges() {
         return "<a href='http://www.google.com/search?q=" . urlencode($keyphrase) . "' target='_blank'>" . $keyphrase . "</a>";
     }
 
-    function renderPositionChangeDiff($rows)
+    function renderPositionChangeDiff($rows, $day)
     {
         $output = "";
         if ($rows) {
@@ -145,20 +161,19 @@ function renderPositionChanges() {
                 if ($lastAveragePosition != $averagePosition) {
                     if ($lastAveragePosition) {
                         $diff = (float)($averagePosition - $lastAveragePosition);
-                        $diffColor = ExtraWatchTrendHTML::getDiffColor($diff, true);
+                        $diffColor = ExtraWatchTrendHTML::getDiffColor($diff, TRUE);
                         $diffImg = "<img src='" . $this->extraWatch->config->getLiveSiteWithSuffix() . "components/com_extrawatch/icons/trend_$diffColor.gif' border='0'/>";
-                        $output .= sprintf("<td style='color: $diffColor' align='right'>%+.2f</td><td>$diffImg</td><td align='center'>%s</td>", $diff, ExtraWatchDate::getDateByDay($row->date));
+                        if ($day == $row->date) {
+                            $output .= sprintf("<td style='color: $diffColor' align='right'>%+.2f</td><td>$diffImg</td><td align='center'>%s</td>", $diff, ExtraWatchDate::getDateByDay($row->date));
+                        }
                     }
                     $lastAveragePosition = $averagePosition;
                 }
 
             }
         }
-        if (!$output) {
-            $output .= "<td></td><td></td><td></td>";
-        }
         return $output;
     }
 }
 
-?>
+

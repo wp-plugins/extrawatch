@@ -1,22 +1,17 @@
 <?php
-
 /**
+ * @file
  * ExtraWatch - A real-time ajax monitor and live stats
  * @package ExtraWatch
  * @version 1.2.18
- * @revision 58
+ * @revision 155
  * @license http://www.gnu.org/licenses/gpl-3.0.txt     GNU General Public License v3
  * @copyright (C) 2012 by Matej Koval - All rights reserved!
  * @website http://www.codegravity.com
- **/
+ */
 defined('_JEXEC') or die('Restricted access');
-
 ?>
-<a href='http://www.codegravity.com/donate/' target='_blank'
-   title='Remove Backlink'><?php echo _EW_ADMINHEADER_REMOVE_BACKLINK;?></a> <img
-    src='<?php echo($this->extraWatch->config->getLiveSiteWithSuffix());?>components/com_extrawatch/icons/external.gif'
-    border='0'/></a> |
-<a href='http://www.codegravity.com/faq/extrawatch' target='_blank'><?php echo _EW_MENU_FAQ;?> <img
+<a href='http://www.codegravity.com/faq/' target='_blank'><?php echo _EW_MENU_FAQ;?> <img
     src='<?php echo($this->extraWatch->config->getLiveSiteWithSuffix());?>components/com_extrawatch/icons/external.gif'
     border='0'/></a> |
 <a href='http://www.codegravity.com/support/' target='_blank'

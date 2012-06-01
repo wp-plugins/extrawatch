@@ -1,14 +1,15 @@
 <?php
 
 /**
+ * @file
  * ExtraWatch - A real-time ajax monitor and live stats
  * @package ExtraWatch
  * @version 1.2.18
- * @revision 58
+ * @revision 155
  * @license http://www.gnu.org/licenses/gpl-3.0.txt     GNU General Public License v3
  * @copyright (C) 2012 by Matej Koval - All rights reserved!
  * @website http://www.codegravity.com
- **/
+ */
 
 /** ensure this file is being included by a parent file */
 if (!defined('_JEXEC') && !defined('_VALID_MOS'))
@@ -17,17 +18,17 @@ if (!defined('_JEXEC') && !defined('_VALID_MOS'))
 class ExtraWatchHeatmap
 {
 
-    var $database;
-    var $helper;
-    var $stat;
-    var $block;
-    var $date;
+    public $database;
+    public $helper;
+    public $stat;
+    public $block;
+    public $date;
 
     const HEATMAP_PARAM_NAME = "extraWatchHeatmap";
     const HEATMAP_PARAM_DAY_NAME = "extraWatchDay";
     const HEATMAP_PARAM_HASH = "randHash";
 
-    function ExtraWatchHeatmap($database)
+    function __construct($database)
     {
         $this->database = $database;
         $this->helper = new ExtraWatchHelper($this->database);
@@ -152,7 +153,7 @@ class ExtraWatchHeatmap
 
     function updateHeatmapStats($day)
     {
-        $query = sprintf("DELETE FROM #__extrawatch_info where `date` = %d and `group` = %d", (int)$day, DB_KEY_HEATMAP);
+        $query = sprintf("DELETE FROM #__extrawatch_info where `date` = %d and `group` = %d", (int)$day, EW_DB_KEY_HEATMAP);
         $this->database->executeQuery($query);
 
         $query = sprintf("SELECT count( uri2titleId ) AS `count` , uri2titleId
@@ -164,7 +165,7 @@ class ExtraWatchHeatmap
         if (@$rows) {
             foreach ($rows as $row) {
                 $query = sprintf("INSERT INTO #__extrawatch_info (`name`, `value`, `date`, `group`) VALUES ('%s', %d, %d, %d);",
-                    $this->database->getEscaped($row->uri2titleId), $this->database->getEscaped($row->count), $day, DB_KEY_HEATMAP);
+                    $this->database->getEscaped($row->uri2titleId), $this->database->getEscaped($row->count), $day, EW_DB_KEY_HEATMAP);
                 $this->database->setQuery($query);
                 $rows = $this->database->executeQuery($query);
             }
@@ -175,10 +176,10 @@ class ExtraWatchHeatmap
     {
         foreach (ExtraWatchHelper::requestGet() as $key => $value) {
             if (stristr($key, ExtraWatchHeatmap::HEATMAP_PARAM_NAME)) {
-                return true;
+                return TRUE;
             }
         }
-        return false;
+        return FALSE;
     }
 
     function getHeatmapClickNums($ip, $uri, $day)
@@ -194,4 +195,4 @@ class ExtraWatchHeatmap
 
 }
 
-?>
+

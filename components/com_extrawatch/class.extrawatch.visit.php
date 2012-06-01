@@ -1,14 +1,15 @@
 <?php
 
 /**
+ * @file
  * ExtraWatch - A real-time ajax monitor and live stats
  * @package ExtraWatch
  * @version 1.2.18
- * @revision 58
+ * @revision 155
  * @license http://www.gnu.org/licenses/gpl-3.0.txt     GNU General Public License v3
  * @copyright (C) 2012 by Matej Koval - All rights reserved!
  * @website http://www.codegravity.com
- **/
+ */
 
 /** ensure this file is being included by a parent file */
 if (!defined('_JEXEC') && !defined('_VALID_MOS'))
@@ -17,23 +18,23 @@ if (!defined('_JEXEC') && !defined('_VALID_MOS'))
 class ExtraWatchVisit
 {
 
-    var $env;
+    public $env;
 
-    var $database;
-    var $config;
-    var $helper;
-    var $stat;
-    var $block;
-    var $goal;
-    var $sizes;
-    var $date;
-    var $heatmap;
-    var $seo;
+    public $database;
+    public $config;
+    public $helper;
+    public $stat;
+    public $block;
+    public $goal;
+    public $sizes;
+    public $date;
+    public $heatmap;
+    public $seo;
 
-    function ExtraWatchVisit()
+    function __construct()
     {
         $this->env = ExtraWatchEnvFactory::getEnvironment();
-        $this->database = & $this->env->getDatabase();
+        $this->database = $this->env->getDatabase();
         $this->config = new ExtraWatchConfig($this->database);
         $this->helper = new ExtraWatchHelper($this->database);
         $this->stat = new ExtraWatchStat($this->database);
@@ -137,24 +138,28 @@ class ExtraWatchVisit
         $maxRows = $this->config->getConfigValue('EXTRAWATCH_STATS_MAX_ROWS');
         $today = $this->date->jwDateToday();
 
-        /** delete visitors */
-        $maxVisitors = $this->config->getConfigValue('EXTRAWATCH_LIMIT_VISITORS');
-        $query = sprintf("SELECT id as maxId FROM #__extrawatch where browser is not NULL ORDER BY id DESC LIMIT %d, 1", (int)($maxVisitors * 2));
-        $maxId = @ $this->database->resultQuery($query);
-        $query = sprintf("DELETE FROM #__extrawatch_uri WHERE browser is not NULL and fk < %d", (int)$maxId);
-        @$this->database->executeQuery($query);
-        $query = sprintf("DELETE FROM #__extrawatch WHERE browser is not NULL and id < %d", (int)$maxId);
-        @$this->database->executeQuery($query);
+        /** get oldest visitor id in database */
+        $query = sprintf("select (max(id)-min(id)) as difference from #__extrawatch where browser is not null ");
+        $difference = $this->database->resultQuery($query);
 
+        $query = sprintf("select id as maxid from #__extrawatch where browser is not NULL order by id desc limit 1");
+        $rows = @ $this->database->objectListQuery($query);
+        $row = @ $rows[0];
+        $maxidvisitors = @ $row->maxid - $this->config->getConfigValue('EXTRAWATCH_MAXID_VISITORS');
+        $maxidbots = @ $row->maxid - $this->config->getConfigValue('EXTRAWATCH_MAXID_BOTS');
 
-        /** delete bots */
-        $maxBots = $this->config->getConfigValue('EXTRAWATCH_LIMIT_BOTS');
-        $query = sprintf("SELECT id as maxId FROM #__extrawatch where browser is NULL ORDER BY id DESC LIMIT %d, 1", (int)($maxBots * 2));
-        $maxId = @ $this->database->resultQuery($query);
-        $query = sprintf("DELETE FROM #__extrawatch_uri WHERE browser is NULL and fk < %d", (int)$maxId);
-        @$this->database->executeQuery($query); //1189132
-        $query = sprintf("DELETE FROM #__extrawatch WHERE browser is NULL and id < %d", (int)$maxId);
-        @$this->database->executeQuery($query);
+        $query = sprintf("select id from #__extrawatch where (id < '%d' and browser is NULL) order by id desc", (int) $maxidbots);
+        $rows = @ $this->database->objectListQuery($query);
+
+        foreach ($rows as $row) {
+
+            $query = sprintf("delete from #__extrawatch where id = '%d' ", (int) $row->id);
+            $this->database->executeQuery($query);
+
+            $query = sprintf("delete from #__extrawatch_uri where fk = '%d' ", (int) $row->id);
+            $this->database->executeQuery($query);
+
+        }
 
         for ($i = 0; $i < 20; $i++) {
             /** delete records from previous day, which are not in top 20 (or value in maxRows */
@@ -162,7 +167,7 @@ class ExtraWatchVisit
             $rows = @ $this->database->objectListQuery($query);
             if ($rows)
                 foreach ($rows as $row) {
-                    $query = sprintf("delete from `#__extrawatch_info` where id = '%d' and `group` not in (%d, %d, %d) ", (int)$row->id, (int)DB_KEY_URI2KEYPHRASE, DB_KEY_HEATMAP, DB_KEY_SEARCH_RESULT_NUM); /* except uri2keyphrase */
+                    $query = sprintf("delete from `#__extrawatch_info` where id = '%d' and `group` not in (%d, %d, %d) ", (int)$row->id, (int)EW_DB_KEY_URI2KEYPHRASE, EW_DB_KEY_HEATMAP, EW_DB_KEY_SEARCH_RESULT_NUM); /* except uri2keyphrase */
                     $this->database->executeQuery($query);
 
                     $query = sprintf("delete from `#__extrawatch_uri` where fk = '%d' ", (int)$row->id);
@@ -176,20 +181,20 @@ class ExtraWatchVisit
             $daysToKeep = $today - $this->config->getConfigValue('EXTRAWATCH_STATS_KEEP_DAYS');
 
             // delete old statistics, except unique/loads (frontend module use it for total: value)
-            $query = sprintf("delete from #__extrawatch_info where date < '%d' and `group` not in (%d, %d, %d)", (int)$daysToKeep, DB_KEY_UNIQUE, DB_KEY_LOADS, DB_KEY_SEARCH_RESULT_NUM);
+            $query = sprintf("delete from #__extrawatch_info where date < '%d' and `group` not in (%d, %d, %d)", (int)$daysToKeep, EW_DB_KEY_UNIQUE, EW_DB_KEY_LOADS, EW_DB_KEY_SEARCH_RESULT_NUM);
             $this->database->executeQuery($query);
         }
 
         /*		//delete all IP records that are less than 1%
                 $value = $this->config->getConfigValue('EXTRAWATCH_STATS_IP_HITS');
-                $query = sprintf("DELETE FROM `#__extrawatch_info` where (`group` = '%d' and date < '%d')", (int) ($today-1), (int) DB_KEY_IP);
+                $query = sprintf("DELETE FROM `#__extrawatch_info` where (`group` = '%d' and date < '%d')", (int) ($today-1), (int) EW_DB_KEY_IP);
                 $this->database->setQuery($query);
                 $this->database->executeQuery($query);
 
 
                 //delete all IP records that are less than 1%
                 $value = $this->config->getConfigValue('EXTRAWATCH_STATS_IP_HITS');
-                $query = sprintf("DELETE FROM `#__extrawatch_info` where (`group` = '%d' and date < '%d' and value < '%s')", (int) $today, $this->database->getEscaped($value), (int) DB_KEY_IP);
+                $query = sprintf("DELETE FROM `#__extrawatch_info` where (`group` = '%d' and date < '%d' and value < '%s')", (int) $today, $this->database->getEscaped($value), (int) EW_DB_KEY_IP);
                 $this->database->setQuery($query);
                 $this->database->executeQuery($query);
         */
@@ -248,6 +253,17 @@ class ExtraWatchVisit
 
         $query = sprintf("delete from #__extrawatch_flow where count < (%d)", (int)$count);
         $this->database->executeQuery($query);
+
+/*        /* make sure there are no other records in tables * /
+        $query = sprintf("select max(id) as maxId from #__extrawatch", (int) $maxidbots);
+        $maxId = @ $this->database->resultQuery($query);
+
+        $query = sprintf("delete from #__extrawatch where id < %d ", ($maxId - ($maxidvisitors + $maxidbots)));
+        $this->database->executeQuery($query);
+
+        $query = sprintf("delete from #__extrawatch_uri where fk < %d ", ($maxId - ($maxidvisitors + $maxidbots)));
+        $this->database->executeQuery($query);*/
+
 
 
     }
@@ -321,14 +337,14 @@ class ExtraWatchVisit
         $liveSite = $this->config->getLiveSite();
 
         if ($this->heatmap->isHeatmapLoaded()) {
-            return true;
+            return TRUE;
         }
 
 
         $ip = addslashes(strip_tags(@ $this->getRemoteIPAddress()));
 
         if ($this->config->isIgnored('IP', $ip) || $this->config->isIgnored('URI', $uri) || $this->config->isIgnored('USER', $newUsername)) {
-            return true;
+            return TRUE;
         }
         $referer = $this->getReferer();
 
@@ -340,10 +356,10 @@ class ExtraWatchVisit
                 preg_match('@^(?:http://)?([^/]+)@i', $referer, $matches);
                 $host = @ $matches[1];
 
-                $this->stat->increaseKeyValueInGroup(DB_KEY_REFERERS, $host);
+                $this->stat->increaseKeyValueInGroup(EW_DB_KEY_REFERERS, $host);
                 $phrase = $this->extractPhraseFromUrl($referer);
                 $phrase = str_replace("%2B", "+", $phrase);
-                $this->stat->increaseKeyValueInGroup(DB_KEY_KEYPHRASE, $phrase);
+                $this->stat->increaseKeyValueInGroup(EW_DB_KEY_KEYPHRASE, $phrase);
 
                 $this->insertSearchResultPage($uri, $phrase, $referer, $title);
 
@@ -355,7 +371,7 @@ class ExtraWatchVisit
 
                     $keyword = @ trim(strtolower($keyword));
                     if ($keyword && strlen($keyword) >= 3) { //keyword leght must be >= as 3
-                        $this->stat->increaseKeyValueInGroup(DB_KEY_KEYWORDS, $keyword);
+                        $this->stat->increaseKeyValueInGroup(EW_DB_KEY_KEYWORDS, $keyword);
                     }
                 }
             } else { /* starts with the live site */
@@ -380,7 +396,7 @@ class ExtraWatchVisit
                 $query = sprintf("update #__extrawatch_internal set `timestamp` = '%d' where (id = '%d') ", $this->date->getUTCTimestamp(), (int)$id);
                 $this->database->executeQuery($query);
 
-                $this->stat->increaseKeyValueInGroup(DB_KEY_INTERNAL, $id);
+                $this->stat->increaseKeyValueInGroup(EW_DB_KEY_INTERNAL, $id);
 
             }
         }
@@ -452,14 +468,14 @@ class ExtraWatchVisit
         }
 
         if (@ $newUsername) {
-            $this->stat->increaseKeyValueInGroup(DB_KEY_USERS, $newUsername);
+            $this->stat->increaseKeyValueInGroup(EW_DB_KEY_USERS, $newUsername);
         }
 
         if ($this->config->getConfigValue('EXTRAWATCH_IP_STATS')) {
-            $this->stat->increaseKeyValueInGroup(DB_KEY_IP, $ip); //add ip watching
+            $this->stat->increaseKeyValueInGroup(EW_DB_KEY_IP, $ip); //add ip watching
         }
 
-        $this->stat->increaseKeyValueInGroup(DB_KEY_HITS, DB_KEY_HITS);
+        $this->stat->increaseKeyValueInGroup(EW_DB_KEY_HITS, EW_DB_KEY_HITS);
 
         $this->goal->checkGoals($title, $newUsername, $ip, $referer, $liveSite);
 
@@ -473,7 +489,7 @@ class ExtraWatchVisit
             if (@$position) {
                 $uri2keyphraseId = $this->insertUri2Keyphrase($uri, $phrase, $title);
                 $uri2keyphraseId2positionId = $this->insertUri2Keyphrase2Position($uri2keyphraseId, $position);
-                $this->stat->increaseKeyValueInGroup(DB_KEY_SEARCH_RESULT_NUM, $uri2keyphraseId2positionId);
+                $this->stat->increaseKeyValueInGroup(EW_DB_KEY_SEARCH_RESULT_NUM, $uri2keyphraseId2positionId);
             }
         }
     }
@@ -487,7 +503,7 @@ class ExtraWatchVisit
         $userAgent = addslashes(strip_tags(@ $_SERVER['HTTP_USER_AGENT']));
 
         if ($this->config->isIgnored('IP', $ip) || $this->config->isIgnored('URI', $uri)) {
-            return true;
+            return TRUE;
         }
 
         $this->updateBrowserStats($ip, $userAgent);
@@ -502,8 +518,8 @@ class ExtraWatchVisit
             $lastUri = $lastUriRow->uri;
         }
 
-        $this->stat->increaseKeyValueInGroup(DB_KEY_URI, $uri);
-        $this->stat->increaseKeyValueInGroup(DB_KEY_LOADS, DB_KEY_LOADS);
+        $this->stat->increaseKeyValueInGroup(EW_DB_KEY_URI, $uri);
+        $this->stat->increaseKeyValueInGroup(EW_DB_KEY_LOADS, EW_DB_KEY_LOADS);
 
         $referer = $this->getReferer();
         if ($this->isVisitFromSameSite($referer)) {
@@ -525,7 +541,7 @@ class ExtraWatchVisit
         $rows = @ $this->database->objectListQuery($query);
         $row = @ $rows[0];
         if (@ $row->browser == '')
-            $firstTime = true;
+            $firstTime = TRUE;
 
         $country = @$row->country;
         if (!$country) {
@@ -542,7 +558,7 @@ class ExtraWatchVisit
             $userAgent = strip_tags($userAgent);
             if (@ $userAgent) {
                 // to make sure it's really unique for today
-                $this->stat->increaseKeyValueInGroup(DB_KEY_UNIQUE, DB_KEY_UNIQUE);
+                $this->stat->increaseKeyValueInGroup(EW_DB_KEY_UNIQUE, EW_DB_KEY_UNIQUE);
             }
 
             /* Googlebot patch identifier: Googlebot-Image/1.0 */
@@ -552,13 +568,13 @@ class ExtraWatchVisit
             }
 
             $browser = $this->identifyBrowser(@ $userAgent);
-            $this->stat->increaseKeyValueInGroup(DB_KEY_BROWSER, $browser);
+            $this->stat->increaseKeyValueInGroup(EW_DB_KEY_BROWSER, $browser);
 
             $os = $this->identifyOs(@ $userAgent);
-            $this->stat->increaseKeyValueInGroup(DB_KEY_OS, $os);
+            $this->stat->increaseKeyValueInGroup(EW_DB_KEY_OS, $os);
 
             if ($country != EXTRAWATCH_UNKNOWN_COUNTRY) {
-                $this->stat->increaseKeyValueInGroup(DB_KEY_COUNTRY, $country);
+                $this->stat->increaseKeyValueInGroup(EW_DB_KEY_COUNTRY, $country);
             }
 
         }
@@ -717,7 +733,7 @@ class ExtraWatchVisit
         if (!@$id) {
             $query = sprintf("insert into #__extrawatch_uri2title (id, uri, title, `count`, `timestamp`) values ('','%s','%s',1,'%d') ", $this->database->getEscaped($uri), $this->database->getEscaped($title), (int)ExtraWatchDate::getUTCTimestamp());
             $this->database->executeQuery($query);
-        } else if ($title) { // already exists, but we need to update title if there is any
+        } elseif ($title) { // already exists, but we need to update title if there is any
             $query = sprintf("update #__extrawatch_uri2title set title = '%s' where id = '%d' ", $this->database->getEscaped($title), (int)$id);
             $this->database->executeQuery($query);
         }
@@ -793,9 +809,9 @@ class ExtraWatchVisit
         $ignorePrefix = "www.";
         $comparison = @strstr(str_replace($ignorePrefix, "", $referer), str_replace($ignorePrefix, "", str_replace($ignorePrefix, "", $liveSite)));
         if ($comparison) {
-            return true;
+            return TRUE;
         } else {
-            return false;
+            return FALSE;
         }
     }
 
@@ -854,7 +870,7 @@ class ExtraWatchVisit
             $this->database->executeQuery($query);
             $id = $this->getUri2KeyphraseId($uri2titleId, $keyphraseId);
         }
-        $this->stat->increaseKeyValueInGroup(DB_KEY_URI2KEYPHRASE, $id);
+        $this->stat->increaseKeyValueInGroup(EW_DB_KEY_URI2KEYPHRASE, $id);
         return $id;
     }
 
@@ -920,4 +936,4 @@ class ExtraWatchVisit
 
 }
 
-?>
+
