@@ -13,34 +13,4 @@
 defined('_JEXEC') or die('Restricted access');
 ?>
 
-<!--PRO_START-->
-<?php
-$day = ExtraWatchHelper::requestGet('day');
-if (!$day) {
-    $day = $this->extraWatch->date->jwDateToday(); // yesterday by default, because it contains
-}
-?>
-<h2>Heatmap for <?php echo $this->extraWatch->date->getDateByDay($day); ?></h2>
-<table width='700px' border="0">
-    <tr>
-        <td colspan="5">
-            <?php echo $this->renderDateControlGet('heatmap', $day); ?>
-        </td>
-    </tr>
-</table>
-<br/>
-<?php
-if ($day == ExtraWatchDate::jwDateToday()) {
-    $extraWatchHeatmap->updateHeatmapStats($day);
-}
-?>
-<?php echo $extraWatchHeatmapHTML->renderHeatmapTable($day); ?>
-<br/><br/>
-<table width='700px' border="0">
-    <tr>
-        <td colspan="5">
-            <?php echo $this->renderDateControlGet('heatmap', $day); ?>
-        </td>
-    </tr>
-</table>
-<!--PRO_END-->
+

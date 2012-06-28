@@ -32,25 +32,4 @@ $prevWeek = $week -1;
 $nextWeek = $week +1;
 -->
 
-<!--PRO_START-->
-<?php echo($extraWatchVisitHistoryHTML->renderHistoryNavigation()); ?>
 
-<table cellpadding='2' cellspacing='0' width='100%' border='0'>
-    <tr>
-        <td colspan='8'><h3><?php echo _EW_HISTORY_VISITORS;?></h3>
-
-            <div style='border: 1px solid #FFB7B7; width: 100%; background-color: #FFF5F5; padding: 2px;'>
-                <?php echo sprintf(_EW_HISTORY_SHOWING_ONLY, $this->extraWatch->config->getConfigValue('EXTRAWATCH_HISTORY_MAX_DB_RECORDS'));?>
-            </div>
-            <br/>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <?php echo ($extraWatchVisitHistoryHTML->renderVisitors()); ?>
-        </td>
-    </tr>
-</table>
-<br/>
-<?php echo($extraWatchVisitHistoryHTML->renderHistoryNavigation()); ?>
-<!--PRO_END-->

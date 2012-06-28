@@ -37,19 +37,7 @@ $output .= ("
         <a href='javascript:extraWatchBlockIpToggle(\"$ip\");'><img src='" . $extraWatch->config->getLiveSiteWithSuffix() . "components/com_extrawatch/img/icons/block.png' />" . _EW_VISIT_BLOCK_IP . "</a><br/>
         <a href='" . $extraWatch->config->renderLink("goals", "&action=insert&id=" . $uriId) . "' '" . _EW_VISIT_ADD_PAGE . "'><img src='" . $extraWatch->config->getLiveSiteWithSuffix() . "components/com_extrawatch/img/icons/goal.gif' />" . _EW_VISIT_ADD_PAGE . "</a>");
 
-/*PRO_START*/
-$getData = $extraWatchVisitsHTML->renderGetVars($uriId);
-$postData = $extraWatchVisitsHTML->renderPostVars($uriId);
 
-$output .= "<table>";
-if ($getData) {
-    $output .= "<tr><td><br/><u>" . _EW_VISIT_URL_PARAMETERS . "</u></td>" . $getData;
-}
-if ($postData) {
-    $output .= "<tr><td><br/><u>" . _EW_VISIT_SUBMITED_FIELDS . "</u></td>" . $postData;
-}
-$output .= "</table></div></div>";
-/*PRO_END*/
 
 echo($output);
 

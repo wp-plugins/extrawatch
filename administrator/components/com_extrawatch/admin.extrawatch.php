@@ -139,12 +139,7 @@ function extraWatchMainController() {
         return $extraWatchHTML->renderAcceptLicense();
     } else {
 
-        /*PRO_START*/
-        if (!$extraWatch->config->isFree() && !$extraWatch->config->isAdFree()  /* disabled trial || ($extraWatch->config->isTrial() && !$extraWatch->config->isTrialTimeOver())*/) {
-            $extraWatchHTML->renderAdminStyles();
-            return $extraWatchHTML->renderAdFreeLicense();
-        }
-        /*PRO_END*/
+        
 
         switch ($task) {
 
