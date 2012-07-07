@@ -5,7 +5,7 @@
  * ExtraWatch - A real-time ajax monitor and live stats
  * @package ExtraWatch
  * @version 1.2.18
- * @revision 203
+ * @revision 212
  * @license http://www.gnu.org/licenses/gpl-3.0.txt     GNU General Public License v3
  * @copyright (C) 2012 by Matej Koval - All rights reserved!
  * @website http://www.codegravity.com
@@ -30,13 +30,28 @@ defined('_JEXEC') or die('Restricted access');
                     <h3><?php echo(_EW_ANTISPAM_ADDRESSES);?>:</h3>
                     <?php echo $extraWatchBlockHTML->renderBlockedInfo(); ?><br/><br/>
 
-                    <div style="height: 300px; overflow: auto;">
-                        <table>
-                            <?php echo($extraWatchBlockHTML->renderBlockedIPs(0, TRUE, FALSE)); ?>
-                        </table>
-                    </div>
-                    <br/>
                 </td>
+            </tr>
+            <tr>
+                <td colspan='4' align='left'><h2><?php echo(_EW_ANTISPAM_IMPORT_CSV);?>:</h2>
+                    <form action="<?php echo $this->extraWatch->config->getAdministratorIndex();?>?option=com_joomlawatch&task=antiSpam" method="post" enctype="multipart/form-data">
+                        <input type="file" name="file" id="file"/>
+                        <input type='hidden' name='option' value='com_joomlawatch'/>
+                        <input type='hidden' name='task' value='antiSpam'/>
+                        <input type='hidden' name='action' value='saveAntiSpamCsv'/>
+
+                        <input type="submit" name="submit" value="Submit"/>
+                    </form>
+                </td>
+            </tr>
+            <tr><td>
+                <div style="height: 300px; overflow: auto;">
+                    <table>
+                        <?php echo($extraWatchBlockHTML->renderBlockedIPs(0, TRUE, FALSE)); ?>
+                    </table>
+                </div>
+                <br/>
+            </td>
                 <td valign='top' width='50%'>
                     <table border='0'>
                         <tr>

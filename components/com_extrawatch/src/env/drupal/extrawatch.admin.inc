@@ -10,6 +10,6 @@ function extrawatch()
 {
     define('JPATH_BASE2', dirname(__FILE__));
     define('_JEXEC', 1);
-    define('ENV', 1);
+    if (!defined('ENV')) define('ENV', 1);
     include('administrator/components/com_extrawatch/admin.extrawatch.php');
 }

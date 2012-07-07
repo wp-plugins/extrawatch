@@ -5,7 +5,7 @@
  * ExtraWatch - A real-time ajax monitor and live stats
  * @package ExtraWatch
  * @version 1.2.18
- * @revision 203
+ * @revision 212
  * @license http://www.gnu.org/licenses/gpl-3.0.txt     GNU General Public License v3
  * @copyright (C) 2012 by Matej Koval - All rights reserved!
  * @website http://www.codegravity.com
@@ -43,7 +43,7 @@ class ExtraWatchWordpressEnv implements ExtraWatchEnv
 
     function getRootSite()
     {
-	    $hostname = "http://" . $_SERVER['HTTP_HOST'];
+        $hostname = "http://" . $_SERVER['HTTP_HOST'];
         $scriptName = $_SERVER['SCRIPT_NAME'];
         $scriptNameExploded = explode("wp-content/", $scriptName);
         if (sizeof($scriptNameExploded) > 1) {
@@ -74,7 +74,13 @@ class ExtraWatchWordpressEnv implements ExtraWatchEnv
     function getEnvironmentSuffix()
     {
         // as install dir
-        return "wp-content/plugins/extrawatch/";
+        /*FREE_START*/
+        $moduleName = "extrawatch";
+        /*FREE_END*/
+
+        
+
+        return "wp-content/plugins/".$moduleName."/";
     }
 
     function renderLink($task, $otherParams)
@@ -135,8 +141,11 @@ class ExtraWatchWordpressEnv implements ExtraWatchEnv
         return $dirs;
     }
 
-    function isAgentPublished($database) {
-        return TRUE;
+    function getAgentNotPublishedMsg($database) {
+        if (!is_active_widget( false, false, "extrawatchagentwidget", true )) {
+            return _EW_AGENT_NOT_PUBLISHED_ERROR_WORDPRESS;
+        }
+        return FALSE;
     }
 
 

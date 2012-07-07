@@ -5,7 +5,7 @@
  * ExtraWatch - A real-time ajax monitor and live stats
  * @package ExtraWatch
  * @version 1.2.18
- * @revision 203
+ * @revision 212
  * @license http://www.gnu.org/licenses/gpl-3.0.txt     GNU General Public License v3
  * @copyright (C) 2012 by Matej Koval - All rights reserved!
  * @website http://www.codegravity.com
@@ -277,6 +277,35 @@ function extraWatchMainController() {
 
                         break;
                         }
+
+                    case "export":
+                        {
+                        //$extraWatchHTML->renderAdminStyles();
+                        //$extraWatchHTML->renderHeader();
+                        $extraWatch->goal->exportGoals($_POST);
+                        $extraWatchGoalHTML->renderExportGoals(@ $result);
+
+                        break;
+                        }
+
+                    case "import":
+                        {
+                        $extraWatchHTML->renderAdminStyles();
+                        $extraWatchHTML->renderHeader();
+                        echo $extraWatchGoalHTML->renderImportGoals();
+
+                        break;
+                        }
+
+                    case "saveImportGoal":
+                        {
+                        $extraWatchHTML->renderAdminStyles();
+                        $extraWatchHTML->renderHeader();
+                        $extraWatch->goal->saveImportGoal($_POST);
+                        $extraWatchGoalHTML->renderGoals(@ $result);
+
+                        }
+
                     default:
                         {
                         $extraWatchHTML->renderAdminStyles();

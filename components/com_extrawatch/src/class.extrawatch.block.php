@@ -5,7 +5,7 @@
  * ExtraWatch - A real-time ajax monitor and live stats
  * @package ExtraWatch
  * @version 1.2.18
- * @revision 203
+ * @revision 212
  * @license http://www.gnu.org/licenses/gpl-3.0.txt     GNU General Public License v3
  * @copyright (C) 2012 by Matej Koval - All rights reserved!
  * @website http://www.codegravity.com
@@ -313,11 +313,64 @@ class ExtraWatchBlock
     /**
      * block
      */
-    function updateSpamWordForBlockedIp($ip, $spamWord)
-    {
+    function updateSpamWordForBlockedIp($ip, $spamWord) {
         $query = sprintf("update #__extrawatch_blocked set badWord = '%s' where ip = '%s'", $this->database->getEscaped($spamWord), $this->database->getEscaped($ip));
         $this->database->executeQuery($query);
     }
+
+    function csv_to_array($input, $delimiter=','){
+        $header = null;
+        $data = array();
+        $csvData = str_getcsv($input, "\n");
+        foreach($csvData as $csvLine){
+            if(is_null($header)) $header = explode($delimiter, $csvLine);
+            else{
+                $items = explode($delimiter, $csvLine);
+                for($n = 0, $m = count($header); $n < $m; $n++){
+                    $prepareData[$header[$n]] = $items[$n];
+                }
+                $data[] = $prepareData;
+            }
+        }
+        return $data;
+    }    /**     * block     */
+
+    function saveImportAntiSpamIp($post) {
+        if ((($_FILES["file"]["type"] == "text/comma-separated-values")))
+        {
+            if ($_FILES["file"]["error"] > 0){
+                echo "Return Code: " . $_FILES["file"]["error"] . "<br />";            }
+            else
+            {
+                if (file_exists(JPATH_BASE."/" . $_FILES["file"]["name"]))                {
+                    echo $_FILES["file"]["name"] . " already exists. ";
+                }else{
+                    move_uploaded_file($_FILES["file"]["tmp_name"],JPATH_BASE."/" . $_FILES["file"]["name"]);
+                    $row = 1;
+                    $handle = fopen($_FILES["file"]["name"], "r");
+                    while (($data = fgetcsv($handle, '', ",")) !== FALSE) {
+                        $num = count($data);
+                        $row++;
+                        if($data[1] != 'ip'){
+                            $date = strtotime(date("d-m-Y H:i:s")).'<br/>';                        //check if ip is exist or not
+                            $query = sprintf("select * from #__joomlawatch_blocked where ip = '$data[1]'");
+                            $rows = @ $this->database->assocListQuery($query);
+                            if(empty($rows)){
+                                //insert into database
+                                $query = sprintf("INSERT into #__joomlawatch_blocked values ('','$data[1]','','$date', '')");
+                                $this->database->executeQuery($query);
+                            }
+                        }
+                    }
+                    fclose($handle);
+                    unlink($_FILES["file"]["name"]);
+                }
+            }
+        }      else        {
+            echo "Invalid file";
+        }
+    }
+
 
 
 }

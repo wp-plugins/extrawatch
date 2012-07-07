@@ -5,7 +5,7 @@
  * ExtraWatch - A real-time ajax monitor and live stats
  * @package ExtraWatch
  * @version 1.2.18
- * @revision 203
+ * @revision 212
  * @license http://www.gnu.org/licenses/gpl-3.0.txt     GNU General Public License v3
  * @copyright (C) 2012 by Matej Koval - All rights reserved!
  * @website http://www.codegravity.com
@@ -372,6 +372,139 @@ class ExtraWatchGoal
                 }
 
             }
+    }
+
+    /**
+     *  Export Goals
+     */
+    function exportGoals()
+    {
+        $query = "select * from #__extrawatch_goals ";
+        $rows = @ $this->database->assocListQuery($query);
+
+        $output = "<?xml version=\"1.0\" ?>\n";
+        $output .= "<goals>"; // iterate over each table and return the fields for each table
+        foreach ($rows as $key => $row) {
+            $output .= "<goal>";
+            foreach ($row as $resultKey => $resultRow) {
+                if ($resultKey != 'id') {
+                    $output .= "<" . $resultKey . ">" . $resultRow . "</" . $resultKey . ">";
+                }
+            }
+            $output .= "</goal>";
+        }
+
+        $output .= "</goals>";
+        $xmlFile = "extrawatch-goals-" . date('Ymd') . ".xml";
+        $xmlHandle = fopen($xmlFile, "w"); //--- write xml to file ---
+        fwrite($xmlHandle, $output);
+        fclose($xmlHandle); // tell the browser what kind of file is come in
+        return @ $output;
+    }
+
+    function saveImportGoal($post)
+    {
+        if ((($_FILES["file"]["type"] == "text/xml"))) {
+            if ($_FILES["file"]["error"] > 0) {
+                echo "Return Code: " . $_FILES["file"]["error"] . "<br />";
+            } else {
+                if (file_exists(JPATH_BASE . "/" . $_FILES["file"]["name"])) {
+                    echo $_FILES["file"]["name"] . " already exists. ";
+                } else {
+                    move_uploaded_file($_FILES["file"]["tmp_name"], JPATH_BASE . "/" . $_FILES["file"]["name"]);
+                    //XML Read
+                    $doc = new DOMDocument();
+                    $doc->load($_FILES['file']['name']);
+
+                    $goals = $doc->getElementsByTagName("goal");
+                    foreach ($goals as $goal) {
+                        $names = $goal->getElementsByTagName("name");
+                        $name = $names->item(0)->nodeValue;
+
+                        $username_inverseds = $goal->getElementsByTagName("username_inversed");
+                        $username_inversed = $username_inverseds->item(0)->nodeValue;
+
+                        $parentIds = $goal->getElementsByTagName("parentId");
+                        $parentId = $parentIds->item(0)->nodeValue;
+
+                        $uri_conditions = $goal->getElementsByTagName("uri_condition");
+                        $uri_condition = $uri_conditions->item(0)->nodeValue;
+
+                        $uri_inverseds = $goal->getElementsByTagName("uri_inversed");
+                        $uri_inversed = $uri_inverseds->item(0)->nodeValue;
+
+                        $get_vars = $goal->getElementsByTagName("get_var");
+                        $get_var = $get_vars->item(0)->nodeValue;
+
+                        $get_conditions = $goal->getElementsByTagName("get_condition");
+                        $get_condition = $get_conditions->item(0)->nodeValue;
+
+                        $get_inverseds = $goal->getElementsByTagName("get_inversed");
+                        $get_inversed = $get_inverseds->item(0)->nodeValue;
+
+                        $post_vars = $goal->getElementsByTagName("post_var");
+                        $post_var = $post_vars->item(0)->nodeValue;
+
+                        $post_conditions = $goal->getElementsByTagName("post_condition");
+                        $post_condition = $post_conditions->item(0)->nodeValue;
+
+                        $post_inverseds = $goal->getElementsByTagName("post_inversed");
+                        $post_inversed = $post_inverseds->item(0)->nodeValue;
+
+                        $title_conditions = $goal->getElementsByTagName("title_condition");
+                        $title_condition = $title_conditions->item(0)->nodeValue;
+
+                        $title_inverseds = $goal->getElementsByTagName("title_inversed");
+                        $title_inversed = $title_inverseds->item(0)->nodeValue;
+
+                        $username_conditions = $goal->getElementsByTagName("username_condition");
+                        $username_condition = $username_conditions->item(0)->nodeValue;
+
+                        $ip_conditions = $goal->getElementsByTagName("ip_condition");
+                        $ip_condition = $ip_conditions->item(0)->nodeValue;
+
+                        $ip_inverseds = $goal->getElementsByTagName("ip_inversed");
+                        $ip_inversed = $ip_inverseds->item(0)->nodeValue;
+
+                        $came_from_conditions = $goal->getElementsByTagName("came_from_condition");
+                        $came_from_condition = $came_from_conditions->item(0)->nodeValue;
+
+                        $came_from_inverseds = $goal->getElementsByTagName("came_from_inversed");
+                        $came_from_inversed = $came_from_inverseds->item(0)->nodeValue;
+
+                        $country_conditions = $goal->getElementsByTagName("country_condition");
+                        $country_condition = $country_conditions->item(0)->nodeValue;
+
+                        $country_inverseds = $goal->getElementsByTagName("country_inversed");
+                        $country_inversed = $country_inverseds->item(0)->nodeValue;
+
+                        $blocks = $goal->getElementsByTagName("block");
+                        $block = $blocks->item(0)->nodeValue;
+
+                        $redirects = $goal->getElementsByTagName("redirect");
+                        $redirect = $redirects->item(0)->nodeValue;
+
+                        $disableds = $goal->getElementsByTagName("disabled");
+                        $disabled = $disableds->item(0)->nodeValue;
+
+                        //Check the Goal is exist or not
+                        $query = sprintf("select name from #__extrawatch_goals where name = '$name'");
+                        $rows = @ $this->database->assocListQuery($query);
+                        if (empty($rows)) {
+                            $value = "'$name','$username_inversed','$parentId','$uri_condition','$uri_inversed','$get_var','$get_condition','$get_inversed',                                     '$post_var','$post_condition','$post_inversed','$title_condition','$title_inversed','$username_condition','$ip_condition','$ip_inversed',                                     '$came_from_condition','$came_from_inversed','$country_condition','$country_inversed','$block','$redirect','$disabled'";
+                            //$query = sprintf("insert into #__extrawatch_goals values('NULL','$name','$username_inversed','$parentId','$uri_condition','$uri_inversed','$get_var','$get_condition','$get_inversed','$post_var','$post_condition','$post_inversed','$title_condition','$title_inversed','$username_condition','$ip_condition','$ip_inversed','$came_from_condition','$came_from_inversed','$country_condition','$country_inversed','$block','$redirect','$disabled')");
+
+                            $query = sprintf("insert into #__extrawatch_goals values('NULL',$value)");
+                            $result = $this->database->executeQuery($query);
+                        }
+                    } //Delete uploaded file
+                    unlink($_FILES["file"]["name"]);
+                }
+            }
+        } else {
+            echo "Invalid file";
+        }
+        return $result;
     }
 
 }
