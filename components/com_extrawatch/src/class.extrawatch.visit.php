@@ -383,7 +383,7 @@ class ExtraWatchVisit
         $phrase = str_replace("%2B", "+", $phrase);
         $this->stat->increaseKeyValueInGroup(EW_DB_KEY_KEYPHRASE, $phrase);
 
-        $this->insertSearchResultPage($uri, $phrase, $referer, $title);
+        
 
         $keywords = explode(' ', $phrase); //using space instead of + because google has changed it
         if (trim($phrase)) {
