@@ -7,7 +7,7 @@ Demo server: <a href="http://codegravitydemo.com/wordpress/">Frontpage</a> / <a 
 Features: <strong>Visitor Live Stats</strong>, <strong>History</strong>,
 <strong>Graphs</strong>, <strong>Anti-spam</strong>, <strong>Nightly Email Reports</strong>,
 <strong>Front-end Counters</strong>, translated in <strong>42 world languages</strong>
-Version: 1.2.18.234 FREE
+Version: 1.2.18.242 FREE
 Author: Matej Koval
 Author URI: http://www.codegravity.com
 */
@@ -93,9 +93,9 @@ if (@function_exists("extrawatch_admin_menu")) {
   }
 
   function getExtraWatchURL() {
-    /*FREE_START*/
+    
     $extraWatchPath = WP_PLUGIN_URL."/extrawatch/";
-    /*FREE_END*/
+    
 
     
 
@@ -103,9 +103,9 @@ if (@function_exists("extrawatch_admin_menu")) {
   }
 
   function getExtraWatchPath() {
-    /*FREE_START*/
+    
     $extraWatchPath = WP_PLUGIN_DIR."/extrawatch/";
-    /*FREE_END*/
+    
 
     
 
