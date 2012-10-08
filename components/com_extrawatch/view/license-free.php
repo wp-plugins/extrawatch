@@ -15,6 +15,7 @@ defined('_JEXEC') or die('Restricted access');
 
 function extrawatch_renderLicenseFree($extraWatch)
 {
+
   $output = "
 
 <style>
@@ -50,7 +51,7 @@ function extrawatch_renderLicenseFree($extraWatch)
         font-weight: normal;
     }
 </style>
-<h1>ExtraWatch 1.2.18.270 FREE</h1>
+<h1>ExtraWatch 1.2.18.388 FREE</h1>
 
 <script type='text/javascript'>
     function toggleNoKeyForm() {
@@ -67,7 +68,7 @@ function extrawatch_renderLicenseFree($extraWatch)
             <table>
                 <tr>
                     <td>
-                        <form action='" . $extraWatch->config->renderLink() . "'>
+                        <form action='" . $extraWatch->config->renderLink() . "' method='POST'>
                             <input type='text' name='key' size='50'/> <input type='submit' value='activate'/>
                             <input type='hidden' name='option' value='com_extrawatch'/>
                             <input type='hidden' name='task' value='activate'/>
@@ -131,7 +132,7 @@ function extrawatch_renderLicenseFree($extraWatch)
 
         <tr><td valign='top' colspan='2'>
 
-            <iframe src='http://www.codegravity.com/demo/extrawatch/1.2.18/' width='1100' height='768'>
+            <iframe src='http://www.codegravity.com/demo/extrawatch/1.2.18/".($extraWatch->env->getEnvironmentName())."/' width='1100' height='768'>
             </iframe>
             <br/><br/>
 

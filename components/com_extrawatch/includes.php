@@ -5,26 +5,49 @@
  * ExtraWatch - A real-time ajax monitor and live stats
  * @package ExtraWatch
  * @version 1.2.18
- * @revision 270
+ * @revision 388
  * @license http://www.gnu.org/licenses/gpl-3.0.txt     GNU General Public License v3
  * @copyright (C) 2012 by Matej Koval - All rights reserved!
  * @website http://www.codegravity.com
  */
 
-if (!defined('DS')) define('DS', DIRECTORY_SEPARATOR);
+$env = @$_REQUEST['env'];
+if (!$env) {
+    $env = @$_REQUEST['amp;env'];  // env passed this way because of xhtml compatibility
+}
+
+if (!defined('DS')) {
+    define('DS', DIRECTORY_SEPARATOR);
+}
+
+if (@$this instanceof extrawatch) { // we're in PrestaShop
+    $env = "ExtraWatchPrestaShopEnv";
+}
+
 $jBasePath = dirname(__FILE__) . DS . ".." . DS . "..";
 if (!defined('JPATH_BASE')) define('JPATH_BASE', $jBasePath);
 if (!defined('JPATH_BASE2')) define('JPATH_BASE2', $jBasePath);
 if (!defined('_JEXEC')) define("_JEXEC", 1);
 
-$env = @$_REQUEST['env'];
 $frontend = @$_REQUEST['frontend'];
 
 switch ($env) {
+    case "ExtraWatchPrestaShopEnv":
+        {
+        if (!defined('ENV')) define('ENV', 1);
+        $GLOBALS['smarty'] = true;
+        $GLOBALS['_MODULES'] = true;
+
+        require_once(realpath(dirname(__FILE__)).''.DS.'..'.DS.'..'.DS.'..'.DS.'..'.DS.'..'.DS.'config'.DS.'config.inc.php');
+
+        break;
+        }
+
     case "ExtraWatchMagentoEnv":
     {
     $GLOBALS['mageRunCode'] = true;
     if (!defined('ENV')) define('ENV', 1);
+
     break;
     }
 
