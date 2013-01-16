@@ -2,12 +2,12 @@
 <extension type="component" version="3.0" method="upgrade">
 
     <name>ExtraWatch</name>
-    <creationDate>2013</creationDate>
+    <creationDate>2012</creationDate>
     <author>Matej Koval - http://www.codegravity.com</author>
-    <copyright>Copyright 2006-2013 by Matej Koval</copyright>
+    <copyright>Copyright 2006-2012 by Matej Koval</copyright>
     <authorEmail>foo@codegravity.com</authorEmail>
     <authorUrl>http://www.codegravity.com</authorUrl>
-    <version>1.2.18.465 FREE</version>
+    <version>1.2.18.432 FREE</version>
     <license>http://www.gnu.org/licenses/gpl-3.0.txt GNU/GPLv3</license>
     <description>
         ExtraWatch is an AJAX component and module for Joomla CMS that allows you to watch
@@ -23,9 +23,6 @@
     <install>
         <sql>
             <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
-            <file driver="mysql">sql/install.mysql.utf8.sql</file>
-            <file driver="mysqli" charset="utf8">sql/install.mysql.utf8.sql</file>
-            <file driver="mysqli">sql/install.mysql.utf8.sql</file>
         </sql>
     </install>
 
@@ -84,7 +81,23 @@ in this section are copied from /site/ in the package -->
                     img="components/com_extrawatch/img/icons/map_icon.gif"
                     alt="Live Stats">Live Stats
             </menu>
-            
+            <!--PRO_START-->
+            <menu
+                    link="option=com_extrawatch&amp;task=seo"
+                    img="components/com_extrawatch/img/icons/seo.png"
+                    alt="SEO">SEO
+            </menu>
+            <menu
+                    link="option=com_extrawatch&amp;task=heatmap"
+                    img="components/com_extrawatch/img/icons/heatmap.png"
+                    alt="Heatmap">Heatmap
+            </menu>
+            <menu
+                    link="option=com_extrawatch&amp;task=flow"
+                    img="components/com_extrawatch/img/icons/flow.png"
+                    alt="Traffic Flow">Traffic Flow
+            </menu>
+            <!--PRO_END-->
             <menu
                     link="option=com_extrawatch&amp;task=graphs"
                     img="components/com_extrawatch/img/icons/trend_icon.gif"
@@ -115,7 +128,18 @@ in this section are copied from /site/ in the package -->
                     img="components/com_extrawatch/img/icons/license.png"
                     alt="Your License">Your License
             </menu>
-            
+            <!--PRO_START-->
+            <menu
+                    link="option=com_extrawatch&amp;task=status"
+                    img="components/com_extrawatch/img/icons/status.png"
+                    alt="Database Status">Database Status
+            </menu>
+            <menu
+                    link="option=com_extrawatch&amp;task=sizes"
+                    img="components/com_extrawatch/img/icons/sizes.png"
+                    alt="Modules / Components Sizes">Modules / Components Sizes
+            </menu>
+            <!--PRO_END-->
             <menu
                     link="option=com_extrawatch&amp;task=settings"
                     img="components/com_extrawatch/img/icons/settings.gif"
@@ -151,7 +175,6 @@ in this section are copied from /site/ in the package -->
             <filename>img/icons/settings.gif</filename>
             <filename>img/icons/update.png</filename>
             <filename>img/icons/credits.png</filename>
-            <filename>script.extrawatch.php</filename>
             <filename>install.extrawatch.php</filename>
             <filename>uninstall.extrawatch.php</filename>
             <filename>admin.extrawatch.php</filename>
