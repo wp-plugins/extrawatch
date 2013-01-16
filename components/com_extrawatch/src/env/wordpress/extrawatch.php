@@ -1,13 +1,13 @@
 <?php
 /*
-Plugin Name: ExtraWatch FREE
+Plugin Name: ExtraWatch Live Stats and Visitor Counter FREE
 Plugin URI: http://www.codegravity.com
 Description: Popular visitor live tracking component ported from Joomla. <a href="http://youtu.be/w8-LITejoV0?hd=1">View demo video</a>.
-Demo server: <a href="http://codegravitydemo.com/wordpress/">Frontpage</a> / <a href="http://codegravitydemo.com/wordpress/wp-admin/">Admin</a>.
+Demo server: <a href="http://codegravitydemo.com/wordpress/FREE/">Frontpage</a> / <a href="http://codegravitydemo.com/wordpress/FREE/wp-admin/">Admin</a>.
 Features: <strong>Visitor Live Stats</strong>, <strong>History</strong>,
 <strong>Graphs</strong>, <strong>Anti-spam</strong>, <strong>Nightly Email Reports</strong>,
 <strong>Front-end Counters</strong>, translated in <strong>42 world languages</strong>
-Version: 1.2.18.465 FREE
+Version: 1.2.18.469 FREE
 Author: Matej Koval
 Author URI: http://www.codegravity.com
 */
