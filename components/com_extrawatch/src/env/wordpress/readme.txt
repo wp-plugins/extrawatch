@@ -4,7 +4,7 @@ Donate link: http://www.extrawatch.com/
 Tags: admin, widget, plugin, counter, anti-spam, stats, visitors, click map, countries, tracking, maps, location, geolocation, statistics, spam, flags, goals
 Requires at least: 3.2.1.
 Tested up to: 3.2.1.
-Stable tag: 2.0.570
+Stable tag: 2.0.572
 
 Popular visitor live tracking component ported from Joomla. Features: live stats,graphs,goals,history,anti-spam,blocking,nightly reports and more..
 
@@ -16,12 +16,19 @@ Furthermore, you can block harmful IP addresses, see blocked attempts stats, eva
 
 
 FREE version features:
+
 - Live Stats
+
 - Nightly Email Reports
+
 - Anti-spam and IP Blocking
+
 - Graphs and Trends
+
 - History
+
 - Goals
+
 
 
 
