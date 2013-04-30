@@ -5,7 +5,7 @@
  * ExtraWatch - A real-time ajax monitor and live stats
  * @package ExtraWatch
  * @version 2.0
- * @revision 663
+ * @revision 662
  * @license http://www.gnu.org/licenses/gpl-3.0.txt     GNU General Public License v3
  * @copyright (C) 2013 by CodeGravity.com - All rights reserved!
  * @website http://www.extrawatch.com
@@ -75,10 +75,6 @@ function extrawatch_mainController($task = "") {
 
     $output = "";
 
-    if (!$extraWatch->config->getLiveSite()) {
-        $extraWatch->config->setLiveSite($env->getRootSite());
-    }
-
     switch ($task) {
 
         /*
@@ -127,8 +123,7 @@ function extrawatch_mainController($task = "") {
             break;
             }
     }
-    if (false) {//remove check license accepted
-    //if (!$extraWatch->config->checkLicenseAccepted()) {
+    if (!$extraWatch->config->checkLicenseAccepted()) {
         $output .= $extraWatchHTML->renderAdminStyles($extraWatch);
         $output .= $extraWatchHTML->renderAcceptLicense();
         return $output;
@@ -456,7 +451,7 @@ function extrawatch_mainController($task = "") {
                 }
 
             default :
-                if (true || $extraWatch->config->checkLicenseAccepted()) { // disable license checking
+                if ($extraWatch->config->checkLicenseAccepted()) {
                     $output .= $extraWatchHTML->renderAdminStyles($extraWatch);
                     $output .= $extraWatchHTML->renderHeader($extraWatch);
                     $output .= $extraWatchHTML->renderBody($option);
