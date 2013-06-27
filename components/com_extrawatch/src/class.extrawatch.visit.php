@@ -5,7 +5,7 @@
  * ExtraWatch - A real-time ajax monitor and live stats
  * @package ExtraWatch
  * @version 2.1
- * @revision 791
+ * @revision 792
  * @license http://www.gnu.org/licenses/gpl-3.0.txt     GNU General Public License v3
  * @copyright (C) 2013 by CodeGravity.com - All rights reserved!
  * @website http://www.extrawatch.com
@@ -611,9 +611,6 @@ class ExtraWatchVisit
 
       $browser = $this->referer->identifyBrowser(@ $userAgent);
       $this->stat->increaseKeyValueInGroup(EW_DB_KEY_BROWSER, $browser);
-
-      $os = json_decode($this->referer->identifyOSAsJSON(@ $userAgent));
-      $this->stat->increaseKeyValueInGroup(EW_DB_KEY_OS, $os->name);
 
       if ($country != EXTRAWATCH_UNKNOWN_COUNTRY) {
         $this->stat->increaseKeyValueInGroup(EW_DB_KEY_COUNTRY, $country);
