@@ -5,7 +5,7 @@
  * ExtraWatch - A real-time ajax monitor and live stats
  * @package ExtraWatch
  * @version 2.1
- * @revision 808
+ * @revision 794
  * @license http://www.gnu.org/licenses/gpl-3.0.txt     GNU General Public License v3
  * @copyright (C) 2013 by CodeGravity.com - All rights reserved!
  * @website http://www.extrawatch.com
@@ -38,7 +38,6 @@ class ExtraWatchMain {
   {
     $this->env = ExtraWatchEnvFactory::getEnvironment();
     $this->database = $this->env->getDatabase();
-    $this->setup = new ExtraWatchSetup($this->database);
     $this->stat = new ExtraWatchStat($this->database);
     $this->config = new ExtraWatchConfig($this->database);
     $this->helper = new ExtraWatchHelper($this->database);

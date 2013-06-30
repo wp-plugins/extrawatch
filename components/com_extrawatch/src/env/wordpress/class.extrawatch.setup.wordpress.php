@@ -5,7 +5,7 @@
  * ExtraWatch - A real-time ajax monitor and live stats
  * @package ExtraWatch
  * @version 2.1
- * @revision 808
+ * @revision 794
  * @license http://www.gnu.org/licenses/gpl-3.0.txt     GNU General Public License v3
  * @copyright (C) 2013 by CodeGravity.com - All rights reserved!
  * @website http://www.extrawatch.com
@@ -16,7 +16,7 @@ if (!defined('_JEXEC') && !defined('_VALID_MOS'))  {
   die('Restricted access');
 }
 
-class ExtraWatchEnvSetupWordpress implements ExtraWatchEnvSetup
+class ExtraWatchSetupWordpress implements ExtraWatchSetup
 {
 
   function install()
@@ -24,8 +24,8 @@ class ExtraWatchEnvSetupWordpress implements ExtraWatchEnvSetup
     error_reporting(E_ALL);
     $env = ExtraWatchEnvFactory::getEnvironment();
     $database = $env->getDatabase();
-    ExtraWatchEnvSetupWordpress::create_tables($database);
-    ExtraWatchEnvSetupWordpress::install_geolocation($database);
+    ExtraWatchSetupWordpress::create_tables($database);
+    ExtraWatchSetupWordpress::install_geolocation($database);
 
   }
 
@@ -33,7 +33,7 @@ class ExtraWatchEnvSetupWordpress implements ExtraWatchEnvSetup
   {
     $env = ExtraWatchEnvFactory::getEnvironment();
     $database = $env->getDatabase();
-    ExtraWatchEnvSetupWordpress::drop_tables($database);
+    ExtraWatchSetupWordpress::drop_tables($database);
   }
 
   function activate()
