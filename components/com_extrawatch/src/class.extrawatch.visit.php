@@ -5,7 +5,7 @@
  * ExtraWatch - A real-time ajax monitor and live stats
  * @package ExtraWatch
  * @version 2.1
- * @revision 794
+ * @revision 808
  * @license http://www.gnu.org/licenses/gpl-3.0.txt     GNU General Public License v3
  * @copyright (C) 2013 by CodeGravity.com - All rights reserved!
  * @website http://www.extrawatch.com
@@ -389,15 +389,15 @@ class ExtraWatchVisit
     }
     $referer = $this->getReferer();
 	$this->referer->checkSocialMedia($referer);
-    $this->referer->checkDevice($_SERVER['HTTP_USER_AGENT']);
-    $this->referer->checkOS($_SERVER['HTTP_USER_AGENT']);
+    $this->referer->checkDevice(@$_SERVER['HTTP_USER_AGENT']);
+    $this->referer->checkOS(@$_SERVER['HTTP_USER_AGENT']);
 
     $this->addUri2Title($uri, $title);
 
     if (@$referer) { // check if there is referer, otherwise there's no point to execute the code in this block
       if (@ !$this->isVisitFromSameSite($referer)) {
         /* from some other website */
-        preg_match('@^(?:http://)?([^/]+)@i', $referer, $matches);
+        preg_match('@^(?:http[s]://)?([^/]+)@i', $referer, $matches);
         $host = @ $matches[1];
 
         $this->stat->increaseKeyValueInGroup(EW_DB_KEY_REFERERS, $host);
@@ -408,9 +408,6 @@ class ExtraWatchVisit
         
 
         $keywords = explode(' ', $phrase); //using space instead of + because google has changed it
-        if (trim($phrase)) {
-          $this->insertUri2Keyphrase($uri, $phrase, $title);
-        }
         foreach ($keywords as $keyword) {
 
           $keyword = @ trim(strtolower($keyword));
@@ -513,13 +510,16 @@ class ExtraWatchVisit
 
   }
 
+    /*
+     * seo
+     */
   function insertSearchResultPage($uri, $phrase, $referer, $title)
   {
     if (@$phrase) {
       $position = $this->seo->extractGooglePageNumberFromReferer($referer);
       if (@$position) {
-        $uri2keyphraseId = $this->insertUri2Keyphrase($uri, $phrase, $title);
-        $uri2keyphraseId2positionId = $this->insertUri2Keyphrase2Position($uri2keyphraseId, $position);
+        $uri2keyphraseId = $this->insertUri2KeyphraseByUriKeyphraseTitle($uri, $phrase, $title);
+        $uri2keyphraseId2positionId = $this->insertUri2KeyphraseByUriKeyphraseTitle2Position($uri2keyphraseId, $position);
         $this->stat->increaseKeyValueInGroup(EW_DB_KEY_SEARCH_RESULT_NUM, $uri2keyphraseId2positionId);
       }
     }
@@ -789,7 +789,7 @@ class ExtraWatchVisit
     $liveSiteWithoutPrefix = str_replace($ignorePrefix, "", $liveSite);
     $comparison = strpos($refererWithoutPrefix, $liveSiteWithoutPrefix);
 
-	if (!$referer || $comparison != FALSE || $comparison == 0) {
+	if (!$referer || $comparison != FALSE || $comparison > 0) {
       return TRUE;
     } else {
       return FALSE;
@@ -833,29 +833,39 @@ class ExtraWatchVisit
     return $this->database->resultQuery($query);
   }
 
-  function insertUri2Keyphrase($uri, $keyphrase, $title)
-  {
-    $keyphraseId = $this->getKeyphraseId($keyphrase);
-    if (!$keyphraseId) {
-      $this->insertKeyphrase($keyphrase);
-      $keyphraseId = $this->getKeyphraseId($keyphrase);
-    }
-    $uri2titleId = $this->getUriIdByUriName($uri);
-    if (!$uri2titleId) {
-      $uri2titleId = $this->addUri2Title($uri, $title);
+    function insertUri2KeyphraseByUriKeyphraseTitle($uri, $keyphrase, $title) {
+        $keyphraseId = $this->getKeyphraseId($keyphrase);
+        if (!$keyphraseId) {
+            $this->insertKeyphrase($keyphrase);
+            $keyphraseId = $this->getKeyphraseId($keyphrase);
+        }
+        $uri2titleId = $this->getUriIdByUriName($uri);
+        if (!$uri2titleId) {
+            $uri2titleId = $this->addUri2Title($uri, $title);
+        }
+
+        $uri2keyphraseId = $this->getUri2KeyphraseId($uri2titleId, $keyphraseId);
+        if (!$uri2keyphraseId) {
+            $query = sprintf("insert into #__extrawatch_uri2keyphrase values ('','%d','%d') ", (int) $uri2titleId, (int) $keyphraseId);
+            $this->database->executeQuery($query);
+            $uri2keyphraseId = $this->getUri2KeyphraseId($uri2titleId, $keyphraseId);
+        }
+        $this->stat->increaseKeyValueInGroup(EW_DB_KEY_URI2KEYPHRASE, $uri2keyphraseId);
+        return $uri2keyphraseId;
     }
 
-    $id = $this->getUri2KeyphraseId($uri2titleId, $keyphraseId);
-    if (!$id) {
-      $query = sprintf("insert into #__extrawatch_uri2keyphrase values ('','%d','%d') ", (int) $uri2titleId, (int) $keyphraseId);
-      $this->database->executeQuery($query);
-      $id = $this->getUri2KeyphraseId($uri2titleId, $keyphraseId);
-    }
-    $this->stat->increaseKeyValueInGroup(EW_DB_KEY_URI2KEYPHRASE, $id);
-    return $id;
-  }
 
-  function insertUri2Keyphrase2Position($uri2keyphraseId, $position)
+    function getUri2KeyphraseByUriKeyphrase($uri, $keyphrase) {
+        $keyphraseId = $this->getKeyphraseId($keyphrase);
+        if (!$keyphraseId) {
+            $keyphraseId = $this->getKeyphraseId($keyphrase);
+        }
+        $uri2titleId = $this->getUriIdByUriName($uri);
+        $uri2keyphraseId = $this->getUri2KeyphraseId($uri2titleId, $keyphraseId);
+        return $uri2keyphraseId;
+    }
+
+  function insertUri2KeyphraseByUriKeyphraseTitle2Position($uri2keyphraseId, $position)
   {
     $id = $this->getUri2Keyphrase2Position($uri2keyphraseId, $position);
     if (!$id) {
@@ -914,6 +924,15 @@ class ExtraWatchVisit
     $query = sprintf("insert into #__extrawatch_keyphrase (`name`) values ('%s') ", $this->database->getEscaped($keyword));
     $this->database->executeQuery($query);
   }
+
+    public function getKeyphraseByUriId($uri2keyphraseId) {
+        $uri = $this->helper->getUri();
+        $uri2titleId = $this->getUriIdByUriName($uri);
+        $keyphraseId = $this->getUri2KeyphraseId($uri2titleId, $uri2keyphraseId);
+        $keyphrase = $this->getKeyphraseById($keyphraseId);
+        return $keyphrase;
+    }
+
 
 }
 
