@@ -4,8 +4,8 @@
  * @file
  * ExtraWatch - A real-time ajax monitor and live stats
  * @package ExtraWatch
- * @version 2.1
- * @revision 815
+ * @version 2.0
+ * @revision 816
  * @license http://www.gnu.org/licenses/gpl-3.0.txt     GNU General Public License v3
  * @copyright (C) 2013 by CodeGravity.com - All rights reserved!
  * @website http://www.codegravity.com
@@ -19,17 +19,13 @@ defined('_JEXEC') or die('Restricted access'); ?>
 
 
 <img
-        src='<?php echo($extraWatch->config->getLiveSiteWithSuffix());?>components/com_extrawatch/img/icons/flow-disabled.png' title='<?php echo _EW_MENU_AVAILABLE_IN_PRO;?>'/>&nbsp;<?php echo _EW_ADMINHEADER_FLOW;?>
+        src='<?php echo($extraWatch->config->getLiveSiteWithSuffix());?>components/com_extrawatch/img/icons/flow-disabled.png' title='Available in PRO version'/>&nbsp;<?php echo _EW_ADMINHEADER_FLOW;?>
  |
 <img
-        src='<?php echo($extraWatch->config->getLiveSiteWithSuffix());?>components/com_extrawatch/img/icons/seo-disabled.png' title='<?php echo _EW_MENU_AVAILABLE_IN_PRO;?>'/>&nbsp;SEO
+        src='<?php echo($extraWatch->config->getLiveSiteWithSuffix());?>components/com_extrawatch/img/icons/seo-disabled.png' title='Available in PRO version'/>&nbsp;SEO
 |
 <img
-        src='<?php echo($extraWatch->config->getLiveSiteWithSuffix());?>components/com_extrawatch/img/icons/click-disabled.png' title='<?php echo _EW_MENU_AVAILABLE_IN_PRO;?>'/>&nbsp;<?php echo _EW_ADMINHEADER_HEATMAP;?>
- |
-<img
-        src='<?php echo($extraWatch->config->getLiveSiteWithSuffix());?>components/com_extrawatch/img/icons/downloads-disabled.png' title='<?php echo _EW_MENU_AVAILABLE_IN_PRO;?>'/>&nbsp;<?php echo _EW_MENU_DOWNLOADS;?>
-
+        src='<?php echo($extraWatch->config->getLiveSiteWithSuffix());?>components/com_extrawatch/img/icons/click-disabled.png' title='Available in PRO version'/>&nbsp;<?php echo _EW_ADMINHEADER_HEATMAP;?>
  |
 
 <a href='<?php echo $extraWatch->config->renderLink('graphs');?>'><img
@@ -50,10 +46,10 @@ defined('_JEXEC') or die('Restricted access'); ?>
 
 
 <img
-        src='<?php echo($extraWatch->config->getLiveSiteWithSuffix());?>components/com_extrawatch/img/icons/status-disabled.png' title='<?php echo _EW_MENU_AVAILABLE_IN_PRO;?>'/>&nbsp;<?php echo _EW_MENU_STATUS;?>
+        src='<?php echo($extraWatch->config->getLiveSiteWithSuffix());?>components/com_extrawatch/img/icons/status-disabled.png' title='Available in PRO version'/>&nbsp;<?php echo _EW_MENU_STATUS;?>
  |
 <img
-        src='<?php echo($extraWatch->config->getLiveSiteWithSuffix());?>components/com_extrawatch/img/icons/sizes-disabled.png' title='<?php echo _EW_MENU_AVAILABLE_IN_PRO;?>'/>&nbsp;<?php echo _EW_ADMINHEADER_COMPONENTS;?>
+        src='<?php echo($extraWatch->config->getLiveSiteWithSuffix());?>components/com_extrawatch/img/icons/sizes-disabled.png' title='Available in PRO version'/>&nbsp;<?php echo _EW_ADMINHEADER_COMPONENTS;?>
  |
 
 <a href='<?php echo $extraWatch->config->renderLink('settings');?>'><img
@@ -62,3 +58,9 @@ defined('_JEXEC') or die('Restricted access'); ?>
 <a href='<?php echo $extraWatch->config->renderLink('credits');?>'><img
     src='<?php echo($extraWatch->config->getLiveSiteWithSuffix());?>components/com_extrawatch/img/icons/credits.png'/>&nbsp;<?php echo _EW_MENU_CREDITS;?>
 </a>
+<?php
+if ($extraWatch->config->getEnvironment() == "ExtraWatchJoomlaEnv") {
+  ?>
+<?php
+}
+
