@@ -1,17 +1,4 @@
 <?php
-/**
- * @file
- * ExtraWatch - A real-time ajax monitor and live stats
- * @package ExtraWatch
- * @version 2.2
- * @revision 927
- * @license http://www.gnu.org/licenses/gpl-3.0.txt     GNU General Public License v3
- * @copyright (C) 2013 by CodeGravity.com - All rights reserved!
- * @website http://www.codegravity.com
- */
-
-defined('_JEXEC') or die('Restricted access');
-
 /*
 Plugin Name: ExtraWatch Live Stats and Visitor Counter FREE
 Plugin URI: http://www.extrawatch.com
@@ -19,8 +6,8 @@ Plugin URI: http://www.extrawatch.com
 Description: Features: <strong>Visitor Live Stats</strong>, <strong>Front-end Counters</strong>, <strong>Anti-spam</strong>, <strong>Nightly Email Reports</strong>, <strong>History</strong>, <strong>Graphs</strong>, translated in <strong>42 world languages</strong>
 
 
-Version: 2.2.927 FREE
-Author: CodeGravity.com
+Version: 2.0.926 FREE
+Author: ExtraWatch.com
 Author URI: http://www.extrawatch.com
 */
 
@@ -45,7 +32,7 @@ if (@function_exists("extrawatch_admin_menu")) {
 } else {
 
   add_action('admin_menu', 'extrawatch_admin_menu');
-  add_action('wp_meta', 'extrawatch_frontend');
+  //add_action('wp_meta', 'extrawatch_frontend');
 
   require_once(JPATH_BASE2 . DS . "components" . DS . "com_extrawatch" . DS . "src" . DS. "inc.extrawatch.env.php");
 
