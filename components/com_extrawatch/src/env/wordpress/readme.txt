@@ -1,34 +1,53 @@
-=== ExtraWatch Live Stats and Visitor Counter FREE ===
+=== ExtraWatch FREE (Live Stats, Heatmap, Click tracking, Download Monitor and more)  ===
 Contributors: matto3c
 Donate link: http://www.extrawatch.com/
-Tags: admin, widget, plugin, counter, anti-spam, stats, visitors, click map, countries, tracking, maps, location, geolocation, statistics, spam, flags, goals
+Tags: analytics, statistics, stats, tracking, widget, heatmap, clicks, conversion tracking, counter, anti-spam, stats, visitors, downloads, download monitor, click map, tracking, maps, location, geolocation, statistics, spam, flags, goals, analytics, click, heat map, mouse click, tap, touch, tracker, tracking, usability
 Requires at least: 3.2.
 Tested up to: 3.5.1.
-Stable tag: 2.2.1210
+Stable tag: 2.2.1214
+License: GNU/GPLv2
 
-Popular visitor live tracking component ported from Joomla. Features: live stats,graphs,goals,history,anti-spam,blocking,nightly reports and more..
+Optimize website and increase sales. Watch your visitors in real time, Click Heatmap, Conversion Tracking, Download monitor, Anti-spam, Email Reports
 
 == Description ==
-Popular visitor live tracking component ported from Joomla. ExtraWatch allows you to watch your visitors live stats and bots in real-time from the administration back-end.
-
-Especially their IP addresses, countries they come from, geographical location on a map, which pages they are viewing, their browser and operating system, it creates daily and all-time stats from these information plus unique, pageload and total hits statistics.
-Furthermore, you can block harmful IP addresses, see blocked attempts stats, evaluate the trend charts, and create goals based on many parameters. In the front-end, it displays the top countries, user and visit information for certain periods of time.
+Analyze your visitor behaviour, optimize website and then increase conversions and sales. Once called the "Swiss Army Knife" for every Wordpress website. See map of clicks on Heatmap, Facebook, Twitter and other Social media
 
 
-FREE version features:
 
-- Live Stats
 
-- Nightly Email Reports
 
-- Anti-spam and IP Blocking
+== FREE version features: == 
 
-- Graphs and Trends
+➨ Live Stats 
+- allows you to "watch" your visitors as they come to your website in real time
+- total time of each user session
+- monitor when user has left the website, marking session as inactive
 
-- History
+➨ Nightly Email Reports
+- summary report sent overnight so you can chech how your site performs in the morning
 
-- Goals
+➨ Goals
+- allows you to track various types of user actions, such as: visited page, page title, username, IP address, came from, country, URL and Form parameters, option to block or redirect such users
+- import / export goals
 
+➨ Graphs 
+- section contains daily and weekly bar charts for pages, goals, users .. etc.
+
+➨ Anti-spam 
+- contains list of pre-defined spam words and blocked IP addresses, you can add your "bad words" into this list based on which the IP addresses will be blocked from your website
+
+➨ History
+- same as live stats but for previous days
+
+➨ Settings
+- various configuration params + 32 world languages
+
+➨ Other
+- asynchronous tracking - does not affect page speed
+- possibility to use also cloud-based version which stores data on 3rd party server
+
+➨ Not found any other feature? 
+- ask for it using live chat or open a support ticke
 
 
 
@@ -98,6 +117,9 @@ Please read http://www.extrawatch.com/faq/
 == Changelog ==
 
 = version 2.0 =
+https://code.google.com/p/extrawatch/source/list
+
+= version 2.2 =
 https://code.google.com/p/extrawatch/source/list
 
 == Upgrade Notice ==
