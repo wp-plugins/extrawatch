@@ -1,23 +1,12 @@
 <?php
-/**
- * @file
- * ExtraWatch - A real-time ajax monitor and live stats
- * @package ExtraWatch
- * @version 2.2
- * @revision 1209
- * @license http://www.gnu.org/licenses/gpl-3.0.txt     GNU General Public License v3
- * @copyright (C) 2013 by CodeGravity.com - All rights reserved!
- * @website http://www.codegravity.com
- */
-
 /*
-Plugin Name: ExtraWatch Live Stats and Visitor Counter FREE
+Plugin Name: ExtraWatch FREE (Live Stats, Heatmap, Click tracking, Download Monitor and more)
 Plugin URI: http://www.extrawatch.com
 
 Description: Features: <strong>Visitor Live Stats</strong>, <strong>Front-end Counters</strong>, <strong>Anti-spam</strong>, <strong>Nightly Email Reports</strong>, <strong>History</strong>, <strong>Graphs</strong>, translated in <strong>42 world languages</strong>
 
 
-Version: 2.2.1209 FREE
+Version: 2.2.1211 FREE
 Author: CodeGravity.com
 Author URI: http://www.extrawatch.com
 */
