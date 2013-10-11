@@ -4,19 +4,26 @@
  * @file
  * ExtraWatch - A real-time ajax monitor and live stats
  * @package ExtraWatch
- * @version 2.0
- * @revision 932
+ * @version @VERSION@
+ * @revision @REVISION@
  * @license http://www.gnu.org/licenses/gpl-3.0.txt     GNU General Public License v3
- * @copyright (C) 2013 by CodeGravity.com - All rights reserved!
+ * @copyright (C) @YEAR@ by CodeGravity.com - All rights reserved!
  * @website http://www.extrawatch.com
  */
+
+ if (defined("EW_STANDALONE")) {
+	define("JPATH_BASE",realpath("extrawatch"));
+	define("ENV",1);
+	define("_JEXEC",1);
+}
+
+ 
 defined('_JEXEC') or die('Restricted access');
 
 /** ensure this file is being included by a parent file */
 
-if (!defined('_JEXEC') && !defined('_VALID_MOS')) {
-    die('Restricted access');
-}
+
+defined('_JEXEC') or die('Restricted access');
 
 if (!defined("JPATH_BASE2")) {
     define("JPATH_BASE2", JPATH_BASE);
@@ -27,6 +34,8 @@ if (!defined("DS")) {
 }
 
 require_once JPATH_BASE . DS . "components" . DS . "com_extrawatch" . DS . "includes.php";
+
+$env = ExtraWatchEnvFactory::getEnvironment();
 
 
 function renderExtraWatchAgent()
@@ -39,60 +48,50 @@ function renderExtraWatchAgent()
     require_once JPATH_BASE . DS . "components" . DS . "com_extrawatch" . DS . "lang" . DS . $extraWatch->config->getLanguage() . ".php";
 
     if (EXTRAWATCH_DEBUG) {
-        $output .= ("<span style='color: #ff3333'>" . _JW_DESC_DEBUG . "</span><br/>");
+        $output .= ("<span style='color: #ff3333'>" . _EW_DESC_DEBUG . "</span><br/>");
     }
 
     $extraWatchHTML = new ExtraWatchHTML();
     $extraWatch->block->checkPostRequestForSpam(ExtraWatchHelper::requestGet());
     $extraWatch->block->checkPostRequestForSpam(ExtraWatchHelper::requestPost());
-    $extraWatch->visit->insertVisit();
+    try {
+        $extraWatch->visit->insertVisit();
+    } catch (ExtraWatchIPBlockedException $e) {
+        die($this->config->getConfigValue('EXTRAWATCH_BLOCKING_MESSAGE'));
+    }
 
     
-    $output .= $extraWatchHTML->renderHeatMapJS();
-    
+    //$output .= $extraWatchHTML->renderHeatMapJS();
+
 
 
     /*
      * The following piece of code identifies the userAgent and inserts the backlink to extrawatch.com
-     *
      * I would really appreciate, that you would keep the this unchanged.
-     *
      * It took me some time to create and maintain this component and to share it with everyone.
-     *
      * This is the least you could kindly do. Thank you.
-     *
      *
      * CodeGravity.com
     */
 
 
+    $output = ""; // reset output;
 
-    $nofollow = "";
-    if ($extraWatch->config->isAdFree() && $extraWatch->config->getCheckboxValue("EXTRAWATCH_FRONTEND_NOFOLLOW")) {
-        $nofollow = "rel='nofollow'";
-    }
+    /*FREE_START*/
+        $title = "Heatmap, Real-time analytics, Conversion tracking and anti-spam for Joomla, Wordpress, Drupal, Magento and Prestashop";
+        $output .= "<a href='http://www.extrawatch.com' target='_blank' title='" . $title . "'>";
+		//$output .= "<img src='".$extraWatch->config->getLiveSite(). $env->getEnvironmentSuffix(). DS . "components" . DS . "com_extrawatch" . DS . "img" .DS. "icons" . DS . "extrawatch-logo-16x16.png"."'/>";
+		$output .= "</a>";
+    /*FREE_END*/
 
-    if ($extraWatch->config->isAdFree()) {
-        $title = "";
-    } else {
-        $title = "Free visitor tracking, live stats, counter, conversions for Joomla, Wordpress, Drupal, Magento and Prestashop";
-    }
+    $host = $extraWatch->config->getLiveSiteWithSuffix();
 
-    if (!($extraWatch->config->isAdFree() && $extraWatch->config->getCheckboxValue("EXTRAWATCH_FRONTEND_NO_BACKLINK"))) {
-        $output .= ("<a href='http://www.extrawatch.com' target='_blank' $nofollow title='" . $title . "'>");
-    }
+	$output .= $extraWatch->helper->renderHTMLCodeSnippet(_EW_PROJECT_ID);
 
-    $output .= ("<img src='" . $extraWatch->config->getLiveSiteWithSuffix() . "components/com_extrawatch/ajax/img.php?rand=" . (rand() % 100000) . "&amp;env=" . get_class($extraWatch->env) . "' border='0' alt='$title' title='$title'/>");
-
-    if (!($extraWatch->config->isAdFree() && $extraWatch->config->getCheckboxValue("EXTRAWATCH_FRONTEND_NO_BACKLINK"))) {
-
-        $output .= ("</a>");
-    }
     return $output;
 }
 
-$env = ExtraWatchEnvFactory::getEnvironment()->getEnvironmentName();
 
-if (!defined('ENV') | $env == "nocms") echo renderExtraWatchAgent();
+if (!defined('ENV') | $env->getEnvironmentName() == "nocms") echo renderExtraWatchAgent();
 
 

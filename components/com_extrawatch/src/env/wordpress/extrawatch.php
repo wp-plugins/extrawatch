@@ -1,4 +1,15 @@
 <?php
+/**
+ * @file
+ * ExtraWatch - A real-time ajax monitor and live stats
+ * @package ExtraWatch
+ * @version 2.2
+ * @revision 1208
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt     GNU General Public License v3
+ * @copyright (C) 2013 by CodeGravity.com - All rights reserved!
+ * @website http://www.codegravity.com
+ */
+
 /*
 Plugin Name: ExtraWatch Live Stats and Visitor Counter FREE
 Plugin URI: http://www.extrawatch.com
@@ -6,8 +17,8 @@ Plugin URI: http://www.extrawatch.com
 Description: Features: <strong>Visitor Live Stats</strong>, <strong>Front-end Counters</strong>, <strong>Anti-spam</strong>, <strong>Nightly Email Reports</strong>, <strong>History</strong>, <strong>Graphs</strong>, translated in <strong>42 world languages</strong>
 
 
-Version: 2.0.932 FREE
-Author: ExtraWatch.com
+Version: 2.2.1208 FREE
+Author: CodeGravity.com
 Author URI: http://www.extrawatch.com
 */
 
@@ -26,22 +37,27 @@ if (!defined('JPATH_BASE')) define("JPATH_BASE", dirname(__FILE__));
 if ( ! defined( 'WP_PLUGIN_DIR' ) )
   define( 'WP_PLUGIN_DIR', WP_CONTENT_DIR.'/plugins' );
 
+if ( ! defined( '_EW_PROJECT_ID' ) ) 
+	define("_EW_PROJECT_ID", FALSE);
+
 /* this fixes double require by wordpress*/
 if (@function_exists("extrawatch_admin_menu")) {
   return;
 } else {
 
   add_action('admin_menu', 'extrawatch_admin_menu');
-  //add_action('wp_meta', 'extrawatch_frontend');
+  add_action('wp_meta', 'extrawatch_frontend');
 
+  require_once(JPATH_BASE2 . DS . "components" . DS . "com_extrawatch" . DS . "src" . DS. "class.extrawatch.log.php");
   require_once(JPATH_BASE2 . DS . "components" . DS . "com_extrawatch" . DS . "src" . DS. "inc.extrawatch.env.php");
 
   require_once(JPATH_BASE2 . DS . "components" . DS . "com_extrawatch" . DS . "src" . DS. "env". DS. "wordpress" . DS . "widget" . DS . "class.extrawatch.agent.widget.php");
   require_once(JPATH_BASE2 . DS . "components" . DS . "com_extrawatch" . DS . "src" . DS. "env". DS. "wordpress" . DS . "widget" . DS . "class.extrawatch.users.widget.php");
   require_once(JPATH_BASE2 . DS . "components" . DS . "com_extrawatch" . DS . "src" . DS. "env". DS. "wordpress" . DS . "widget" . DS . "class.extrawatch.visitors.widget.php");
 
-  register_activation_hook(__FILE__, array('ExtraWatchSetupWordpress', 'install'));
-  register_deactivation_hook(__FILE__, array('ExtraWatchSetupWordpress', 'uninstall'));
+  register_activation_hook(__FILE__, array('ExtraWatchEnvSetupWordpress', 'install'));
+  register_deactivation_hook(__FILE__, array('ExtraWatchEnvSetupWordpress', 'uninstall'));
+
 
   function extrawatch_admin_menu()
   {
