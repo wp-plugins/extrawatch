@@ -8,7 +8,7 @@ Description: Features: <strong>Visitor Live Stats</strong>, <strong>Front-end Co
 <!--PRO_START-->
 Description: Features: <strong>Visitor Live Stats</strong>, <strong>Monitor File Downloads, Clicks</strong>, <strong>Monitor clicks, Heatmap</strong>, <strong>SEO Report</strong>, <strong>Traffic Flow</strong>, <strong>Front-end Counters</strong>, <strong>Anti-spam</strong>, <strong>Nightly Email Reports</strong>, <strong>History</strong>, <strong>Graphs</strong>, <strong>Directory sizes</strong>, translated in <strong>42 world languages</strong>
 <!--PRO_END-->
-Version: 2.2.1352 FREE
+Version: 2.2.1356 FREE
 Author: CodeGravity.com
 Author URI: http://www.extrawatch.com
 */
