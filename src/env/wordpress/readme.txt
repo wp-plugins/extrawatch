@@ -4,7 +4,7 @@ Donate link: http://www.extrawatch.com/
 Tags: analytics, statistics, stats, tracking, widget, heatmap, clicks, conversion tracking, counter, anti-spam, stats, visitors, downloads, download monitor, click map, tracking, maps, location, geolocation, statistics, spam, flags, goals, analytics, click, heat map, mouse click, tap, touch, tracker, tracking, usability
 Requires at least: 3.2.
 Tested up to: 3.5.1.
-Stable tag: 2.2.1356
+Stable tag: 2.2.1357
 License: GNU/GPLv2
 
 Optimize website and increase sales. Watch your visitors in real time, Click Heatmap, Conversion Tracking, Download monitor, Anti-spam, Email Reports
@@ -13,60 +13,9 @@ Optimize website and increase sales. Watch your visitors in real time, Click Hea
 Analyze your visitor behaviour, optimize website and then increase conversions and sales. Once called the "Swiss Army Knife" for every Wordpress website. See map of clicks on Heatmap, Facebook, Twitter and other Media
 
 
-/*PRO_START*/
-=  PRO version features: =
 
 
-[youtube http://www.youtube.com/watch?v=OELeZHt8kbE&enablejsapi=1&autoplay=1&rel=0&modestbranding=1&showinfo=0&showsearch=0&vq=hd1080]
 
-
-➨ Android mobile app
-- access your stats with one-click from your mobile screen
-
-➨ See map of clicks on Heatmap
-- see the most "active" spots of your website, optimize page to get better conversions and sales
-- monitoring of unique ids of clicked elements and possibility to set them as goals and watch how it changes in time
-- tracks also link clicks
-
-➨ Monitor Downloaded files
-- transparent way how to monitor which files your users have downloaded
-- interactive HTML5 line chart
-- referer monitoring - from where was file referenced (your own site or 3rd party site)
-
-➨ Monitor User activity
-- detect last user activity
-- report and send alert emails when users share same login from different IP
-
-➨ Facebook, Twitter and other Media
-- detection from where your users came from such as: facebook, twitter, RSS, etc.
-
-➨ Mobile devices detection
-- detect most common Android, iOS and other devices and their types
-
-➨ Check Search Engines Reports
-- check percentage of traffic from search engines
-- list of keywords by which users found your website and their stats
-- increase and decrease of search result position and their trends
-- list of most common unique keyphrases so you can export them to 3rd party tool to monitor and increase search rank position
-
-➨ Traffic Flow
-- an interactive HTML5 chart of flow of traffic between your pages
-
-➨ Directory Sizes
-- you can monitor which other extensions are taking up your hosting space
-
-➨ Database Status
-- monitoring of increase / decrease of database table sizes in time
-
-➨ Front-end widgets
-- displays number of visits per specific time period
-
-
-Purchase the ExtraWatch PRO lifetime license:
-https://www.e-junkie.com/ecom/gb.php?i=1162853&c=single&cl=189955&on0=Promotion&os0=Promotion
-/*PRO_END*/
-
-/*FREE_START*/
 = FREE version features: =
 
 ➨ Live Stats 
@@ -100,7 +49,7 @@ https://www.e-junkie.com/ecom/gb.php?i=1162853&c=single&cl=189955&on0=Promotion&
 ➨ Not found any other feature? 
 - ask for it using live chat or open a support ticke
 
-/*FREE_END*/
+
 
 
 For more information and demos please visit: http://www.extrawatch.com
