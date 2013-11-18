@@ -51,7 +51,7 @@ function extrawatch_renderLicenseFree($extraWatch)
         font-weight: normal;
     }
 </style>
-<h1>ExtraWatch 2.2.1319 FREE</h1>
+<h1>ExtraWatch 2.2.1352 FREE</h1>
 
 <script type='text/javascript'>
     function toggleNoKeyForm() {
