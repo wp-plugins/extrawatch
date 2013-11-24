@@ -5,7 +5,7 @@
  * ExtraWatch - A real-time ajax monitor and live stats
  * @package ExtraWatch
  * @version 2.2
- * @revision 1367
+ * @revision 1390
  * @license http://www.gnu.org/licenses/gpl-3.0.txt     GNU General Public License v3
  * @copyright (C) 2013 by CodeGravity.com - All rights reserved!
  * @website http://www.codegravity.com
@@ -49,9 +49,12 @@ defined('_JEXEC') or die('Restricted access'); ?>
 
 <?php if (!_EW_CLOUD_MODE) { ?>
 <img
-        src='<?php echo($extraWatch->config->getLiveSiteWithSuffix());?>components/com_extrawatch/img/icons/click-disabled.png' title='<?php echo _EW_MENU_AVAILABLE_IN_PRO;?>' />&nbsp;<span class='disabled'><?php echo _EW_ADMINHEADER_HEATMAP;?></span>
- 
+        src='<?php echo($extraWatch->config->getLiveSiteWithSuffix());?>components/com_extrawatch/img/icons/heatmap-disabled.png' title='<?php echo _EW_MENU_AVAILABLE_IN_PRO;?>' />&nbsp;<span class='disabled'><?php echo _EW_ADMINHEADER_HEATMAP;?></span>
+
 <img
+        src='<?php echo($extraWatch->config->getLiveSiteWithSuffix());?>components/com_extrawatch/img/icons/click-disabled.png' title='<?php echo _EW_MENU_AVAILABLE_IN_PRO;?>' />&nbsp;<span class='disabled'><?php echo _EW_ADMINHEADER_CLICK_AREAS;?></span>
+
+    <img
         src='<?php echo($extraWatch->config->getLiveSiteWithSuffix());?>components/com_extrawatch/img/icons/seo-disabled.png' title='<?php echo _EW_MENU_AVAILABLE_IN_PRO;?>' />&nbsp;<span class='disabled'>SEO</span>
 
 <img
