@@ -33,11 +33,13 @@ class ExtraWatchDBWrapWordpress implements ExtraWatchDBWrap
     $this->dbprefix = $wpdb->base_prefix;
     $select = TRUE;
 
-	if (!($this->dbref = @mysql_connect($host, $user, $password, TRUE))) {
-        if (!$this->dbref = @mysqli_connect($host, $user, $password, TRUE)) {
-            die("cannot connect");
+	    if (!$this->dbref = @mysqli_connect($host, $user, $password, TRUE)) {
+            die("cannot connect ". mysqli_error($this->dbref);
         }
-    }
+		else
+		if (!($this->dbref = @mysql_connect($host, $user, $password, TRUE))) {
+            die("cannot connect ". mysql_error($this->dbref);
+		} 
     if ($select) {
       $this->select($database);
     }
