@@ -5,7 +5,7 @@
  * ExtraWatch - A real-time ajax monitor and live stats
  * @package ExtraWatch
  * @version 2.2
- * @revision 1421
+ * @revision 1422
  * @license http://www.gnu.org/licenses/gpl-3.0.txt     GNU General Public License v3
  * @copyright (C) 2013 by CodeGravity.com - All rights reserved!
  * @website http://www.extrawatch.com
@@ -33,13 +33,9 @@ class ExtraWatchDBWrapWordpress implements ExtraWatchDBWrap
     $this->dbprefix = $wpdb->base_prefix;
     $select = TRUE;
 
-	    if (!$this->dbref = @mysqli_connect($host, $user, $password, TRUE)) {
-            die("cannot connect ". mysqli_error($this->dbref));
-        }
-		else
-		if (!($this->dbref = @mysql_connect($host, $user, $password, TRUE))) {
-            die("cannot connect ". mysql_error($this->dbref));
-		} 
+    if (!($this->dbref = @mysql_connect($host, $user, $password, TRUE))) {
+      die("cannot connect");
+    }
     if ($select) {
       $this->select($database);
     }
