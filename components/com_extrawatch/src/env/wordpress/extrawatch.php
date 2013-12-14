@@ -6,7 +6,7 @@ Plugin URI: http://www.extrawatch.com
 Description: Features: <strong>Visitor Live Stats</strong>, <strong>Front-end Counters</strong>, <strong>Anti-spam</strong>, <strong>Nightly Email Reports</strong>, <strong>History</strong>, <strong>Graphs</strong>, translated in <strong>42 world languages</strong>
 
 
-Version: 2.2.1427 FREE
+Version: 2.2.1428 FREE
 Author: CodeGravity.com
 Author URI: http://www.extrawatch.com
 */
