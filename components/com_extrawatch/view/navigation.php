@@ -5,7 +5,7 @@
  * ExtraWatch - A real-time ajax monitor and live stats
  * @package ExtraWatch
  * @version 2.2
- * @revision 1457
+ * @revision 1484
  * @license http://www.gnu.org/licenses/gpl-3.0.txt     GNU General Public License v3
  * @copyright (C) 2013 by CodeGravity.com - All rights reserved!
  * @website http://www.codegravity.com
@@ -49,28 +49,28 @@ defined('_JEXEC') or die('Restricted access'); ?>
 
 <?php if (!_EW_CLOUD_MODE) { ?>
 <img
-        src='<?php echo($extraWatch->config->getLiveSiteWithSuffix());?>components/com_extrawatch/img/icons/heatmap-disabled.png' title='<?php echo _EW_MENU_AVAILABLE_IN_PRO;?>' />&nbsp;<span class='disabled'><?php echo _EW_ADMINHEADER_HEATMAP;?></span>
+        src='<?php echo($extraWatch->config->getLiveSiteWithSuffix());?>components/com_extrawatch/img/icons/heatmap-disabled.png' title='<?php echo _EW_MENU_AVAILABLE_IN_PRO_HEATMAP;?>' />&nbsp;<span class='ewDisabled' title='<?php echo _EW_MENU_AVAILABLE_IN_PRO_HEATMAP;?>'><?php echo _EW_ADMINHEADER_HEATMAP;?></span>
 
 <img
-        src='<?php echo($extraWatch->config->getLiveSiteWithSuffix());?>components/com_extrawatch/img/icons/click-disabled.png' title='<?php echo _EW_MENU_AVAILABLE_IN_PRO;?>' />&nbsp;<span class='disabled'><?php echo _EW_ADMINHEADER_CLICK_AREAS;?></span>
+        src='<?php echo($extraWatch->config->getLiveSiteWithSuffix());?>components/com_extrawatch/img/icons/click-disabled.png' title='<?php echo _EW_MENU_AVAILABLE_IN_PRO_CLICK_AREAS;?>' />&nbsp;<span class='ewDisabled' title='<?php echo _EW_MENU_AVAILABLE_IN_PRO_CLICK_AREAS;?>'><?php echo _EW_ADMINHEADER_CLICK_AREAS;?></span>
 
     <img
-        src='<?php echo($extraWatch->config->getLiveSiteWithSuffix());?>components/com_extrawatch/img/icons/seo-disabled.png' title='<?php echo _EW_MENU_AVAILABLE_IN_PRO;?>' />&nbsp;<span class='disabled'>SEO</span>
+        src='<?php echo($extraWatch->config->getLiveSiteWithSuffix());?>components/com_extrawatch/img/icons/seo-disabled.png' title='<?php echo _EW_MENU_AVAILABLE_IN_PRO_SEO_REPORT;?>' />&nbsp;<span class='ewDisabled' title='<?php echo _EW_MENU_AVAILABLE_IN_PRO_SEO_REPORT;?>'>SEO</span>
 
 <img
-        src='<?php echo($extraWatch->config->getLiveSiteWithSuffix());?>components/com_extrawatch/img/icons/users-disabled.png' title='<?php echo _EW_MENU_AVAILABLE_IN_PRO;?>'/>&nbsp;<span class='disabled'><?php echo _EW_MENU_USERS;?></span>
+        src='<?php echo($extraWatch->config->getLiveSiteWithSuffix());?>components/com_extrawatch/img/icons/users-disabled.png' title='<?php echo _EW_MENU_AVAILABLE_IN_PRO_USERS;?>'/>&nbsp;<span class='ewDisabled' title='<?php echo _EW_MENU_AVAILABLE_IN_PRO_USERS;?>'><?php echo _EW_MENU_USERS;?></span>
 <img
-        src='<?php echo($extraWatch->config->getLiveSiteWithSuffix());?>components/com_extrawatch/img/icons/flow-disabled.png' title='<?php echo _EW_MENU_AVAILABLE_IN_PRO;?>' />&nbsp;<span class='disabled'><?php echo _EW_ADMINHEADER_FLOW;?></span>
+        src='<?php echo($extraWatch->config->getLiveSiteWithSuffix());?>components/com_extrawatch/img/icons/flow-disabled.png' title='<?php echo _EW_MENU_AVAILABLE_IN_PRO_FLOW;?>' />&nbsp;<span class='ewDisabled' title='<?php echo _EW_MENU_AVAILABLE_IN_PRO_FLOW;?>'><?php echo _EW_ADMINHEADER_FLOW;?></span>
  
 <img
-        src='<?php echo($extraWatch->config->getLiveSiteWithSuffix());?>components/com_extrawatch/img/icons/downloads-disabled.png' title='<?php echo _EW_MENU_AVAILABLE_IN_PRO;?>' />&nbsp;<span class='disabled'><?php echo _EW_MENU_DOWNLOADS;?></span>
+        src='<?php echo($extraWatch->config->getLiveSiteWithSuffix());?>components/com_extrawatch/img/icons/downloads-disabled.png' title='<?php echo _EW_MENU_AVAILABLE_IN_PRO_DOWNLOADS;?>' />&nbsp;<span class='ewDisabled' title='<?php echo _EW_MENU_AVAILABLE_IN_PRO_DOWNLOADS;?>'><?php echo _EW_MENU_DOWNLOADS;?></span>
 
  
 <img
-        src='<?php echo($extraWatch->config->getLiveSiteWithSuffix());?>components/com_extrawatch/img/icons/status-disabled.png' title='<?php echo _EW_MENU_AVAILABLE_IN_PRO;?>' />&nbsp;<span class='disabled'><?php echo _EW_MENU_STATUS;?></span>
+        src='<?php echo($extraWatch->config->getLiveSiteWithSuffix());?>components/com_extrawatch/img/icons/status-disabled.png' title='<?php echo _EW_MENU_AVAILABLE_IN_PRO_STATUS;?>' />&nbsp;<span class='ewDisabled' title='<?php echo _EW_MENU_AVAILABLE_IN_PRO_STATUS;?>'><?php echo _EW_MENU_STATUS;?></span>
  
 <img
-        src='<?php echo($extraWatch->config->getLiveSiteWithSuffix());?>components/com_extrawatch/img/icons/sizes-disabled.png' title='<?php echo _EW_MENU_AVAILABLE_IN_PRO;?>' />&nbsp;<span class='disabled'><?php echo _EW_ADMINHEADER_COMPONENTS;?></span>
+        src='<?php echo($extraWatch->config->getLiveSiteWithSuffix());?>components/com_extrawatch/img/icons/sizes-disabled.png' title='<?php echo _EW_MENU_AVAILABLE_IN_PRO_COMPONENTS;?>' />&nbsp;<span class='ewDisabled' title='<?php echo _EW_MENU_AVAILABLE_IN_PRO_COMPONENTS;?>'><?php echo _EW_ADMINHEADER_COMPONENTS;?></span>
 <?php } ?>
 
 
