@@ -5,7 +5,7 @@
  * ExtraWatch - A real-time ajax monitor and live stats
  * @package ExtraWatch
  * @version 2.2
- * @revision 1513
+ * @revision 1528
  * @license http://www.gnu.org/licenses/gpl-3.0.txt     GNU General Public License v3
  * @copyright (C) 2014 by CodeGravity.com - All rights reserved!
  * @website http://www.extrawatch.com
@@ -127,7 +127,18 @@ function extrawatch_mainController($task = "") {
                     $extraWatch->config->saveVersionIntoDatabase();
                     $extraWatch->config->setLiveSite($env->getRootSite());
                     break;
-            }
+					}
+
+                case "continueUnregistered" :
+                    {
+                    $output .= $extraWatchHTML->renderAdminStyles($extraWatch);
+                    $extraWatch->config->activate(ExtraWatchConfig::_EW_CONST_UNREGISTERED);
+                    $extraWatch->config->saveVersionIntoDatabase();
+                    $extraWatch->config->setLiveSite($env->getRootSite());
+                    break;
+					}
+					
+					
 
         case "licenseAccepted" :
             {
@@ -389,10 +400,9 @@ function extrawatch_mainController($task = "") {
 
                     case "save" :
                         {
-                        $numRecordsImported = $extraWatch->block->saveImportAntiSpamIp(ExtraWatchHelper::requestPost());
+                        $numRecordsImported = $extraWatch->block->saveBadWordsList(ExtraWatchHelper::requestPost());
                         $output .= $extraWatchHTML->renderAdminStyles($extraWatch);
                         $output .= $extraWatchHTML->renderHeader($extraWatch);
-                        $output .= sprintf(_EW_ANTISPAM_NUM_IP_FROM_CSV_IMPORTED, (int) $numRecordsImported);
                         $output .= $extraWatchHTML->renderAntiSpam();
                         break;
                         }
