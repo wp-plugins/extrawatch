@@ -5,7 +5,7 @@
  * ExtraWatch - A real-time ajax monitor and live stats
  * @package ExtraWatch
  * @version 2.2
- * @revision 1550
+ * @revision 1565
  * @license http://www.gnu.org/licenses/gpl-3.0.txt     GNU General Public License v3
  * @copyright (C) 2014 by CodeGravity.com - All rights reserved!
  * @website http://www.extrawatch.com
@@ -216,7 +216,7 @@ class ExtraWatchVisitHTML
 
 
 
-		  
+
 
         $username = "";
         if (@ $row->username) {
@@ -278,10 +278,9 @@ class ExtraWatchVisitHTML
         }
 
         $output .= "</td><td valign='top' align='left' style='background-color: #$color;'>" . @ $flag . "</td>
-																		<td valign='top' align='left' style='background-color: #$color;'><span $inactiveClass>$ipString$onlineString</span>";
-
-
+																		<td valign='top' align='left' style='background-color: #$color;'><span $inactiveClass>$ipString</span>";
           $output .= "$username</td>
+																		<td valign='top' align='left' style='background-color: #$color;'>$onlineString</td>
 																		<td valign='top' align='left' style='background-color: #$color;'>" . @ $browser . "</td>
 																		<td valign='top' align='left' style='background-color: #$color;'>" . @ $os . "</td>
 																		<td valign='top' align='left' style='background-color: #$color;' width='100%'>";
@@ -401,6 +400,7 @@ class ExtraWatchVisitHTML
       return;
     }
     $output = "<tr>
+        <td style='background-color: #" . $color . "'></td>
         <td style='background-color: #" . $color . "'></td>
         <td style='background-color: #" . $color . "'></td>
         <td style='background-color: #" . $color . "'></td>
