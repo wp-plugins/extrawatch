@@ -5,7 +5,7 @@
  * ExtraWatch - A real-time ajax monitor and live stats
  * @package ExtraWatch
  * @version 2.3
- * @revision 1843
+ * @revision 1857
  * @license http://www.gnu.org/licenses/gpl-3.0.txt     GNU General Public License v3
  * @copyright (C) 2014 by CodeGravity.com - All rights reserved!
  * @website http://www.codegravity.com
@@ -33,15 +33,15 @@ defined('_JEXEC') or die('Restricted access'); ?>
 
         
         <?php if (!_EW_CLOUD_MODE) { ?>
-            <li><a href="javascript:void(0);" title='<?php echo _EW_MENU_AVAILABLE_IN_PRO_LOCATION;?>'><i class="glyphicons google_maps"></i><?php echo _EW_NAVIGATION_LOCATION;?></a></li>
-            <li><a href="javascript:void(0);" title='<?php echo _EW_MENU_AVAILABLE_IN_PRO_HEATMAP;?>' class="linkDisabled"><i class="glyphicons fire linkDisabled"></i><?php echo _EW_ADMINHEADER_HEATMAP;?><?php echo $extraWatchHTML->renderBadge('heatmap');?></a></li>
-            <li><a href="javascript:void(0);" title='<?php echo _EW_MENU_AVAILABLE_IN_PRO_CLICK_AREAS;?>' class="linkDisabled"><i class="glyphicons hand_up linkDisabled"></i><?php echo _EW_NAVIGATION_CLICKS;?><?php echo $extraWatchHTML->renderBadge('clicks');?></a></li>
-            <li><a href="javascript:void(0);" title='<?php echo _EW_MENU_AVAILABLE_IN_PRO_SEO_REPORT;?>' class="linkDisabled"><i class="glyphicons search linkDisabled"></i><?php echo _EW_EMAIL_SEO_REPORTS;?><?php echo $extraWatchHTML->renderBadge('seo');?></a></li>
-            <li><a href="javascript:void(0);" title='<?php echo _EW_MENU_AVAILABLE_IN_PRO_USERS;?>' class="linkDisabled"><i class="glyphicons user linkDisabled"></i><?php echo _EW_MENU_USERS;?><?php echo $extraWatchHTML->renderBadge('users');?></a></li>
-            <li><a href="javascript:void(0);" title='<?php echo _EW_MENU_AVAILABLE_IN_PRO_FLOW;?>' class="linkDisabled"><i class="glyphicons move linkDisabled"></i><?php echo _EW_ADMINHEADER_FLOW;?></a></li>
-            <li><a href="javascript:void(0);" title='<?php echo _EW_MENU_AVAILABLE_IN_PRO_DOWNLOADS;?>' class="linkDisabled"><i class="glyphicons download_alt linkDisabled"></i><?php echo _EW_MENU_DOWNLOADS;?><?php echo $extraWatchHTML->renderBadge('downloads');?></a></li>
-            <li><a href="javascript:void(0);" title='<?php echo _EW_MENU_AVAILABLE_IN_PRO_STATUS;?>' class="linkDisabled"><i class="glyphicons database_plus linkDisabled"></i><?php echo _EW_MENU_STATUS;?></a></li>
-            <li><a href="javascript:void(0);" title='<?php echo _EW_MENU_AVAILABLE_IN_PRO_COMPONENTS;?>' class="linkDisabled"><i class="glyphicons folder_open linkDisabled"></i><?php echo _EW_ADMINHEADER_COMPONENTS  ;?></a></li>
+            <li><a href="<?php echo $extraWatch->config->renderLink('location');?>" title='<?php echo "("._EW_AVAILABLE_IN_FULL_VERSION.") "._EW_MENU_AVAILABLE_IN_PRO_LOCATION;?>' class="linkDisabled"><i class="glyphicons google_maps linkDisabled"></i><?php echo _EW_NAVIGATION_LOCATION;?></a></li>
+            <li><a href="<?php echo $extraWatch->config->renderLink('heatmap');?>" title='<?php echo "("._EW_AVAILABLE_IN_FULL_VERSION.") "._EW_MENU_AVAILABLE_IN_PRO_HEATMAP;?>' class="linkDisabled"><i class="glyphicons fire linkDisabled"></i><?php echo _EW_ADMINHEADER_HEATMAP;?><?php echo $extraWatchHTML->renderBadge('heatmap');?></a></li>
+            <li><a href="<?php echo $extraWatch->config->renderLink('clicks');?>" title='<?php echo "("._EW_AVAILABLE_IN_FULL_VERSION.") "._EW_MENU_AVAILABLE_IN_PRO_CLICK_AREAS;?>' class="linkDisabled"><i class="glyphicons hand_up linkDisabled"></i><?php echo _EW_NAVIGATION_CLICKS;?><?php echo $extraWatchHTML->renderBadge('clicks');?></a></li>
+            <li><a href="<?php echo $extraWatch->config->renderLink('seo');?>" title='<?php echo "("._EW_AVAILABLE_IN_FULL_VERSION.") "._EW_MENU_AVAILABLE_IN_PRO_SEO_REPORT;?>' class="linkDisabled"><i class="glyphicons search linkDisabled"></i><?php echo _EW_EMAIL_SEO_REPORTS;?><?php echo $extraWatchHTML->renderBadge('seo');?></a></li>
+            <li><a href="<?php echo $extraWatch->config->renderLink('users');?>" title='<?php echo "("._EW_AVAILABLE_IN_FULL_VERSION.") "._EW_MENU_AVAILABLE_IN_PRO_USERS;?>' class="linkDisabled"><i class="glyphicons user linkDisabled"></i><?php echo _EW_MENU_USERS;?><?php echo $extraWatchHTML->renderBadge('users');?></a></li>
+            <li><a href="<?php echo $extraWatch->config->renderLink('flow');?>" title='<?php echo "("._EW_AVAILABLE_IN_FULL_VERSION.") "._EW_MENU_AVAILABLE_IN_PRO_FLOW;?>' class="linkDisabled"><i class="glyphicons move linkDisabled"></i><?php echo _EW_ADMINHEADER_FLOW;?></a></li>
+            <li><a href="<?php echo $extraWatch->config->renderLink('downloads');?>" title='<?php echo "("._EW_AVAILABLE_IN_FULL_VERSION.") "._EW_MENU_AVAILABLE_IN_PRO_DOWNLOADS;?>' class="linkDisabled"><i class="glyphicons download_alt linkDisabled"></i><?php echo _EW_MENU_DOWNLOADS;?><?php echo $extraWatchHTML->renderBadge('downloads');?></a></li>
+            <li><a href="<?php echo $extraWatch->config->renderLink('status');?>" title='<?php echo "("._EW_AVAILABLE_IN_FULL_VERSION.") "._EW_MENU_AVAILABLE_IN_PRO_STATUS;?>' class="linkDisabled"><i class="glyphicons database_plus linkDisabled"></i><?php echo _EW_MENU_STATUS;?></a></li>
+            <li><a href="<?php echo $extraWatch->config->renderLink('sizes');?>" title='<?php echo "("._EW_AVAILABLE_IN_FULL_VERSION.") "._EW_MENU_AVAILABLE_IN_PRO_COMPONENTS;?>' class="linkDisabled"><i class="glyphicons folder_open linkDisabled"></i><?php echo _EW_ADMINHEADER_COMPONENTS  ;?></a></li>
         <?php } ?>
       
 
