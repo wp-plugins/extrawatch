@@ -5,7 +5,7 @@
  * ExtraWatch - A real-time ajax monitor and live stats  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
  * @package ExtraWatch  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
  * @version 2.3  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
- * @revision 2114  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
+ * @revision 2116  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
  * @license http://www.gnu.org/licenses/gpl-3.0.txt     GNU General Public License v3  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
  * @copyright (C) 2014 by CodeGravity.com - All rights reserved!  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
  * @website http://www.codegravity.com  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
@@ -41,37 +41,7 @@ $output .= ("
         <a href='javascript:extrawatch_blockIpToggle(\"$ip\");extrawatch_sendVisitsReq();'><img src='" . $extraWatch->config->getLiveSiteWithSuffix() . "components/com_extrawatch/img/icons/block.png' />" . _EW_VISIT_BLOCK_IP . "</a><br/>  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
         <a href='" . $extraWatch->config->renderLink("goals", "&action=insert&id=" . $uriId) . "' '" . _EW_VISIT_ADD_PAGE . "'><img src='" . $extraWatch->config->getLiveSiteWithSuffix() . "components/com_extrawatch/img/icons/goal-add.gif' />" . _EW_VISIT_ADD_PAGE . "</a>");  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
 
-/*PRO_START*/
 
-
-$getData = $extraWatchVisitsHTML->renderGetVars($uriId);  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
-$postData = $extraWatchVisitsHTML->renderPostVars($uriId);  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
-
-$output .= "<table>";  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
-if ($getData) {
-  $output .= "<tr><td><br/><u>" . _EW_VISIT_URL_PARAMETERS . "</u></td>" . $getData;  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
-}
-if ($postData) {
-  $output .= "<tr><td><br/><u>" . _EW_VISIT_SUBMITED_FIELDS . "</u></td>" . $postData;  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
-}
-
-$clicks = $extraWatch->heatmap->getHeatmapClicksByUri2TitleId($uri2titleId, $day, $ip);  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
-$uri = $extraWatch->visit->getUriNameByUri2TitleId($uri2titleId);  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
-
-if ($clicks) {
-    $output .= "<br/><br/><u>"._EW_ADMINHEADER_CLICK_AREAS."</u><br/>";  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
-    foreach($clicks as $click) {  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
-        if (@$click->clicked_element_xpath_condition) {  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
-            $link = $click->name;  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
-        } else {
-            $link = $extraWatchHeatmapHTML->renderHighlightElementLink($uri, $click->xpath);  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
-        }
-        $output .= $link."<br/>";  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
-    }
-}
-
-$output .= "</table></div></div>";  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
-/*PRO_END*/
 
 echo($output);
 
