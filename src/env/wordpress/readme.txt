@@ -1,52 +1,60 @@
 === ExtraWatch FREE (Live Stats, Heatmap, Click tracking, Download Monitor and more)  ===
 Contributors: matto3c
 Donate link: http://www.extrawatch.com/
-Tags: analytics, statistics, stats, tracking, widget, heatmap, clicks, conversion tracking, counter, anti-spam, stats, visitors, downloads, download monitor, click map, tracking, maps, location, geolocation, statistics, spam, flags, goals, analytics, click, heat map, mouse click, tap, touch, tracker, tracking, usability
+Tags: analytics, slimstat, wp slimstat, statistics, stats, tracking, widget, heatmap, clicks, conversion tracking, counter, anti-spam, stats, visitors, downloads, download monitor, click map, tracking, maps, location, geolocation, statistics, spam, flags, goals, analytics, click, heat map, mouse click, tap, touch, tracker, tracking, usability, analytics, analyze, geolocation, maxmind, online users, pageviews, reports, spider, statistics, StatPress, stats, tracker, tracking, wassup
 Requires at least: 3.2.
-Tested up to: 3.9.9.
-Stable tag: 2.3.2154
+Tested up to: 4.0
+Stable tag: 2.3.2158
 License: GNU/GPLv2
 
 Optimize website and increase sales. Watch your visitors in real time, Click Heatmap, Conversion Tracking, Download monitor, Anti-spam, Email Reports
 
 == Description ==
 Analyze your visitor behaviour, optimize website and then increase conversions and sales. Once called the "Swiss Army Knife" for every Wordpress website. See map of clicks on Heatmap, Facebook, Twitter and other Media
+If you're using static plugins like WP Slimstat, this plugin will give you completely different real-time experience.
 
+> <strong>Support</strong><br>
+> The ExtraWatch team does not provide support for the WordPress SEO plugin on the WordPress.org forums. Support is available to people who bought the [PRO version of the plugin](https://www.extrawatch.com/buy/) only.
+> Note that the ExtraWatch PRO plugin has several extra features too so it might be well worth your investment!
+>
+
+
+[youtube http://www.youtube.com/watch?v=OELeZHt8kbE&enablejsapi=1&autoplay=1&rel=0&modestbranding=1&showinfo=0&showsearch=0&vq=hd1080]
 
 
 
 
 = FREE version features: =
 
-➨ Live Stats 
+= Live Stats  =
 - allows you to "watch" your visitors as they come to your website in real time
 - total time of each user session
 - monitor when user has left the website, marking session as inactive
 
-➨ Nightly Email Reports
+= Nightly Email Reports =
 - summary report sent overnight so you can chech how your site performs in the morning
 
-➨ Goals
+= Goals =
 - allows you to track various types of user actions, such as: visited page, page title, username, IP address, came from, country, URL and Form parameters, option to block or redirect such users
 - import / export goals
 
-➨ Graphs 
+= Graphs  =
 - section contains daily and weekly bar charts for pages, goals, users .. etc.
 
-➨ Anti-spam 
+= Anti-spam  =
 - contains list of pre-defined spam words and blocked IP addresses, you can add your "bad words" into this list based on which the IP addresses will be blocked from your website
 
-➨ History
+= History =
 - same as live stats but for previous days
 
-➨ Settings
+= Settings =
 - various configuration params + 32 world languages
 
-➨ Other
+= Other =
 - asynchronous tracking - does not affect page speed
 - possibility to use also cloud-based version which stores data on 3rd party server
 
-➨ Not found any other feature? 
+= Not found any other feature?  =
 - ask for it using live chat or open a support ticke
 
 
@@ -160,6 +168,9 @@ Nightly email reports
 
 
 == Changelog ==
+
+= version 2.3 =
+New graphically nicer user interface
 
 = version 2.0 =
 https://code.google.com/p/extrawatch/source/list
