@@ -4,7 +4,7 @@ Donate link: http://www.extrawatch.com/
 Tags: analytics, slimstat, wp slimstat, statistics, stats, tracking, widget, heatmap, clicks, conversion tracking, counter, anti-spam, stats, visitors, downloads, download monitor, click map, tracking, maps, location, geolocation, statistics, spam, flags, goals, analytics, click, heat map, mouse click, tap, touch, tracker, tracking, usability, analytics, analyze, geolocation, maxmind, online users, pageviews, reports, spider, statistics, StatPress, stats, tracker, tracking, wassup
 Requires at least: 3.2.
 Tested up to: 4.0
-Stable tag: 2.3.2158
+Stable tag: 2.3.2161
 License: GNU/GPLv2
 
 Optimize website and increase sales. Watch your visitors in real time, Click Heatmap, Conversion Tracking, Download monitor, Anti-spam, Email Reports
@@ -14,7 +14,7 @@ Analyze your visitor behaviour, optimize website and then increase conversions a
 If you're using static plugins like WP Slimstat, this plugin will give you completely different real-time experience.
 
 > <strong>Support</strong><br>
-> The ExtraWatch team does not provide support for the WordPress SEO plugin on the WordPress.org forums. Support is available to people who bought the [PRO version of the plugin](https://www.extrawatch.com/buy/) only.
+> The ExtraWatch team does not provide support for the plugin on the WordPress.org forums. Support is available to people who bought the [PRO version of the plugin](https://www.extrawatch.com/buy/) only.
 > Note that the ExtraWatch PRO plugin has several extra features too so it might be well worth your investment!
 >
 
