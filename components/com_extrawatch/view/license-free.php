@@ -56,7 +56,7 @@ $output = "";
 ";
 
 $output .= "
-<h1>ExtraWatch 2.3.2204 FREE</h1>  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
+<h1>ExtraWatch 2.3.2205 FREE</h1>  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
 ";
 
 
@@ -95,7 +95,7 @@ $output .= "
 
 		$env = @get_class($extraWatch->env);
 		
-		$output .= "<iframe src='http://www.extrawatch.com/track/extrawatch/2.3/install/?domain=".$domain."&license=FREE&version=2.3.2204&ip=".$ip."&env=".$env."' width='1px' frameborder='0' height='1px'>
+		$output .= "<iframe src='http://www.extrawatch.com/track/extrawatch/2.3/install/?domain=".$domain."&license=FREE&version=2.3.2205&ip=".$ip."&env=".$env."' width='1px' frameborder='0' height='1px'>
         </iframe>";			
 
 		$output .= "		
