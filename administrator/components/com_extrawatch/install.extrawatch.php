@@ -5,7 +5,7 @@
  * ExtraWatch - A real-time ajax monitor and live stats  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
  * @package ExtraWatch  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
  * @version 2.3  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
- * @revision 2477  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
+ * @revision 2478  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
  * @license http://www.gnu.org/licenses/gpl-3.0.txt     GNU General Public License v3  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
  * @copyright (C) 2015 by CodeGravity.com - All rights reserved!  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
  * @website http://www.extrawatch.com  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
@@ -181,12 +181,6 @@ function com_install()
   $database = JFactory :: getDBO();  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
 
 
-  $extraWatchAdminDirFile = JPATH_ADMINISTRATOR.DIRECTORY_SEPARATOR."components".DIRECTORY_SEPARATOR."com_extrawatch".DIRECTORY_SEPARATOR."extrawatch.php";    	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
-  $currentDir = dirname(__FILE__);  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
-				$extraWatchAdminControllerFile = $currentDir.DIRECTORY_SEPARATOR."admin".DIRECTORY_SEPARATOR."extrawatch.php";  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
-				//echo("copying: $extraWatchAdminControllerFile to $extraWatchAdminDirFile");  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
-				@copy($extraWatchAdminControllerFile, $extraWatchAdminControllerFile);   	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
-
 
   if ("1.6" == "1.5" && !version_compare(JVERSION, '1.6.0', '<')) {  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
     echo("<span style='color: red'><h2>Error: You are using joomla " . JVERSION . " but the installation package is for version 1.6 ! Uninstall this version, <a href='http://www.extrawatch.com/download'>Go to download section</a>, download the package for Joomla " . JVERSION . ", and install again.</h2></span>");  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
@@ -243,7 +237,7 @@ function com_install()
 
 		?>
 		
-        <iframe src="http://www.extrawatch.com/track/extrawatch/2.3/install/?domain=<?php echo($domain);?>&license=FREE&version=2.3.2477&ip=<?php echo $ip;?>&env=ExtraWatchJoomlaEnv" width="1px" frameborder="0"  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
+        <iframe src="http://www.extrawatch.com/track/extrawatch/2.3/install/?domain=<?php echo($domain);?>&license=FREE&version=2.3.2478&ip=<?php echo $ip;?>&env=ExtraWatchJoomlaEnv" width="1px" frameborder="0"  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
                 height="1px">  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
         </iframe>
 
