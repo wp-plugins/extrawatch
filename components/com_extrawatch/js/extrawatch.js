@@ -100,7 +100,7 @@ var ew_Heatmap = {
         } else {
 			setTimeout(function() {
 				downloadUrl(url, function (e) {}, true);
-			}, 3000);	//we had to add some delay so that this call is last one. If it was called first, it was causing some problems with some shopping cart ajax calls
+			}, 100);	//we had to add some delay so that this call is last one. If it was called first, it was causing some problems with some shopping cart ajax calls
         }
 
 
@@ -280,7 +280,7 @@ var ew_Heatmap = {
 
     checkIfElementContainsHrefWithHttp: function (targetElement, domain) {
         while(targetElement != null) {  /* go through all parent elements */
-            if (targetElement.href != null && ew_Helper.startsWith(targetElement.href,"http") && !(targetElement.href.indexOf(domain) > 0)) {
+            if (targetElement.href != null && ew_Helper.startsWith(targetElement.href,"http") /* && !(targetElement.href.indexOf(domain) > 0) */) {
                 return true;
             }
             targetElement = targetElement.parentElement;
@@ -292,6 +292,9 @@ var ew_Heatmap = {
 		var currentDomain = null;
 		if (window.location && window.location.href && window.location.href.split('/') && (window.location.href.split('/').length > 0)) {
 			currentDomain = window.location.href.split('/')[2];
+		}
+		if (evt.target != null && evt.target.type != null && evt.target.type == "submit") {	/* shopping cart submit buttons etc. */
+			return true;
 		}
 		if (evt.target != null && ew_Heatmap.checkIfElementContainsHrefWithHttp(evt.target, currentDomain)) {	//only for links which have http://
 			return true;
