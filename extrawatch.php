@@ -6,7 +6,7 @@ Plugin URI: http://www.extrawatch.com
 Description: Features: <strong>Visitor Live Stats</strong>, <strong>Front-end Counters</strong>, <strong>Anti-spam</strong>, <strong>Nightly Email Reports</strong>, <strong>History</strong>, <strong>Graphs</strong>, translated in <strong>42 world languages</strong>  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
 
 
-Version: 2.3.2495 FREE  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
+Version: 2.3.2499 FREE  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
 Author: CodeGravity.com  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
 Author URI: http://www.extrawatch.com  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
 */
@@ -30,8 +30,15 @@ if ( ! defined( '_EW_PROJECT_ID' ) )
 	define("_EW_PROJECT_ID", FALSE);  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
 
   function getExtraWatchURL() {  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
+
+	if ( function_exists('plugins_url') ) {
+		$pluginUrl = plugins_url();
+	} else {
+		$pluginUrl = WP_PLUGIN_URL;
+	}
+
     
-    $extraWatchPath = WP_PLUGIN_URL."/extrawatch/";  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
+    $extraWatchPath = $pluginUrl."/extrawatch/";  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
     
 
     
@@ -46,6 +53,9 @@ add_action('plugins_loaded', 'extrawatch_menu');
 
 //including main stylesheet to header to prevent blinking
 if (strstr($_SERVER['REQUEST_URI'],'?page=extrawatch')) {   //loading only if actual plugin body is requested
+
+	$protocol = is_ssl() ? 'https' : 'http';
+
     wp_enqueue_style("dashboard.css.php",getExtraWatchURL()."/components/com_extrawatch/ajax/dashboard.css.php?env=ExtraWatchWordpressEnv");
 }
 
