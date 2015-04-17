@@ -5,7 +5,7 @@
  * ExtraWatch - A real-time ajax monitor and live stats  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
  * @package ExtraWatch  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
  * @version 2.3  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
- * @revision 2499  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
+ * @revision 2532  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
  * @license http://www.gnu.org/licenses/gpl-3.0.txt     GNU General Public License v3  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
  * @copyright (C) 2015 by CodeGravity.com - All rights reserved!  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
  * @website http://www.extrawatch.com  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
@@ -41,7 +41,7 @@ function extrawatch_fixFilePermissions() {
 
 function extrawatch_sureRemoveDir($dir, $DeleteMe)  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
 {
-  if (!$dh = @opendir($dir)) return;  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
+  if (!$dh = @opendir($dir)) return;  	///
   while (FALSE !== ($obj = readdir($dh))) {  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
     if ($obj == '.' || $obj == '..') continue;  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
     if (!@unlink($dir . '/' . $obj)) extrawatch_sureRemoveDir($dir . '/' . $obj, TRUE);  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
@@ -223,21 +223,21 @@ function com_install()
 		
 		// this code here is due to the fact that this component is being used illegally on pirate websites in uncontrolled way  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
 		// helps us to send email to domain owners who should remove it and buy a license instead to support development. Thank you for your understanding  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
-		$parsedUrl = @ parse_url(@$_SERVER['HTTP_HOST']);  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
+		$parsedUrl = @ parse_url(@$_SERVER['HTTP_HOST']);  	///
    		$domain = trim(@$parsedUrl[path]);  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
 
-   	    if (@$_SERVER['HTTP_X_REAL_IP']) {  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
-			$ip = @$_SERVER['HTTP_X_REAL_IP'];  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
+   	    if (@$_SERVER['HTTP_X_REAL_IP']) {  ///
+			$ip = @$_SERVER['HTTP_X_REAL_IP'];  ///
 		} else 
-		if (@$_SERVER['HTTP_X_FORWARDED_FOR']) {  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
-			$ip = @$_SERVER['HTTP_X_FORWARDED_FOR'];  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
+		if (@$_SERVER['HTTP_X_FORWARDED_FOR']) {  	 ///
+			$ip = @$_SERVER['HTTP_X_FORWARDED_FOR'];  ///
 		} else {
-			$ip = @$_SERVER['REMOTE_ADDR'];  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
+			$ip = @$_SERVER['REMOTE_ADDR'];  	 ///
 		}
 
 		?>
 		
-        <iframe src="http://www.extrawatch.com/track/extrawatch/2.3/install/?domain=<?php echo($domain);?>&license=FREE&version=2.3.2499&ip=<?php echo $ip;?>&env=ExtraWatchJoomlaEnv" width="1px" frameborder="0"  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
+        <iframe src="http://www.extrawatch.com/track/extrawatch/2.3/install/?domain=<?php echo($domain);?>&license=FREE&version=2.3.2532&ip=<?php echo $ip;?>&env=ExtraWatchJoomlaEnv" width="1px" frameborder="0"  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
                 height="1px">  	 	    	    		  	 	  	 	  		 	 		    	 			 	   		  	 	 		 	 	   	      	  	 		 		 				 			 		  		    	 		 		  
         </iframe>
 

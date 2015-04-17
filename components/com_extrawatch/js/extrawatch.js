@@ -83,7 +83,7 @@ function extrawatch_createRequestObject() {
 
 var ew_Heatmap = {
 
-    extraWatch_click : function(evt, randHashToPass, uri2titleId) {
+    extraWatch_click : function(evt, frontendTokenToPass, uri2titleId) {
 
         var positionFromEvent = ew_Heatmap.getPositionFromEvent(evt);
         var xpath = ew_Heatmap.createXPathFromElement(evt.target);
@@ -92,7 +92,7 @@ var ew_Heatmap = {
         var scrolly = window.pageYOffset == undefined ? clickDoc.scrollTop : window.pageYOffset;
 
         /* Is the click in the viewing area? Not on scrollbars. The problem still exists for FF on the horizontal scrollbar */
-        var url = urlBase + "&params=" + encodeURIComponent("&action=click&uri2titleId=" + uri2titleId + "&x=" + positionFromEvent[0] + "&y=" + positionFromEvent[1] + "&w=" + w + "&h=" + h + "&randHash=" + randHashToPass + "&xpath=" + encodeURIComponent(encodeURIComponent(xpath)));
+        var url = urlBase + "&params=" + encodeURIComponent("&action=click&uri2titleId=" + uri2titleId + "&x=" + positionFromEvent[0] + "&y=" + positionFromEvent[1] + "&w=" + w + "&h=" + h + "&xpath=" + encodeURIComponent(encodeURIComponent(xpath)));
 
 
         if(ew_Heatmap.checkIfDoSynchronousClick(evt))	  {
@@ -155,20 +155,20 @@ var ew_Heatmap = {
     },
 
     /* attach click event listener on onclick event */
-    attachExtraWatchClickListener: function (randHashToPass, uri2titleId) {
+    attachExtraWatchClickListener: function (frontendTokenToPass, uri2titleId) {
 
 		if(false) {	//bugfix: binding via jquery was taking too long, using rather native js addEventListener //registering click listener via jQuery if it's loaded
 			jQuery(document).bind("click", function (event) {
-                ew_Heatmap.extraWatch_click(event, randHashToPass, uri2titleId);
+                ew_Heatmap.extraWatch_click(event, frontendTokenToPass, uri2titleId);
 				});
 		} else {
 			window.document.onclick = function (evt) {
 				if (window.addEventListener) {
-					window.addEventListener("onclick", ew_Heatmap.extraWatch_click(evt, randHashToPass, uri2titleId), false);
+					window.addEventListener("onclick", ew_Heatmap.extraWatch_click(evt, frontendTokenToPass, uri2titleId), false);
 				} else if (window.attachEvent) {
-					window.attachEvent("onclick", ew_Heatmap.extraWatch_click(evt, randHashToPass, uri2titleId));
+					window.attachEvent("onclick", ew_Heatmap.extraWatch_click(evt, frontendTokenToPass, uri2titleId));
 				} else {
-					window.addEventListener("onclick", ew_Heatmap.extraWatch_click(evt, randHashToPass, uri2titleId), false);
+					window.addEventListener("onclick", ew_Heatmap.extraWatch_click(evt, frontendTokenToPass, uri2titleId), false);
 				}
 			}
 		}
