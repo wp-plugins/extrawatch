@@ -280,7 +280,7 @@ var ew_Heatmap = {
 
     checkIfElementContainsHrefWithHttp: function (targetElement, domain) {
         while(targetElement != null) {  /* go through all parent elements */
-            if (targetElement.href != null && ew_Helper.startsWith(targetElement.href,"http") /* && !(targetElement.href.indexOf(domain) > 0) */) {
+            if (targetElement.href != null && ew_Helper.startsWith(targetElement.href,"http") || ew_Helper.startsWith(targetElement.href,"https") /* && !(targetElement.href.indexOf(domain) > 0) */) {
                 return true;
             }
             targetElement = targetElement.parentElement;
